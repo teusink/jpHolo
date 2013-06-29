@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        id        = "org.teusink.pg_jqmexampleapp"
+        version   = "1.0">
+    <name>DroidPapers</name>
+	
+    <description>
+        Example app with jQuery Mobile, PhoneGap and a native Android interface in holo-style.
+    </description>
+	
+    <author href="http://www.teusink.org" email="joram.teusink@gmail.com">
+        Teusink.org
+    </author>
+	
+	<!-- Access elements control the Android whitelist. Domains are assumed blocked unless set otherwise -->
+	<!-- <access origin="https://example.com" /> allow any secure requests to example.com -->
+	<!-- <access origin="https://example.com" subdomains="true" /> such as above, but including subdomains, such as www -->
+	<!-- <access origin=".*" /> Allow all domains, suggested development use only -->
+	<access origin="http://127.0.0.1*" /> <!-- allow local pages -->
+
+	<!-- <content src="http://mysite.com/myapp.html" /> for external pages -->
+	<content src="index.html" />
+	
+	<!-- Log level: ERROR, WARN, INFO, DEBUG, VERBOSE  (default=ERROR) -->
+	<preference name="loglevel" value="ERROR" />
+	<preference name="phonegap-version" value="2.8.0" />
+	<preference name="InAppBrowserStorageEnabled" value="true" />
+	<preference name="android-minSdkVersion" value="10" />
+	<preference name="android-maxSdkVersion" value="17" />
+	<preference name="exit-on-suspend" value="false" />
+	<preference name="android-installLocation" value="preferExternal" />
+	<preference name="loadUrlTimeoutValue" value="60000" />
+	<preference name="backgroundColor" value="0x000" />
+	<preference name="errorUrl" value="index_smartphone.html" />
+
+	<!-- PhoneGap features -->
+	<feature name="App"><param name="android-package" value="org.apache.cordova.App" /></feature>
+    <!-- <feature name="Geolocation"><param name="android-package" value="org.apache.cordova.GeoBroker" /></feature> -->
+    <feature name="Device"><param name="android-package" value="org.apache.cordova.Device" /></feature>
+    <!-- <feature name="Accelerometer"><param name="android-package" value="org.apache.cordova.AccelListener" /></feature> -->
+    <!-- <feature name="Compass"><param name="android-package" value="org.apache.cordova.CompassListener" /></feature> -->
+    <feature name="Media"><param name="android-package" value="org.apache.cordova.AudioHandler" /></feature>
+    <!-- <feature name="Camera"><param name="android-package" value="org.apache.cordova.CameraLauncher" /></feature> -->
+    <!-- <feature name="Contacts"><param name="android-package" value="org.apache.cordova.ContactManager" /></feature> -->
+    <feature name="File"><param name="android-package" value="org.apache.cordova.FileUtils" /></feature>
+    <feature name="NetworkStatus"><param name="android-package" value="org.apache.cordova.NetworkManager" /></feature>
+    <feature name="Notification"><param name="android-package" value="org.apache.cordova.Notification" /></feature>
+    <feature name="Storage"><param name="android-package" value="org.apache.cordova.Storage" /></feature>
+    <feature name="FileTransfer"><param name="android-package" value="org.apache.cordova.FileTransfer" /></feature>
+    <!-- <feature name="Capture"><param name="android-package" value="org.apache.cordova.Capture" /></feature> -->
+    <!-- <feature name="Battery"><param name="android-package" value="org.apache.cordova.BatteryListener" /></feature> -->
+    <!-- <feature name="SplashScreen"><param name="android-package" value="org.apache.cordova.SplashScreen" /></feature> -->
+    <!-- <feature name="Echo"><param name="android-package" value="org.apache.cordova.Echo" /></feature> -->
+    <!-- <feature name="Globalization"><param name="android-package" value="org.apache.cordova.Globalization" /></feature> -->
+    <feature name="InAppBrowser"><param name="android-package" value="org.apache.cordova.InAppBrowser" /></feature>
+
+	<!-- additional plugins -->
+	<feature name="Share"><param name="android-package" value="org.apache.cordova.plugins.Share" /></feature>
+	<feature name="Toasts"><param name="android-package" value="org.apache.cordova.plugins.Toasts" /></feature>
+
+</widget>

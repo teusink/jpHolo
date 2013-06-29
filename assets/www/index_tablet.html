@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no" /><!-- to set the behavior of the web view -->
+		<title>JQM Exmaple</title>		
+		<link rel="stylesheet" href="themes/AndroidGooglePlus.min.css" /><!-- Load own JQM theme -->
+		<link rel="stylesheet" href="themes/jquery.mobile.structure-1.3.1.min.css" />		
+		<link rel="stylesheet" href="themes/style.css" /><!-- override some styles (example other fonts Roboto) -->
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="cordova-plugins.js"></script><!-- load own phonegap plugins (share and toast) -->
+		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="js/functions_before.js"></script><!-- load javascript that needs to be loaded BEFORE jquery mobile loads -->
+		<script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>
+		<script type="text/javascript" src="js/energize.js"></script><!-- for speeding op tap events -->
+		<script type="text/javascript" src="js/functions_after.js"></script><!-- load javscript that needs to be loaded AFTER jquery mobile loads -->
+	</head>
+	<body>
+		<div id="indexPage" data-role="page" data-theme="a"><!-- id to tie the page event to this specific page -->
+			
+			<div data-role="popup" id="popupIndexPage" class="ui-content">
+				<p>This is a jQuery Mobile based popup!</p>
+			</div>
+			
+			<!-- left panel  -->
+			<div id="panelMenuIndex" data-role="panel" data-theme="b" data-position="left" data-display="overlay" data-dismissible="true" data-position-fixed="true" data-swipe-close="true" data-animate="true">
+				<ul id="panelMenuIndexUL" data-theme="b" data-role="listview"></ul>
+			</div><!-- here you see why in the javascript there is a page event: initPageVarsOnShow('Index'); and: initPageVarsOnCreate('Index'); -->
+			<!-- /panel -->
+			
+			<!-- right panel  -->
+			<div id="panelMenuRightIndex" data-role="panel" data-theme="b" data-position="right" data-display="overlay" data-dismissible="true" data-position-fixed="true" data-swipe-close="true" data-animate="true">
+				<ul id="panelMenuRightIndexUL" data-theme="b" data-role="listview"></ul>
+			</div><!-- here you see why in the javascript there is a page event: initPageVarsOnShow('Index'); and: initPageVarsOnCreate('Index'); -->
+			<!-- /panel -->
+			
+			<div class="headerSticky" data-role="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
+				<div>
+					<p class="headerBarText"><img id="headerTitleIndex" onclick="togglePanel('#panelMenu' + window.localStorage.getItem('divIdGlobal'));" class="headerIconTitle" src="images/icons/ic_launcher_full_menu.png" /><img id="headerShareIndex" onclick="share(window.localStorage.getItem('shareTagSubject'),window.localStorage.getItem('shareTagText'));" class="headerIconShare" src="images/icons/ic_action_share_header.png" /><img id="headerOverflowIndex" onclick="togglePanel('#panelMenuRight' + window.localStorage.getItem('divIdGlobal'));" class="headerIconOverflow" src="images/icons/ic_action_overflow_header.png" />
+					&nbsp;</p>
+				</div><!-- populate the panel menu, also with the id Index in this case -->
+			</div><!-- /header -->
+			
+			<div data-role="content" data-theme="a">
+				
+				<div class="content-secondary">
+				
+					<h1>Index</h1>
+					<p>Light holo theme with dark title page.</p>				
+					<a onclick="clearFirstBoot();" data-role="button">Clear to first boot</a>
+					<a onclick="$('#popupIndexPage').popup('open');" data-role="button">JQM Popup</a>
+					
+				</div><!-- /contentsecundary -->
+			
+				<div class="content-primary">
+					
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sollicitudin nibh id neque vulputate, eu convallis ligula faucibus. Maecenas tincidunt, magna id convallis accumsan, est magna pulvinar magna, quis commodo augue tellus imperdiet mauris. Proin fermentum ante eget molestie porta. Sed tempor adipiscing interdum. Cras sed sollicitudin justo. Etiam rutrum tristique lacus. In venenatis augue nibh. Aliquam erat volutpat. Cras rhoncus nulla urna, dignissim hendrerit neque sagittis iaculis. Pellentesque euismod mauris lacus, vitae ullamcorper lectus porta volutpat. Pellentesque euismod consequat gravida. Cras ac risus tristique, varius nunc auctor, pellentesque nisi. Vestibulum arcu mi, rhoncus non ultricies vel, iaculis eget nisl. Vivamus faucibus dignissim justo, a euismod mauris commodo vitae. Sed ac mollis tortor. Cras egestas nunc eget magna tincidunt, vel tempor leo iaculis.</p>
+					
+					<p>Nunc interdum dui sit amet nisl consectetur, eget viverra nibh malesuada. Maecenas at nisi a risus faucibus tristique. Nam rhoncus, orci rhoncus scelerisque bibendum, diam enim laoreet sem, vehicula porttitor diam eros ac nisi. Ut in arcu ac risus tincidunt faucibus. Vivamus mattis erat non semper scelerisque. Nunc sagittis euismod posuere. Fusce dictum elementum libero quis tristique. Ut mollis augue et iaculis vulputate. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc at magna porta, iaculis urna sed, mollis nunc. Phasellus erat lorem, auctor sit amet pellentesque a, aliquam at dolor. Donec congue, nisl quis feugiat convallis, erat odio laoreet enim, non rutrum dolor risus tempor nunc. Duis et sem lacinia ipsum aliquam ullamcorper. Proin aliquet vehicula magna, et semper purus dapibus eu.</p>
+					
+					<p>Integer non imperdiet velit. Curabitur semper sapien erat, id rhoncus eros ornare at. Ut a dapibus lacus. Maecenas semper leo eros, eu iaculis ipsum fermentum tempus. Vivamus mollis sed orci in consequat. Aenean vel tellus nisl. Etiam ligula purus, tincidunt ac vulputate pharetra, pharetra ac diam. Vestibulum viverra pharetra sollicitudin. Sed id dolor quis lacus bibendum pellentesque. Curabitur orci neque, elementum interdum tristique consequat, accumsan eu velit. Donec pulvinar dignissim ante, quis elementum mi elementum quis. Nam placerat magna tempor, sagittis arcu nec, molestie nisi.</p>
+					
+					<p>Vivamus suscipit purus vel feugiat molestie. Vestibulum sit amet pharetra elit. Integer porta tincidunt eros, non dignissim libero blandit nec. In cursus erat non dolor facilisis, ut ornare ipsum ornare. Aliquam lacinia rhoncus quam, vitae imperdiet elit posuere at. Phasellus odio urna, interdum sit amet varius a, vehicula ac elit. Sed vulputate, erat vel interdum interdum, nibh purus rhoncus ipsum, ut pellentesque lorem nisl sed libero. Nulla adipiscing sodales metus, ut congue enim commodo ut. Quisque ut porta sem. Nullam eget mi malesuada, lobortis mi a, tincidunt lorem. Sed sit amet gravida lectus, vitae faucibus enim. Cras consequat mollis felis vitae congue. Nulla facilisi.</p>
+					
+					<p>Quisque viverra at tortor eget fringilla. Aenean est mi, cursus non dolor ac, pulvinar aliquet sem. Aenean sed nibh quam. Aenean viverra ut dolor in luctus. Ut porta nisl nibh, vitae sagittis orci ultrices et. Etiam vestibulum nisi vitae nisi consectetur eleifend. In egestas justo nec nunc fermentum, vitae bibendum ante semper. Fusce non bibendum nunc.</p>
+				
+				</div><!-- /contentprimary -->
+				
+			</div><!-- /content -->
+		
+		</div><!-- /page -->
+		
+		<div id="secondPage" data-role="page" data-theme="c">
+			
+			<!-- left panel  -->
+			<div id="panelMenuSecond" data-role="panel" data-theme="b" data-position="left" data-display="overlay" data-dismissible="true" data-position-fixed="true" data-swipe-close="true" data-animate="true">
+				<ul id="panelMenuSecondUL" data-theme="b" data-role="listview"></ul>
+			</div>
+			<!-- /panel -->
+			
+			<!-- right panel  -->
+			<div id="panelMenuRightSecond" data-role="panel" data-theme="b" data-position="right" data-display="overlay" data-dismissible="true" data-position-fixed="true" data-swipe-close="true" data-animate="true">
+				<ul id="panelMenuRightSecondUL" data-theme="b" data-role="listview"></ul>
+			</div>
+			<!-- /panel -->
+			
+			<div data-role="header" data-tap-toggle="false" data-position="fixed" data-theme="a" class="headerDark"><!-- this class makes sure there is a blue line beneath header -->
+				<div>
+					<p class="headerBarText"><img id="headerTitleSecond" onclick="togglePanel('#panelMenu' + window.localStorage.getItem('divIdGlobal'));" class="headerIconTitle" src="images/icons/ic_launcher_full_menu.png" /><img id="headerShareSecond" onclick="share(window.localStorage.getItem('shareTagSubject'),window.localStorage.getItem('shareTagText'));" class="headerIconShare" src="images/icons/ic_action_share_header.png" /><img id="headerOverflowSecond" onclick="togglePanel('#panelMenuRight' + window.localStorage.getItem('divIdGlobal'));" class="headerIconOverflow" src="images/icons/ic_action_overflow_header.png" />
+					&nbsp;</p>
+				</div>
+			</div><!-- /header -->
+			
+			<div data-role="content" data-theme="c">
+				
+				<div class="content-secondary">
+				
+					<h1>Page 2</h1>
+					<p>Dark holo theme page.</p>
+					
+				</div><!-- /contentsecundary -->
+			
+				<div class="content-primary">
+					
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sollicitudin nibh id neque vulputate, eu convallis ligula faucibus. Maecenas tincidunt, magna id convallis accumsan, est magna pulvinar magna, quis commodo augue tellus imperdiet mauris. Proin fermentum ante eget molestie porta. Sed tempor adipiscing interdum. Cras sed sollicitudin justo. Etiam rutrum tristique lacus. In venenatis augue nibh. Aliquam erat volutpat. Cras rhoncus nulla urna, dignissim hendrerit neque sagittis iaculis. Pellentesque euismod mauris lacus, vitae ullamcorper lectus porta volutpat. Pellentesque euismod consequat gravida. Cras ac risus tristique, varius nunc auctor, pellentesque nisi. Vestibulum arcu mi, rhoncus non ultricies vel, iaculis eget nisl. Vivamus faucibus dignissim justo, a euismod mauris commodo vitae. Sed ac mollis tortor. Cras egestas nunc eget magna tincidunt, vel tempor leo iaculis.</p>
+					
+					<p>Nunc interdum dui sit amet nisl consectetur, eget viverra nibh malesuada. Maecenas at nisi a risus faucibus tristique. Nam rhoncus, orci rhoncus scelerisque bibendum, diam enim laoreet sem, vehicula porttitor diam eros ac nisi. Ut in arcu ac risus tincidunt faucibus. Vivamus mattis erat non semper scelerisque. Nunc sagittis euismod posuere. Fusce dictum elementum libero quis tristique. Ut mollis augue et iaculis vulputate. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc at magna porta, iaculis urna sed, mollis nunc. Phasellus erat lorem, auctor sit amet pellentesque a, aliquam at dolor. Donec congue, nisl quis feugiat convallis, erat odio laoreet enim, non rutrum dolor risus tempor nunc. Duis et sem lacinia ipsum aliquam ullamcorper. Proin aliquet vehicula magna, et semper purus dapibus eu.</p>
+					
+					<p>Integer non imperdiet velit. Curabitur semper sapien erat, id rhoncus eros ornare at. Ut a dapibus lacus. Maecenas semper leo eros, eu iaculis ipsum fermentum tempus. Vivamus mollis sed orci in consequat. Aenean vel tellus nisl. Etiam ligula purus, tincidunt ac vulputate pharetra, pharetra ac diam. Vestibulum viverra pharetra sollicitudin. Sed id dolor quis lacus bibendum pellentesque. Curabitur orci neque, elementum interdum tristique consequat, accumsan eu velit. Donec pulvinar dignissim ante, quis elementum mi elementum quis. Nam placerat magna tempor, sagittis arcu nec, molestie nisi.</p>
+					
+					<p>Vivamus suscipit purus vel feugiat molestie. Vestibulum sit amet pharetra elit. Integer porta tincidunt eros, non dignissim libero blandit nec. In cursus erat non dolor facilisis, ut ornare ipsum ornare. Aliquam lacinia rhoncus quam, vitae imperdiet elit posuere at. Phasellus odio urna, interdum sit amet varius a, vehicula ac elit. Sed vulputate, erat vel interdum interdum, nibh purus rhoncus ipsum, ut pellentesque lorem nisl sed libero. Nulla adipiscing sodales metus, ut congue enim commodo ut. Quisque ut porta sem. Nullam eget mi malesuada, lobortis mi a, tincidunt lorem. Sed sit amet gravida lectus, vitae faucibus enim. Cras consequat mollis felis vitae congue. Nulla facilisi.</p>
+					
+					<p>Quisque viverra at tortor eget fringilla. Aenean est mi, cursus non dolor ac, pulvinar aliquet sem. Aenean sed nibh quam. Aenean viverra ut dolor in luctus. Ut porta nisl nibh, vitae sagittis orci ultrices et. Etiam vestibulum nisi vitae nisi consectetur eleifend. In egestas justo nec nunc fermentum, vitae bibendum ante semper. Fusce non bibendum nunc.</p>
+				
+				</div><!-- /contentprimary -->
+				
+			</div><!-- /content -->
+			
+			<div data-role="footer" data-tap-toggle="false" data-position="fixed" data-theme="a" class="footerDark"><!-- this class makes sure there is a blue line above footer -->
+				<div>
+					<img id="footerShareSecond" onclick="share(window.localStorage.getItem('shareTagSubject'),window.localStorage.getItem('shareTagText'));" src="./images/icons/ic_action_share_header.png" class="footerIconLeft">
+					<img id="footerToastSecond" onclick="toast('This is a toast message','short');" src="./images/icons/ic_action_share_header.png" class="footerIconRight">
+				</div>
+			</div><!-- /footer -->
+		
+		</div><!-- /page -->
+		
+		<div id="thirdPage" data-role="page" data-theme="e">
+			
+			<!-- left panel  -->
+			<div id="panelMenuThird" data-role="panel" data-theme="b" data-position="left" data-display="overlay" data-dismissible="true" data-position-fixed="true" data-swipe-close="true" data-animate="true">
+				<ul id="panelMenuThirdUL" data-theme="b" data-role="listview"></ul>
+			</div>
+			<!-- /panel -->
+			
+			<!-- right panel  -->
+			<div id="panelMenuRightThird" data-role="panel" data-theme="b" data-position="right" data-display="overlay" data-dismissible="true" data-position-fixed="true" data-swipe-close="true" data-animate="true">
+				<ul id="panelMenuRightThirdUL" data-theme="b" data-role="listview"></ul>
+			</div>
+			<!-- /panel -->
+			
+			<div class="headerSticky" data-role="header" data-tap-toggle="false" data-position="fixed" data-theme="e" class="headerDark">
+				<div>
+					<p class="headerBarText"><img id="headerTitleThird" onclick="togglePanel('#panelMenu' + window.localStorage.getItem('divIdGlobal'));" class="headerIconTitle" src="images/icons/ic_launcher_full_arrow_light.png" /><img id="headerShareThird" onclick="share(window.localStorage.getItem('shareTagSubject'),window.localStorage.getItem('shareTagText'));" class="headerIconShare" src="images/icons/ic_action_share_header.png" /><img id="headerOverflowThird" onclick="togglePanel('#panelMenuRight' + window.localStorage.getItem('divIdGlobal'));" class="headerIconOverflow" src="images/icons/ic_action_overflow_header.png" />
+					&nbsp;</p>
+				</div>
+			</div><!-- /header -->
+			
+			<div data-role="content" data-theme="e">
+				
+				<div class="content-secondary">
+				
+					<h1>Page 3</h1>
+					<p>Light holo theme with light title page. Not very well worked out yet.</p>
+					
+				</div><!-- /contentsecundary -->
+			
+				<div class="content-primary">
+					
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sollicitudin nibh id neque vulputate, eu convallis ligula faucibus. Maecenas tincidunt, magna id convallis accumsan, est magna pulvinar magna, quis commodo augue tellus imperdiet mauris. Proin fermentum ante eget molestie porta. Sed tempor adipiscing interdum. Cras sed sollicitudin justo. Etiam rutrum tristique lacus. In venenatis augue nibh. Aliquam erat volutpat. Cras rhoncus nulla urna, dignissim hendrerit neque sagittis iaculis. Pellentesque euismod mauris lacus, vitae ullamcorper lectus porta volutpat. Pellentesque euismod consequat gravida. Cras ac risus tristique, varius nunc auctor, pellentesque nisi. Vestibulum arcu mi, rhoncus non ultricies vel, iaculis eget nisl. Vivamus faucibus dignissim justo, a euismod mauris commodo vitae. Sed ac mollis tortor. Cras egestas nunc eget magna tincidunt, vel tempor leo iaculis.</p>
+					
+					<p>Nunc interdum dui sit amet nisl consectetur, eget viverra nibh malesuada. Maecenas at nisi a risus faucibus tristique. Nam rhoncus, orci rhoncus scelerisque bibendum, diam enim laoreet sem, vehicula porttitor diam eros ac nisi. Ut in arcu ac risus tincidunt faucibus. Vivamus mattis erat non semper scelerisque. Nunc sagittis euismod posuere. Fusce dictum elementum libero quis tristique. Ut mollis augue et iaculis vulputate. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc at magna porta, iaculis urna sed, mollis nunc. Phasellus erat lorem, auctor sit amet pellentesque a, aliquam at dolor. Donec congue, nisl quis feugiat convallis, erat odio laoreet enim, non rutrum dolor risus tempor nunc. Duis et sem lacinia ipsum aliquam ullamcorper. Proin aliquet vehicula magna, et semper purus dapibus eu.</p>
+					
+					<p>Integer non imperdiet velit. Curabitur semper sapien erat, id rhoncus eros ornare at. Ut a dapibus lacus. Maecenas semper leo eros, eu iaculis ipsum fermentum tempus. Vivamus mollis sed orci in consequat. Aenean vel tellus nisl. Etiam ligula purus, tincidunt ac vulputate pharetra, pharetra ac diam. Vestibulum viverra pharetra sollicitudin. Sed id dolor quis lacus bibendum pellentesque. Curabitur orci neque, elementum interdum tristique consequat, accumsan eu velit. Donec pulvinar dignissim ante, quis elementum mi elementum quis. Nam placerat magna tempor, sagittis arcu nec, molestie nisi.</p>
+					
+					<p>Vivamus suscipit purus vel feugiat molestie. Vestibulum sit amet pharetra elit. Integer porta tincidunt eros, non dignissim libero blandit nec. In cursus erat non dolor facilisis, ut ornare ipsum ornare. Aliquam lacinia rhoncus quam, vitae imperdiet elit posuere at. Phasellus odio urna, interdum sit amet varius a, vehicula ac elit. Sed vulputate, erat vel interdum interdum, nibh purus rhoncus ipsum, ut pellentesque lorem nisl sed libero. Nulla adipiscing sodales metus, ut congue enim commodo ut. Quisque ut porta sem. Nullam eget mi malesuada, lobortis mi a, tincidunt lorem. Sed sit amet gravida lectus, vitae faucibus enim. Cras consequat mollis felis vitae congue. Nulla facilisi.</p>
+					
+					<p>Quisque viverra at tortor eget fringilla. Aenean est mi, cursus non dolor ac, pulvinar aliquet sem. Aenean sed nibh quam. Aenean viverra ut dolor in luctus. Ut porta nisl nibh, vitae sagittis orci ultrices et. Etiam vestibulum nisi vitae nisi consectetur eleifend. In egestas justo nec nunc fermentum, vitae bibendum ante semper. Fusce non bibendum nunc.</p>
+				
+				</div><!-- /contentprimary -->
+				
+			</div><!-- /content -->
+		
+		</div><!-- /page -->
+	</body>
+</html>

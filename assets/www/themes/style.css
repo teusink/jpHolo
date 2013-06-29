@@ -1,0 +1,314 @@
+/* padding & margin & box-shadow: top right bottom left
+Android ICS colors:
+	Roboto	: 0099CC (dark cyan)
+	Charcoal: 222222 (dark grey)
+	Honest	: 33B5E5 (cyan)
+	Imdur	: 555555 (grey)
+	Grey	: CCCCCC (border)
+	Grey	: F9F9F9 (background)
+*/
+@font-face {
+	font-family: RobotoThin;
+	src: url('Roboto-Thin-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}	
+@font-face {
+	font-family: RobotoRegular;
+	src: url('Roboto-Regular-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+body * {
+	font-family: RobotoRegular !important;
+	font-weight: normal !important;
+	white-space: normal !important;
+	word-wrap: break-word !important;
+}
+ui.page {
+	border-left: 1px #000000 !important;
+	border-right: 1px #000000 !important;
+}
+.ui-btn-inner {
+	border-top: 0 !important;
+}
+div.headerSticky {
+	z-index: 1001;
+	height: 2.65em;
+}
+li.headerSpace {
+	height: 1.35em;
+}
+div.headerDark {
+	z-index: 1001;
+	height: 2.70em;
+	border-bottom: 1px solid #0099CC !important;
+}
+div.footerDark {
+	border-top: 1px solid #0099CC !important;
+}
+img.headerIconTitle {
+	height: 2.75em;
+	border: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+img.headerIconOverflow {
+	height: 2.75em;
+	border: 0;
+	position: absolute;
+	float: right;
+	right: 0;
+	top: 0;
+}
+img.headerIconShare {
+	height: 2.75em;
+	border: 0;
+	position: absolute;
+	float: right;
+	right: 2.812em;
+	top: 0;
+}
+img.footerIconLeft {
+	height: 2.375em;
+	border: 0;
+	float: left;
+}
+img.footerIconRight {
+	height: 2.375em;
+	border: 0;
+	float: right;
+}
+p.headerBarText {
+	font-size: 1em;
+	color: #000000;
+}
+@media (min-width:1600px) {
+	body {
+		font-size: 112.50% !important;
+	}
+}
+@media (min-width:720px) and (max-width:1599px) {
+	body {
+		font-size: 112.50% !important;
+	}
+}
+@media (max-width:719px) {
+	body {
+		font-size: 100% !important;
+	}
+}
+h1, h2, h3, h4, h5, h6 * {
+	font-family: RobotoThin !important;
+	font-weight: normal !important;
+}
+h1 {
+	font-size: 1.375em;
+}
+h2 {
+	font-size: 1.25em;
+}
+h3 {
+	font-size: 1.125em;
+}
+h4 {
+	font-size: 1em;
+}
+h5 {
+	font-size: 0.875em;
+}
+h6 {
+	font-size: 0.75em;
+}
+ul, li, p, a * {
+	white-space: normal !important;
+}
+h3.subTitle {
+	color: #33B4E5;
+}
+h4.small {
+	color: #33B4E5;
+	text-align: center;
+}
+p.warning {
+	color: red;
+}
+a.panelText {
+	font-size: 1em !important;
+	margin-bottom: -0.1875em !important;
+	margin-top: 0.125em !important;
+}
+p.panelTextDivider {
+	font-family: RobotoThin !important;
+	font-weight: normal !important;
+	color: #33B4E5 !important;
+	height: 1.5em !important;
+	font-size: 1em !important;
+	margin-bottom: -0.25em !important;
+	margin-top: 0.375em !important;
+}
+img.largerIcon {
+	max-height: 1.375em !important;
+	max-width: 1.375em !important;
+	margin-top: -0.4375em !important;
+}
+/* jQuery Mobile Split View */
+.type-interior .content-secondary {
+	border-right: 0;
+	border-left: 0;
+	margin: 10px -15px 0;
+	background: #fff;
+	border-top: 1px solid #ccc;
+}
+.type-home .ui-content {
+	margin-top: 5px;
+	overflow: hidden;
+	position: relative;
+}
+.type-interior .ui-content {
+	padding-bottom: 0;
+}
+.content-secondary .ui-collapsible {
+	padding: 10px 15px;
+}
+.content-secondary .ui-collapsible-inset {
+	margin: 0;
+}
+.content-secondary .ui-collapsible-content {
+	padding: 0;
+	background: none;
+}
+.content-secondary .ui-listview {
+	margin: 0;
+}
+@media all and (min-width: 720px) {
+	.type-home .ui-content {
+		margin-top: 5px;
+	}
+	.type-home .ui-content, .type-interior > .ui-content {
+		padding: 0;
+	}
+	.type-interior > .ui-content {
+		overflow: hidden;
+	}
+	.content-secondary {
+		text-align: left;
+		float: left;
+		width: 45%;
+	}
+	.content-secondary, .type-interior .content-secondary {
+		margin: 0 0 20px 2%;
+		padding: 0 4% 0 0;
+		background: none;
+		border-top: none;
+		position: relative;
+	}
+	.type-interior .content-secondary::after {
+		content: "";
+		display: inline-block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 1px;
+		width: 1px;
+		margin-bottom: -9999px;
+		padding-bottom: 9999px;
+		background: #bbb;
+	}
+	.type-index .content-secondary {
+		padding: 0;
+	}
+	.content-secondary .ui-collapsible {
+		margin: 0;
+		padding: 0;
+	}
+	.content-secondary .ui-collapsible-content {
+		border-left: none;
+		border-right: none;
+	}
+	.type-index .content-secondary .ui-listview {
+		margin: 0;
+	}
+	.content-primary {
+		width: 45%;
+		float: right;
+		margin-top: 0;
+		margin-right: 1%;
+		padding-right: 1%;
+	}
+	.content-primary ul:first-child {
+		margin-top: 0;
+	}
+	.content-primary .ui-collapsible-content ul:first-child {
+		margin-top: -10px;
+	}
+	.content-secondary h2 {
+		position: absolute;
+		left: -9999px;
+	}
+	.type-interior .content-primary {
+		padding: 1.5em 6% 3em 0;
+		margin: 0;
+	}
+	.content-secondary .ui-collapsible-inset {
+		margin-bottom: -1px;
+	}
+	.content-secondary .ui-collapsible-heading {
+		display: none;
+	}
+	.content-secondary .ui-collapsible-contain {
+		margin:0;
+	}
+	.content-secondary .ui-collapsible-content {
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
+	.content-secondary .ui-collapsible-content, .content-secondary .ui-collapsible-content > .ui-listview .ui-li-last {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+	.type-interior  .content-secondary .ui-li-divider {
+		padding-top: 1em;
+		padding-bottom: 1em;
+	}
+	.type-interior .content-secondary {
+		margin: 0;
+		padding: 0;
+	}
+}
+@media all and (min-width: 720px) {
+	.type-home .ui-content {
+		background-position: 39%;
+	}
+	.content-secondary {
+		width: 34%;
+	}
+	.content-primary {
+		width: 56%;
+		padding-right: 1%;
+	}
+}
+@media all and (min-width: 1600px) {
+	.type-home .ui-content {
+		background-position: 38.5%;
+	}
+	.content-secondary {
+		width: 30%;
+		padding-right:6%;
+		margin: 0 0 20px 5%;
+	}
+	.type-interior .content-secondary {
+		margin: 0;
+		padding: 0;
+	}
+	.content-primary {
+		width: 50%;
+		margin-right: 5%;
+		padding-right: 3%;
+	}
+	.type-interior .content-primary {
+		width: 60%;
+	}
+}
