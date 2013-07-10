@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.teusink.pg_jqmexampleapp"
+    package="org.teusink.jpholo"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -26,7 +26,7 @@
         android:theme="@android:style/Theme.Black.NoTitleBar">
         
         <activity
-            android:name="org.teusink.pg_jqmexampleapp.StartActivity"            
+            android:name="org.teusink.jpholo.StartActivity"            
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,5 +1,5 @@
 /** Automatically generated file. DO NOT MODIFY */
-package org.teusink.pg_jqmexampleapp;
+package org.teusink.jpholo;
 
 public final class BuildConfig {
     public final static boolean DEBUG = true;

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <widget xmlns     = "http://www.w3.org/ns/widgets"
-        id        = "org.teusink.pg_jqmexampleapp"
+        id        = "org.teusink.jpholo"
         version   = "1.0">
-    <name>DroidPapers</name>
+    <name>jpHolo</name>
 	
     <description>
         Example app with jQuery Mobile, PhoneGap and a native Android interface in holo-style.

@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package org.teusink.pg_jqmexampleapp;
+package org.teusink.jpholo;
 
 public final class R {
     public static final class attr {

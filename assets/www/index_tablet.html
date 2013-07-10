@@ -1,19 +1,37 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no" /><!-- to set the behavior of the web view -->
-		<title>JQM Exmaple</title>		
-		<link rel="stylesheet" href="themes/AndroidGooglePlus.min.css" /><!-- Load own JQM theme -->
-		<link rel="stylesheet" href="themes/jquery.mobile.structure-1.3.1.min.css" />		
-		<link rel="stylesheet" href="themes/style.css" /><!-- override some styles (example other fonts Roboto) -->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, width=device-width" /><!-- Do not change this! -->
+		
+		<!-- Stylesheets -->
+		<!-- jQuery and jQuery Mobile -->
+		<link rel="stylesheet" type="text/css" href="themes/AndroidGooglePlus.min.css" /><!-- ThemeRoller theme -->
+		<link rel="stylesheet" type="text/css" href="themes/jquery.mobile.structure-1.3.1.min.css" />
+		
+		<!-- Application -->
+		<link rel="stylesheet" type="text/css" href="themes/application.css" />
+		<link rel="stylesheet" type="text/css" href="themes/application.smartphone.css" id="sizeStylesheet" />
+		
+		<!-- JavaScript -->
+		<!-- Cordova PhoneGap -->
 		<script type="text/javascript" src="cordova.js"></script>
-		<script type="text/javascript" src="cordova-plugins.js"></script><!-- load own phonegap plugins (share and toast) -->
+		<script type="text/javascript" src="cordova-plugins.js"></script>
+		
+		<!-- jQuery and jQuery Mobile -->
 		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-		<script type="text/javascript" src="js/functions_before.js"></script><!-- load javascript that needs to be loaded BEFORE jquery mobile loads -->
+		<script type="text/javascript" src="js/jquery.mobile.settings.js"></script><!-- this must be loaded before jQuery Mobile -->
 		<script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>
+		
+		<!-- Other frameworks -->
 		<script type="text/javascript" src="js/energize.js"></script><!-- for speeding op tap events -->
-		<script type="text/javascript" src="js/functions_after.js"></script><!-- load javscript that needs to be loaded AFTER jquery mobile loads -->
+		
+		<!-- Application -->
+		<script type="text/javascript">window.indexFile = "index_tablet.html"; </script>
+		<script type="text/javascript" src="js/application.core.js"></script>
+		<script type="text/javascript" src="js/application.specific.main.js"></script>
+		
+		<title>jpHolo</title>
 	</head>
 	<body>
 		<div id="indexPage" data-role="page" data-theme="a"><!-- id to tie the page event to this specific page -->
@@ -54,19 +72,24 @@
 			
 				<div class="content-primary">
 					
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sollicitudin nibh id neque vulputate, eu convallis ligula faucibus. Maecenas tincidunt, magna id convallis accumsan, est magna pulvinar magna, quis commodo augue tellus imperdiet mauris. Proin fermentum ante eget molestie porta. Sed tempor adipiscing interdum. Cras sed sollicitudin justo. Etiam rutrum tristique lacus. In venenatis augue nibh. Aliquam erat volutpat. Cras rhoncus nulla urna, dignissim hendrerit neque sagittis iaculis. Pellentesque euismod mauris lacus, vitae ullamcorper lectus porta volutpat. Pellentesque euismod consequat gravida. Cras ac risus tristique, varius nunc auctor, pellentesque nisi. Vestibulum arcu mi, rhoncus non ultricies vel, iaculis eget nisl. Vivamus faucibus dignissim justo, a euismod mauris commodo vitae. Sed ac mollis tortor. Cras egestas nunc eget magna tincidunt, vel tempor leo iaculis.</p>
-					
-					<p>Nunc interdum dui sit amet nisl consectetur, eget viverra nibh malesuada. Maecenas at nisi a risus faucibus tristique. Nam rhoncus, orci rhoncus scelerisque bibendum, diam enim laoreet sem, vehicula porttitor diam eros ac nisi. Ut in arcu ac risus tincidunt faucibus. Vivamus mattis erat non semper scelerisque. Nunc sagittis euismod posuere. Fusce dictum elementum libero quis tristique. Ut mollis augue et iaculis vulputate. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc at magna porta, iaculis urna sed, mollis nunc. Phasellus erat lorem, auctor sit amet pellentesque a, aliquam at dolor. Donec congue, nisl quis feugiat convallis, erat odio laoreet enim, non rutrum dolor risus tempor nunc. Duis et sem lacinia ipsum aliquam ullamcorper. Proin aliquet vehicula magna, et semper purus dapibus eu.</p>
-					
-					<p>Integer non imperdiet velit. Curabitur semper sapien erat, id rhoncus eros ornare at. Ut a dapibus lacus. Maecenas semper leo eros, eu iaculis ipsum fermentum tempus. Vivamus mollis sed orci in consequat. Aenean vel tellus nisl. Etiam ligula purus, tincidunt ac vulputate pharetra, pharetra ac diam. Vestibulum viverra pharetra sollicitudin. Sed id dolor quis lacus bibendum pellentesque. Curabitur orci neque, elementum interdum tristique consequat, accumsan eu velit. Donec pulvinar dignissim ante, quis elementum mi elementum quis. Nam placerat magna tempor, sagittis arcu nec, molestie nisi.</p>
-					
-					<p>Vivamus suscipit purus vel feugiat molestie. Vestibulum sit amet pharetra elit. Integer porta tincidunt eros, non dignissim libero blandit nec. In cursus erat non dolor facilisis, ut ornare ipsum ornare. Aliquam lacinia rhoncus quam, vitae imperdiet elit posuere at. Phasellus odio urna, interdum sit amet varius a, vehicula ac elit. Sed vulputate, erat vel interdum interdum, nibh purus rhoncus ipsum, ut pellentesque lorem nisl sed libero. Nulla adipiscing sodales metus, ut congue enim commodo ut. Quisque ut porta sem. Nullam eget mi malesuada, lobortis mi a, tincidunt lorem. Sed sit amet gravida lectus, vitae faucibus enim. Cras consequat mollis felis vitae congue. Nulla facilisi.</p>
-					
-					<p>Quisque viverra at tortor eget fringilla. Aenean est mi, cursus non dolor ac, pulvinar aliquet sem. Aenean sed nibh quam. Aenean viverra ut dolor in luctus. Ut porta nisl nibh, vitae sagittis orci ultrices et. Etiam vestibulum nisi vitae nisi consectetur eleifend. In egestas justo nec nunc fermentum, vitae bibendum ante semper. Fusce non bibendum nunc.</p>
+					<h1>About</h1>
+					<p>Get jpHolo on GitHub <a href="https://github.com/teusinkorg/jpHolo" target="_blank">here</a></p>
+					<p>Frameworks and plugins that are used to make this application template</p>
+					<p>PhoneGap <a href="http://phonegap.com/" target="_blank">here</a><br />
+					jQuery Mobile <a href="http://jquerymobile.com/" target="_blank">here</a><br />
+					Energize.js <a href="https://github.com/davidcalhoun/energize.js" target="_blank">here</a><br />
+					Android Icons <a href="http://www.androidicons.com/" target="_blank">here</a></p>
 				
 				</div><!-- /contentprimary -->
 				
 			</div><!-- /content -->
+			
+			<div data-role="footer" data-tap-toggle="false" data-position="fixed" data-theme="a" class="footerSticky"><!-- this class makes sure there is a blue line above footer -->
+				<div>
+					<img id="footerShareIndex" onclick="share(window.localStorage.getItem('shareTagSubject'),window.localStorage.getItem('shareTagText'));" src="./images/icons/ic_action_share_header.png" class="footerIconLeft">
+					<img id="footerToastIndex" onclick="toast('This is a toast message','short');" src="./images/icons/ic_action_share_header.png" class="footerIconRight">
+				</div>
+			</div><!-- /footer -->
 		
 		</div><!-- /page -->
 		
@@ -139,7 +162,7 @@
 			</div>
 			<!-- /panel -->
 			
-			<div class="headerSticky" data-role="header" data-tap-toggle="false" data-position="fixed" data-theme="e" class="headerDark">
+			<div data-role="header" data-tap-toggle="false" data-position="fixed" data-theme="e" class="headerSticky headerDark">
 				<div>
 					<p class="headerBarText"><img id="headerTitleThird" onclick="togglePanel('#panelMenu' + window.localStorage.getItem('divIdGlobal'));" class="headerIconTitle" src="images/icons/ic_launcher_full_arrow_light.png" /><img id="headerShareThird" onclick="share(window.localStorage.getItem('shareTagSubject'),window.localStorage.getItem('shareTagText'));" class="headerIconShare" src="images/icons/ic_action_share_header.png" /><img id="headerOverflowThird" onclick="togglePanel('#panelMenuRight' + window.localStorage.getItem('divIdGlobal'));" class="headerIconOverflow" src="images/icons/ic_action_overflow_header.png" />
 					&nbsp;</p>

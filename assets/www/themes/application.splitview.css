@@ -1,0 +1,52 @@
+/* jQuery Mobile Split View */
+.type-interior .content-secondary {
+	border-right: 0;
+	border-left: 0;
+	margin: 0;
+	padding: 0;
+}
+.type-home .ui-content {
+	margin-top: 5px;
+	overflow: hidden;
+	position: relative;
+	background-position: 39%;
+}
+.type-interior .ui-content {
+	padding-bottom: 0;
+}
+.content-secondary .ui-listview {
+	margin: 0;
+}
+.type-home .ui-content, .type-interior > .ui-content {
+	padding: 0;
+}
+.type-interior > .ui-content {
+	overflow: hidden;
+}
+.content-secondary {
+	text-align: left;
+	float: left;
+	width: 34%;
+}
+.content-secondary, .type-interior .content-secondary {
+	margin: 0 0 20px 2%;
+	padding: 0 4% 0 0;
+	position: relative;
+}
+.type-index .content-secondary {
+	padding: 0;
+}
+.type-index .content-secondary .ui-listview {
+	margin: 0;
+}
+.content-primary {
+	float: right;
+	margin-top: 0;
+	margin-right: 1%;
+	padding-right: 1%;
+	width: 56%;
+}
+.type-interior .content-primary {
+	padding: 1.5em 6% 3em 0;
+	margin: 0;
+}

@@ -1,4 +1,4 @@
-package org.teusink.pg_jqmexampleapp;
+package org.teusink.jpholo;
 
 import org.apache.cordova.DroidGap;
 
@@ -9,17 +9,23 @@ public class StartActivity extends DroidGap {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		super.init();
 		if (checkScreenSize().equals("large") || checkScreenSize().equals("xlarge")) {
-			super.onCreate(savedInstanceState);
-			super.init();
-			super.loadUrl("file:///android_asset/www/index_tablet.html");
+			initiateApp("tablet");
 		} else {
-			super.onCreate(savedInstanceState);
-			super.init();
-			super.loadUrl("file:///android_asset/www/index.html");
+			initiateApp("smartphone");
 		}
 	}
-	
+
+	private void initiateApp(String screenSize) {
+		if (screenSize.equals("tablet")) {
+			super.loadUrl("file:///android_asset/www/index_tablet.html");
+		} else {
+			super.loadUrl("file:///android_asset/www/index_smartphone.html");
+		}
+	}
+
 	private String checkScreenSize() {
 		String screenSize;
 		if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {

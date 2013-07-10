@@ -1,0 +1,10 @@
+@media all and (orientation: landscape) {
+	body {
+		font-size: 90% !important;
+	}	
+}
+@media all and (orientation: portrait) {
+	body {
+		font-size: 100% !important;
+	}
+}
