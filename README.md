@@ -29,7 +29,7 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 
 <h2>Changelog</h2>
 
-<h3>2013-07-10</h3>
+<h3>2013-07-12</h3>
 - improved Gimp image resource files (easier to adjust app title)
 - improved interface (icon title button)
 - added non-minified custom jQuery Mobile Theme
