@@ -4,6 +4,7 @@ Android ICS colors:
 	Charcoal: 222222 (dark grey)
 	Honest	: 33B5E5 (cyan)
 	Imdur	: 555555 (grey)
+	Grey	: 696969 (dim grey, action bar)
 	Grey	: CCCCCC (border)
 	Grey	: F9F9F9 (background)
 */
@@ -43,21 +44,29 @@ div.load_images {
 }
 div.headerDark {
 	z-index: 1001;
-	height: 2.65em;
+	height: 2.85em;
 	border-bottom: 1px solid #0099CC !important;
+	margin: 0;
+	padding: 0;
 }
 div.footerDark {
-	height: 2.65em;
+	height: 2.85em;
 	border-top: 1px solid #0099CC !important;
+	margin: 0;
+	padding: 0;
 }
 div.headerSticky {
 	z-index: 1001;
-	height: 2.65em;
-	border-bottom: 0px !important;
+	height: 2.85em;
+	border-bottom: 1px solid #222222 !important;
+	margin: 0;
+	padding: 0;
 }
 div.footerSticky {
-	height: 2.65em;
-	border-top: 0px !important;
+	height: 2.85em;
+	border-top: 1px solid #555555 !important;
+	margin: 0;
+	padding: 0;
 }
 img.headerIconTitle {
 	height: 100%;
@@ -65,6 +74,8 @@ img.headerIconTitle {
 	position: absolute;
 	left: 0;
 	top: 0;
+	margin: 0;
+	padding: 0;
 }
 img.headerIconOverflow {
 	height: 100%;
@@ -73,6 +84,8 @@ img.headerIconOverflow {
 	float: right;
 	right: 0;
 	top: 0;
+	margin: 0;
+	padding: 0;
 }
 img.headerIconShare {
 	height: 100%;
@@ -81,16 +94,32 @@ img.headerIconShare {
 	float: right;
 	right: 2.812em;
 	top: 0;
+	margin: 0;
+	padding: 0;
+}
+img.headerIconRefresh {
+	height: 100%;
+	border: 0;
+	position: absolute;
+	float: right;
+	right: 5.625em;
+	top: 0;
+	margin: 0;
+	padding: 0;
 }
 img.footerIconLeft {
 	height: 100%;
 	border: 0;
 	float: left;
+	margin: 0;
+	padding: 0;
 }
 img.footerIconRight {
 	height: 100%;
 	border: 0;
 	float: right;
+	margin: 0;
+	padding: 0;
 }
 img.largerIcon {
 	max-height: 1.375em !important;
@@ -148,7 +177,7 @@ a.panelText {
 	margin-top: 0.125em !important;
 }
 li.headerSpace {
-	height: 1.35em;
+	height: 1.55em;
 }
 table {
 	width: 100%;

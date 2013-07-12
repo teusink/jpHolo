@@ -6,7 +6,7 @@
 		
 		<!-- Stylesheets -->
 		<!-- jQuery and jQuery Mobile -->
-		<link rel="stylesheet" type="text/css" href="themes/AndroidGooglePlus.min.css" /><!-- ThemeRoller theme -->
+		<link rel="stylesheet" type="text/css" href="themes/AndroidHolo.min.css" /><!-- ThemeRoller theme -->
 		<link rel="stylesheet" type="text/css" href="themes/jquery.mobile.structure-1.3.1.min.css" />
 		
 		<!-- Application -->
@@ -76,7 +76,7 @@
 				
 			</div><!-- /content -->
 			
-			<div data-role="footer" data-tap-toggle="false" data-position="fixed" data-theme="a" class="footerSticky"><!-- this class makes sure there is a blue line above footer -->
+			<div data-role="footer" data-tap-toggle="false" data-position="fixed" data-theme="f" class="footerSticky"><!-- this class makes sure there is a blue line above footer -->
 				<div>
 					<img id="footerShareIndex" onclick="share(window.localStorage.getItem('shareTagSubject'),window.localStorage.getItem('shareTagText'));" src="./images/icons/ic_action_share_header.png" class="footerIconLeft">
 					<img id="footerToastIndex" onclick="toast('This is a toast message','short');" src="./images/icons/ic_action_share_header.png" class="footerIconRight">
@@ -138,7 +138,7 @@
 			
 			<div data-role="header" data-tap-toggle="false" data-position="fixed" data-theme="e" class="headerDark">
 				<div>
-					<p class="headerBarText"><img id="headerTitleThird" onclick="togglePanel('#panelMenu' + window.localStorage.getItem('divIdGlobal'));" class="headerIconTitle" src="images/icons/ic_launcher_full_arrow_light.png" /><img id="headerShareThird" onclick="share(window.localStorage.getItem('shareTagSubject'),window.localStorage.getItem('shareTagText'));" class="headerIconShare" src="images/icons/ic_action_share_header.png" /><img id="headerOverflowThird" onclick="togglePanel('#panelMenuRight' + window.localStorage.getItem('divIdGlobal'));" class="headerIconOverflow" src="images/icons/ic_action_overflow_header.png" />
+					<p class="headerBarText"><img id="headerTitleThird" onclick="togglePanel('#panelMenu' + window.localStorage.getItem('divIdGlobal'));" class="headerIconTitle" src="images/icons/ic_launcher_full_arrow.png" /><img id="headerShareThird" onclick="share(window.localStorage.getItem('shareTagSubject'),window.localStorage.getItem('shareTagText'));" class="headerIconShare" src="images/icons/ic_action_share_header.png" /><img id="headerOverflowThird" onclick="togglePanel('#panelMenuRight' + window.localStorage.getItem('divIdGlobal'));" class="headerIconOverflow" src="images/icons/ic_action_overflow_header.png" />
 					&nbsp;</p>
 				</div>
 			</div><!-- /header -->

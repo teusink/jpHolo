@@ -30,6 +30,14 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 <h2>Changelog</h2>
 
 <h3>2013-07-10</h3>
+- improved Gimp image resource files (easier to adjust app title)
+- improved interface (icon title button)
+- added non-minified custom jQuery Mobile Theme
+- removed Holo light images (they will return improved)
+- more image resources
+- fixed tablet layout not showing
+
+<h3>2013-07-10</h3>
 - renamed style.css to application.css
 - renamed style_tablet to application.splitview.css
 - added application.tablet.css
