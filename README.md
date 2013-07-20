@@ -29,6 +29,9 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 
 <h2>Changelog</h2>
 
+<h3>2013-07-20</h3>
+- Paved the way for PhoneGap 3.0.0. Project is still using PhoneGap 2.9.0.
+
 <h3>2013-07-12</h3>
 - improved Gimp image resource files (easier to adjust app title)
 - improved interface (icon title button)
