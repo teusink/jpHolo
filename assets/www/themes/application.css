@@ -1,3 +1,4 @@
+@charset 'UTF-8';
 /* padding & margin & box-shadow: top right bottom left
 Android ICS colors:
 	Roboto	: 0099CC (dark cyan)
@@ -8,7 +9,6 @@ Android ICS colors:
 	Grey	: CCCCCC (border)
 	Grey	: F9F9F9 (background)
 */
-
 @font-face {
 	font-family: RobotoThin;
 	src: url('Roboto-Thin-webfont.ttf') format('truetype');
