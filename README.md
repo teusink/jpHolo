@@ -29,6 +29,9 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 
 <h2>Changelog</h2>
 
+<h3>2013-07-21</h3>
+- Upgrade to jQuery Mobile 1.3.2.
+
 <h3>2013-07-20</h3>
 - Paved the way for PhoneGap 3.0.0. Project is still using PhoneGap 2.9.0.
 
