@@ -29,6 +29,11 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 
 <h2>Changelog</h2>
 
+<h3>2013-07-26</h3>
+- Add the new (and all) Roboto TrueType fonts.
+- Improved icon images with new Roboto font.
+- Improved css a bit due to new fonts.
+
 <h3>2013-07-21</h3>
 - Upgrade to jQuery Mobile 1.3.2.
 
