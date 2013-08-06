@@ -42,6 +42,7 @@ public class Toasts extends CordovaPlugin {
 
 	private void cancelToast() {
 		cordova.getActivity().runOnUiThread(new Runnable() {
+			@Override
 			public void run() {
 				if (toast != null) {
 					toast.cancel();
@@ -52,6 +53,7 @@ public class Toasts extends CordovaPlugin {
 
 	private void showToast(final String message, final int length) {
 		cordova.getActivity().runOnUiThread(new Runnable() {
+			@Override
 			public void run() {
 				toast = Toast.makeText(cordova.getActivity(), message, length);
 				toast.show();

@@ -29,7 +29,6 @@
 		<!-- Application -->
 		<script type="text/javascript">window.indexFile = "index_smartphone.html"; </script>
 		<script type="text/javascript" src="js/application.core.js"></script>
-		<script type="text/javascript" src="js/application.specific.main.js"></script>
 		
 		<title>jpHolo</title>
 	</head>
@@ -62,24 +61,38 @@
 			<div data-role="content" data-theme="a">
 				
 				<h1>Index</h1>
-				<p>Light holo theme with dark title page.</p>
+				<p>Holo Light theme with Dark action bar.</p>
 				<a onclick="clearFirstBoot();" data-role="button">Clear to first boot</a>
 				<a onclick="$('#popupIndexPage').popup('open');" data-role="button">JQM Popup</a>
 				
 				<h1>About</h1>
 				<p>Get jpHolo on GitHub <a href="https://github.com/teusinkorg/jpHolo" target="_blank">here</a></p>
 				<p>Frameworks and plugins that are used to make this application template</p>
-				<p>PhoneGap <a href="http://phonegap.com/" target="_blank">here</a><br />
-				jQuery Mobile <a href="http://jquerymobile.com/" target="_blank">here</a><br />
-				Energize.js <a href="https://github.com/davidcalhoun/energize.js" target="_blank">here</a><br />
-				Android Icons <a href="http://www.androidicons.com/" target="_blank">here</a></p>
+				<p>- Platform: <a href="http://phonegap.com/" target="_blank">PhoneGap</a><br />
+				- Platform: <a href="http://jquerymobile.com/" target="_blank">jQuery Mobile</a><br />
+				- jQuery Mobile plugin: <a href="https://github.com/davidcalhoun/energize.js" target="_blank">Energize.js</a><br />
+				- Web: <a href="http://www.androidicons.com/" target="_blank">Android Icons</a><br />
+				- PhoneGap plugin: <a href="http://teusink.blogspot.nl/2013/04/phonegap-android-share-plugin.html" target="_blank">Share</a><br />
+				- PhoneGap plugin: <a href="http://teusink.blogspot.nl/2013/04/phonegap-android-toast-plugin.html" target="_blank">Toast</a><br />
+				- PhoneGap plugin: Appstore<br />
+				- PhoneGap plugin: PackageVersion<br />
+				</p>
+				
+				<h1>Suggestions</h1>
+				<p>- jQuery Mobile plugin: <a href="http://jqmiconpack.andymatthews.net/#/" target="_blank">JQM Icons</a><br />
+				- PhoneGap plugin: <a href="" target="_blank">Background Service</a><br />
+				- PhoneGap plugin: <a href="https://github.com/phonegap-build/PushPlugin" target="_blank">Google Cloud Messaging</a><br />
+				- PhoneGap plugin: <a href="https://github.com/ggendre/GALocalStorage" target="_blank">Google Analytics</a><br />
+				- PhoneGap plugin: <a href="http://teusink.blogspot.nl/2013/07/phonegap-android-cachecleaner-plugin.html" target="_blank">CacheCleaner</a><br />
+				- PhoneGap plugin: <a href="http://teusink.blogspot.nl/2013/04/phonegap-android-downloader-plugin.html" target="_blank">Downloader</a><br />
+				</p>
 				
 			</div><!-- /content -->
 			
 			<div data-role="footer" data-tap-toggle="false" data-position="fixed" data-theme="f" class="footerSticky"><!-- this class makes sure there is a blue line above footer -->
 				<div>
 					<img id="footerShareIndex" onclick="share(window.localStorage.getItem('shareTagSubject'),window.localStorage.getItem('shareTagText'));" src="./images/icons/ic_action_share_header.png" class="footerIconLeft">
-					<img id="footerToastIndex" onclick="toast('This is a toast message','short');" src="./images/icons/ic_action_share_header.png" class="footerIconRight">
+					<img id="footerToastIndex" onclick="toast('This is a toast message','short');" src="./images/icons/ic_action_list_header.png" class="footerIconRight">
 				</div>
 			</div><!-- /footer -->
 		
@@ -109,14 +122,14 @@
 			<div data-role="content" data-theme="c">
 				
 				<h1>Page 2</h1>
-				<p>Dark holo theme page.</p>
+				<p>Holo Dark theme page.</p>
 				
 			</div><!-- /content -->
 			
 			<div data-role="footer" data-tap-toggle="false" data-position="fixed" data-theme="a" class="footerDark"><!-- this class makes sure there is a blue line above footer -->
 				<div>
 					<img id="footerShareSecond" onclick="share(window.localStorage.getItem('shareTagSubject'),window.localStorage.getItem('shareTagText'));" src="./images/icons/ic_action_share_header.png" class="footerIconLeft">
-					<img id="footerToastSecond" onclick="toast('This is a toast message','short');" src="./images/icons/ic_action_share_header.png" class="footerIconRight">
+					<img id="footerToastSecond" onclick="toast('This is a toast message','short');" src="./images/icons/ic_action_list_header.png" class="footerIconRight">
 				</div>
 			</div><!-- /footer -->
 		
@@ -146,7 +159,7 @@
 			<div data-role="content" data-theme="e">
 				
 				<h1>Page 3</h1>
-				<p>Light holo theme with light title page. Not very well worked out yet.</p>
+				<p>Holo Light theme page (not very well worked out yet).</p>
 				
 			</div><!-- /content -->
 		

@@ -9,6 +9,8 @@ An application template based on jQuery Mobile and PhoneGap, featuring an Androi
 - Android Holo Theme look: Light with Dark action bar (full), Dark (full), and Light (partial).
 - Toast messages.
 - Share intent.
+- Google Play Store intent.
+- Retrieve current package version (manifest file).
 - Navigation Drawer.
 
 <h2>Requirements</h2>
@@ -27,7 +29,20 @@ An application template based on jQuery Mobile and PhoneGap, featuring an Androi
 See my blog about this: http://teusink.blogspot.nl/2013/04/android-example-app-with-phonegap-and.html
 Working example can be found on Google Play Store. It is my own app DroidPapers: https://play.google.com/store/apps/details?id=org.teusink.droidpapers
 
+<h2>Working on...</h2>
+- Upgrade to PhoneGap 3.0.0.
+- More jQuery Mobile widgets.
+- More PhoneGap features.
+
 <h2>Changelog</h2>
+
+<h3>2013-08-06</h3>
+- Removed reference to non-existing script.
+- Made example (menu items, toasts etc.) bit more better to understand.
+- Added Appstore plugin to invoke an intent to open Play Store.
+- Added PackageVersion plugin to get current package version set in manifest file in Android.
+- Changed right navigation drawer with menu items to demonstrate the two new plugins.
+- Upgraded package to Android 4.3 (API 18).
 
 <h3>2013-07-26</h3>
 - Add the new (and all) Roboto TrueType fonts.

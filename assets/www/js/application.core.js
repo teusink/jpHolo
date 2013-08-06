@@ -7,23 +7,25 @@
 function toast(text, duration) {
 	var toasts = cordova.require("cordova/plugin/toasts");
 	if (duration === "short") {
-		toasts.showShort(text,
+		toasts.showShort(
+			text,
 			function () {
 				//console.log("PhoneGap Plugin: Toast short: callback success");
 			},
 			function () {
 				console.log("PhoneGap Plugin: Toast short: callback error");
 			}
-			);
+		);
 	} else if (duration === "long") {
-		toasts.showLong(text,
+		toasts.showLong(
+			text,
 			function () {
 				//console.log("PhoneGap Plugin: Toast long: callback success");
 			},
 			function () {
 				console.log("PhoneGap Plugin: Toast long: callback error");
 			}
-			);
+		);
 	} else {
 		toasts.cancel(
 			function () {
@@ -39,14 +41,45 @@ function toast(text, duration) {
 // Share
 function share(subject, text) {
 	var shares = cordova.require("cordova/plugin/share");
-	shares.show({subject: subject, text: text},
+	shares.show(
+		{subject: subject, text: text},
 		function () {
 			//console.log("PhoneGap Plugin: Share: callback success");
 		},
 		function () {
 			console.log("PhoneGap Plugin: Share: callback error");
 		}
-		);
+	);
+}
+
+// Appstore
+function appstore(link, type) {
+	var appstores = cordova.require("cordova/plugin/appstore");
+	appstores.show(
+		{link: link, type: type},
+		function () {
+			// console.log("PhoneGap Plugin: Appstore: callback success");
+		},
+		function () {
+			console.log("PhoneGap Plugin: Appstore: callback error");
+		}
+	);
+}
+
+// PackageVersion
+function getPackageVersion() {
+	var packageVersion = cordova.require("cordova/plugin/packageversion"), currentVersion;
+	packageVersion.get(
+		function (version) {
+			// console.log("PhoneGap Plugin: PackageVersion: callback success");
+			currentVersion = version;
+		},
+		function () {
+			console.log("PhoneGap Plugin: PackageVersion: callback error");
+			currentVersion = "unknown";
+		}
+	);
+	return currentVersion;
 }
 /* END PhoneGap plugins */
 
@@ -81,7 +114,7 @@ function isDeviceReady(action) {
 		var connection = checkConnection();
 		switch (action) {
 		case "toastReady":
-			toast("Device is ready according to PhoneGap. Connection type: " + connection, "short");
+			toast("Holo Light with Dark action bar example\nDevice is ready according to PhoneGap.\nConnection type: " + connection, "short");
 			break;
 		case "action2":
 			// code
@@ -158,10 +191,10 @@ function panelMenu(divId) {
 	$(panel).children().remove('li');
 	$(panel).append('<li data-icon="false" class="headerSpace"><p>&nbsp;</p></li>'); // empty space, needed for header
 	$(panel).append('<li data-role="list-divider"><p class="panelTextDivider">jpHolo</p></li>');
-	$(panel).append('<li data-icon="false"><a class="panelText" href="#indexPage"><img src="./images/icons/ic_action_home.png" class="ui-li-icon largerIcon">Index page</a></li>');
+	$(panel).append('<li data-icon="false"><a class="panelText" href="#indexPage"><img src="./images/icons/ic_action_home.png" class="ui-li-icon largerIcon">Holo light/dark</a></li>');
 	$(panel).append('<li data-role="list-divider"><p class="panelTextDivider">Other pages</p></li>');
-	$(panel).append('<li data-icon="false"><a class="panelText" href="#secondPage"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Second page</a></li>');
-	$(panel).append('<li data-icon="false"><a class="panelText" href="#thirdPage"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Third page</a></li>');
+	$(panel).append('<li data-icon="false"><a class="panelText" href="#secondPage"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Holo dark</a></li>');
+	$(panel).append('<li data-icon="false"><a class="panelText" href="#thirdPage"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Holo light</a></li>');
 	$(panel).listview('refresh');
 }
 
@@ -170,11 +203,11 @@ function panelMenuRight(divId) {
 	var panel = '#panelMenuRight' + divId + 'UL';
 	$(panel).children().remove('li');
 	$(panel).append('<li data-icon="false" class="headerSpace"><p>&nbsp;</p></li>'); // empty space, needed for header
-	$(panel).append('<li data-role="list-divider"><p class="panelTextDivider">More items</p></li>');
-	$(panel).append('<li data-icon="false"><a class="panelText" href="#indexPage"><img src="./images/icons/ic_action_home.png" class="ui-li-icon largerIcon">Index page</a></li>');
-	$(panel).append('<li data-role="list-divider"><p class="panelTextDivider">Other pages</p></li>');
-	$(panel).append('<li data-icon="false"><a class="panelText" href="#secondPage"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Second page</a></li>');
-	$(panel).append('<li data-icon="false"><a class="panelText" href="#thirdPage"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Third page</a></li>');
+	$(panel).append('<li data-role="list-divider"><p class="panelTextDivider">Play Store links</p></li>');
+	$(panel).append('<li data-icon="false"><a class="panelText" onclick="appstore(\'org.teusink.droidpapers\', \'app\')"><img src="./images/icons/ic_action_home.png" class="ui-li-icon largerIcon">DroidPapers</a></li>');
+	$(panel).append('<li data-icon="false"><a class="panelText" onclick="appstore(\'Teusink.org\', \'pub\')"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Teusink.org</a></li>');
+	$(panel).append('<li data-role="list-divider"><p class="panelTextDivider">App info</p></li>');
+	$(panel).append('<li data-icon="false"><a class="panelText" onclick="toast(\'Current version: ' + getPackageVersion() + '\', \'short\')"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Current version</a></li>');
 	$(panel).listview('refresh');
 }
 
@@ -273,11 +306,11 @@ function pressEffectFooter(button1, button2) {
 	if (button2 === true) {
 		$(document).on('vmousedown', "#footerToast" + window.localStorage.getItem("divIdGlobal"), function (e) {
 			if (e) { e.preventDefault(); }
-			$("#footerToast" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_action_share_selected_header.png");
+			$("#footerToast" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_action_list_selected_header.png");
 		});
 		$(document).on('vmouseup', "#footerToast" + window.localStorage.getItem("divIdGlobal"), function (e) {
 			if (e) { e.preventDefault(); }
-			$("#footerToast" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_action_share_header.png");
+			$("#footerToast" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_action_list_header.png");
 		});
 	}
 }
@@ -294,9 +327,9 @@ function initPageVarsOnCreate(id) {
 	if (id === "Index") {
 		isDeviceReady("toastReady");
 	} else if (id === "Second") {
-		toast('This is the Second page', 'short');
+		toast('Holo Dark example', 'short');
 	} else if (id === "Third") {
-		toast('This is the Third page', 'short');
+		toast('Holo Light example', 'short');
 	}
 }
 

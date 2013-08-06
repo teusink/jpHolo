@@ -56,5 +56,7 @@
 	<!-- additional plugins -->
 	<feature name="Share"><param name="android-package" value="org.apache.cordova.plugins.Share" /></feature>
 	<feature name="Toasts"><param name="android-package" value="org.apache.cordova.plugins.Toasts" /></feature>
+	<feature name="Appstore"><param name="android-package" value="org.apache.cordova.plugins.Appstore" /></feature>
+	<feature name="PackageVersion"><param name="android-package" value="org.apache.cordova.plugins.PackageVersion" /></feature>
 
 </widget>
