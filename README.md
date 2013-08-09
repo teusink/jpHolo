@@ -36,6 +36,9 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 
 <h2>Changelog</h2>
 
+<h3>2013-08-09</h3>
+- Footer action buttons height fix.
+
 <h3>2013-08-06</h3>
 - Removed reference to non-existing script.
 - Made example (menu items, toasts etc.) bit more better to understand.

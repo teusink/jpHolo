@@ -69,7 +69,7 @@ div.footerSticky {
 	padding: 0;
 }
 img.headerIconTitle {
-	height: 100%;
+	height: 2.85em;
 	border: 0;
 	position: absolute;
 	left: 0;
@@ -78,7 +78,7 @@ img.headerIconTitle {
 	padding: 0;
 }
 img.headerIconOverflow {
-	height: 100%;
+	height: 2.85em;
 	border: 0;
 	position: absolute;
 	float: right;
@@ -88,7 +88,7 @@ img.headerIconOverflow {
 	padding: 0;
 }
 img.headerIconShare {
-	height: 100%;
+	height: 2.85em;
 	border: 0;
 	position: absolute;
 	float: right;
@@ -98,7 +98,7 @@ img.headerIconShare {
 	padding: 0;
 }
 img.headerIconRefresh {
-	height: 100%;
+	height: 2.85em;
 	border: 0;
 	position: absolute;
 	float: right;
@@ -108,7 +108,7 @@ img.headerIconRefresh {
 	padding: 0;
 }
 img.footerIconLeft {
-	height: 100%;
+	height: 2.85em;
 	border: 0;
 	position: relative;
 	float: left;
@@ -116,7 +116,7 @@ img.footerIconLeft {
 	padding: 0;
 }
 img.footerIconRight {
-	height: 100%;
+	height: 2.85em;
 	border: 0;
 	position: relative;
 	float: right;
