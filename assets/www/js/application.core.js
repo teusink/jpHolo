@@ -10,29 +10,29 @@ function toast(text, duration) {
 		toasts.showShort(
 			text,
 			function () {
-				//console.log("PhoneGap Plugin: Toast short: callback success");
+				console.info("PhoneGap Plugin: Toast short: callback success");
 			},
 			function () {
-				console.log("PhoneGap Plugin: Toast short: callback error");
+				console.error("PhoneGap Plugin: Toast short: callback error");
 			}
 		);
 	} else if (duration === "long") {
 		toasts.showLong(
 			text,
 			function () {
-				//console.log("PhoneGap Plugin: Toast long: callback success");
+				console.info("PhoneGap Plugin: Toast long: callback success");
 			},
 			function () {
-				console.log("PhoneGap Plugin: Toast long: callback error");
+				console.error("PhoneGap Plugin: Toast long: callback error");
 			}
 		);
 	} else {
 		toasts.cancel(
 			function () {
-				//console.log("PhoneGap Plugin: Toast cancel: callback success");
+				console.info("PhoneGap Plugin: Toast cancel: callback success");
 			},
 			function () {
-				console.log("PhoneGap Plugin: Toast cancel: callback error");
+				console.error("PhoneGap Plugin: Toast cancel: callback error");
 			}
 		);
 	}
@@ -44,10 +44,10 @@ function share(subject, text) {
 	shares.show(
 		{subject: subject, text: text},
 		function () {
-			//console.log("PhoneGap Plugin: Share: callback success");
+			console.info("PhoneGap Plugin: Share: callback success");
 		},
 		function () {
-			console.log("PhoneGap Plugin: Share: callback error");
+			console.error("PhoneGap Plugin: Share: callback error");
 		}
 	);
 }
@@ -58,10 +58,10 @@ function appstore(link, type) {
 	appstores.show(
 		{link: link, type: type},
 		function () {
-			// console.log("PhoneGap Plugin: Appstore: callback success");
+			console.info("PhoneGap Plugin: Appstore: callback success");
 		},
 		function () {
-			console.log("PhoneGap Plugin: Appstore: callback error");
+			console.error("PhoneGap Plugin: Appstore: callback error");
 		}
 	);
 }
@@ -71,11 +71,11 @@ function getPackageVersion() {
 	var packageVersion = cordova.require("cordova/plugin/packageversion"), currentVersion;
 	packageVersion.get(
 		function (version) {
-			// console.log("PhoneGap Plugin: PackageVersion: callback success");
+			console.info("PhoneGap Plugin: PackageVersion: callback success");
 			currentVersion = version;
 		},
 		function () {
-			console.log("PhoneGap Plugin: PackageVersion: callback error");
+			console.error("PhoneGap Plugin: PackageVersion: callback error");
 			currentVersion = "unknown";
 		}
 	);

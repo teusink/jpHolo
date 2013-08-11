@@ -36,6 +36,9 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 
 <h2>Changelog</h2>
 
+<h3>2013-08-11</h3>
+- Improved logging commands (console.info, console.warn, console.error, instead of console.log only).
+
 <h3>2013-08-09</h3>
 - Footer action buttons height fix.
 
