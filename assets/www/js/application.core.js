@@ -357,16 +357,6 @@ function initPageVarsOnShow(id) {
 	}
 }
 
-// jqm based popup
-$(document).on('popupafteropen', '#popupIndexPage', function (e) {
-	if (e) { e.preventDefault(); }
-	toast('Popup opened.', 'short');
-});
-$(document).on('popupafterclose', '#popupIndexPage', function (e) {
-	if (e) { e.preventDefault(); }
-	toast('Popup closed.', 'short');
-});
-
 // below is to tie page events to pages so that the 2 functions above (initPageVarsOn...) will execute
 
 // #indexPage

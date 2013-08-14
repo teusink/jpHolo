@@ -25,7 +25,7 @@
 		<script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>
 		
 		<!-- Other frameworks -->
-		<script type="text/javascript" src="js/energize.js"></script><!-- for speeding op tap events -->
+		<script type="text/javascript" src="js/energize-min.js"></script><!-- for speeding op tap events -->
 		
 		<!-- Application -->
 		<script type="text/javascript">window.indexFile = "index_tablet.html"; </script>
@@ -35,10 +35,6 @@
 	</head>
 	<body>
 		<div id="indexPage" data-role="page" data-theme="a"><!-- id to tie the page event to this specific page -->
-			
-			<div data-role="popup" id="popupIndexPage" class="ui-content">
-				<p>This is a jQuery Mobile based popup!</p>
-			</div>
 			
 			<!-- left panel  -->
 			<div id="panelMenuIndex" data-role="panel" data-theme="b" data-position="left" data-display="overlay" data-dismissible="true" data-position-fixed="true" data-swipe-close="true" data-animate="true">
@@ -66,7 +62,6 @@
 					<h1>Index</h1>
 					<p>Holo Light theme with Dark action bar.</p>				
 					<a onclick="clearFirstBoot();" data-role="button">Clear to first boot</a>
-					<a onclick="$('#popupIndexPage').popup('open');" data-role="button">JQM Popup</a>
 					
 				</div><!-- /contentsecundary -->
 			
@@ -77,19 +72,19 @@
 					<p>Frameworks and plugins that are used to make this application template</p>
 					<p>- Platform: <a href="http://phonegap.com/" target="_blank">PhoneGap</a><br />
 					- Platform: <a href="http://jquerymobile.com/" target="_blank">jQuery Mobile</a><br />
-					- jQuery Mobile plugin: <a href="https://github.com/davidcalhoun/energize.js" target="_blank">Energize.js</a><br />
 					- Web: <a href="http://www.androidicons.com/" target="_blank">Android Icons</a><br />
+					- jQuery Mobile plugin: <a href="https://github.com/teusinkorg/energize.js" target="_blank">Energize.js</a><br />
 					- PhoneGap plugin: <a href="http://teusink.blogspot.nl/2013/04/phonegap-android-share-plugin.html" target="_blank">Share</a><br />
 					- PhoneGap plugin: <a href="http://teusink.blogspot.nl/2013/04/phonegap-android-toast-plugin.html" target="_blank">Toast</a><br />
-					- PhoneGap plugin: Appstore<br />
+					- PhoneGap plugin: <a href="http://teusink.blogspot.nl/2013/08/phonegap-android-appstore-plugin.html" target="_blank">Appstore</a><br />
 					- PhoneGap plugin: PackageVersion<br />
 					</p>
 					
 					<h1>Suggestions</h1>
 					<p>- jQuery Mobile plugin: <a href="http://jqmiconpack.andymatthews.net/#/" target="_blank">JQM Icons</a><br />
-					- PhoneGap plugin: <a href="" target="_blank">Background Service</a><br />
+					- PhoneGap plugin: <a href="https://github.com/Red-Folder/Cordova-Plugin-BackgroundService" target="_blank">Background Service</a><br />
 					- PhoneGap plugin: <a href="https://github.com/phonegap-build/PushPlugin" target="_blank">Google Cloud Messaging</a><br />
-					- PhoneGap plugin: <a href="https://github.com/ggendre/GALocalStorage" target="_blank">Google Analytics</a><br />
+					- PhoneGap plugin: <a href="https://github.com/phonegap-build/GAPlugin" target="_blank">Google Analytics</a><br />
 					- PhoneGap plugin: <a href="http://teusink.blogspot.nl/2013/07/phonegap-android-cachecleaner-plugin.html" target="_blank">CacheCleaner</a><br />
 					- PhoneGap plugin: <a href="http://teusink.blogspot.nl/2013/04/phonegap-android-downloader-plugin.html" target="_blank">Downloader</a><br />
 					</p>

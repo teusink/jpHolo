@@ -29,12 +29,17 @@ An application template based on jQuery Mobile and PhoneGap, featuring an Androi
 See my blog about this: http://teusink.blogspot.nl/2013/04/android-example-app-with-phonegap-and.html
 Working example can be found on Google Play Store. It is my own app DroidPapers: https://play.google.com/store/apps/details?id=org.teusink.droidpapers
 
-<h2>Working on...</h2>
-- Upgrade to PhoneGap 3.0.0.
-- More jQuery Mobile widgets.
-- More PhoneGap features.
+<h2>Planned work</h2>
+- Upgrade to jQuery Mobile 1.4.0
+- Upgrade to PhoneGap 3.0.4.
 
 <h2>Changelog</h2>
+
+<h3>2013-08-14</h3>
+- Improved click energizer (energize-min.js).
+- Completed all references on homepage.
+- Remove jQuery Mobile popup.
+- Removed not needed files.
 
 <h3>2013-08-11</h3>
 - Improved logging commands (console.info, console.warn, console.error, instead of console.log only).
