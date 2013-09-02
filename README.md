@@ -5,23 +5,22 @@ An application template based on jQuery Mobile and PhoneGap, featuring an Androi
 
 <h2>Features</h2>
 
-- Application template based on jQuery Mobile 1.3.1 and PhoneGap 2.9.0.
+- Application template based on jQuery Mobile 1.3.2 and PhoneGap 2.9.0.
 - Android Holo Theme look: Light with Dark action bar (full), Dark (full), and Light (partial).
 - Toast messages.
 - Share intent.
 - Google Play Store intent.
-- Retrieve current package version (manifest file).
+- Retrieve current package version that is set in the manifest file.
 - Navigation Drawer.
 
 <h2>Requirements</h2>
 
-- jQuery Mobile 1.3.0 and up.
-- PhoneGap 2.7.0 and up (may work on earlier versions, but that is not tested).
-- It is an Eclipse project, so you might need to use Eclipse or convert the project.
+- Android 2.3.3 and higher. Android 4.0.x may have some small different behaviours in the GUI compared to 2.3.x and 4.1.x and higher.
+- It is an Eclipse project, so you need to use Eclipse or convert the project to another IDE.
 
 <h3>Included resources</h3>
 
-- Gimp images files to make your own png/jpg files.
+- Gimp images files (xcf) to make your own png/jpg files.
 - Full html, css, and javascript sources.
 
 <h3>Examples</h3>
@@ -30,10 +29,18 @@ See my blog about this: http://teusink.blogspot.nl/2013/04/android-example-app-w
 Working example can be found on Google Play Store. It is my own app DroidPapers: https://play.google.com/store/apps/details?id=org.teusink.droidpapers
 
 <h2>Planned work</h2>
-- Upgrade to jQuery Mobile 1.4.0
-- Upgrade to PhoneGap 3.0.4.
+- Upgrade to jQuery Mobile 1.4.0.
+- Upgrade to PhoneGap 3.0.4 (perhaps skip to PhoneGap 3.1.0).
+- Completing the Light interface.
 
-<h2>Changelog</h2>
+<h2>Change-log</h2>
+
+<h3>2013-09-02</h3>
+- When left panel opens the header icon changes to the opened style. Like Google meant it.
+- Included 2 new image files because of the change above.
+- When a panel opens, non-contextual action bar buttons hide (and show when panel closes). Like Google meant it :).
+- Changed energize.js a bit. Ancher tags (<a>) aren't speed up now to prevent click events being fired twice. Moved from minified version to normal version.
+- Added a note to application.smartphone.css when using virtual keyboard in your app.
 
 <h3>2013-08-14</h3>
 - Improved click energizer (energize-min.js).

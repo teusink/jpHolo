@@ -1,5 +1,5 @@
 // JSLint, include this before tests
-// var window, cordova, $, document, navigator, ga_storage, handleAutoChangerSuccess, handleAutoChangerError, handleAcServiceSuccess, handleAcBootServiceSuccess, handleAcWallWidthSuccess, handleAcTimerSuccess, toast, updateView, handleUpdateCheckerSuccess, handleUpdateCheckerError, onDeviceReady, adjustStyle, createDatabase, updateDatabase, onPause, onResume, pressBackButton, initSettings, setTimeout, togglePanel, onConfirmBackup, onConfirmRestore, checkConnection, getFavorites, showTopicContent, checkContentVersionIndex, releaseAudio, pauseAudio, Connection, showTopicContentOffline;
+// var window, cordova, $, document, navigator, ga_storage, handleAutoChangerSuccess, handleAutoChangerError, handleAcServiceSuccess, handleAcBootServiceSuccess, handleAcWallWidthSuccess, handleAcTimerSuccess, toast, updateView, handleUpdateCheckerSuccess, handleUpdateCheckerError, onDeviceReady, adjustStyle, createDatabase, updateDatabase, onPause, onResume, pressBackButton, initSettings, setTimeout, togglePanel, onConfirmBackup, onConfirmRestore, checkConnection, getFavorites, showTopicContent, checkContentVersionIndex, releaseAudio, pauseAudio, Connection, showTopicContentOffline, hideNonContextButtons, panelMenuLeftOpened, showNonContextButtons, panelMenuLeftClosed;
 
 /* PhoneGap plugin functions */
 
@@ -217,26 +217,63 @@ function panelHandling() {
 		open: function (e, ui) {
 			if (e) { e.preventDefault(); }
 			window.localStorage.setItem("panelLeft", 'open');
+			hideNonContextButtons('panel');
+			panelMenuLeftOpened();
 		}
 	});
 	$("#panelMenu" + window.localStorage.getItem("divIdGlobal")).panel({
 		close: function (e, ui) {
 			if (e) { e.preventDefault(); }
 			window.localStorage.setItem("panelLeft", 'closed');
+			showNonContextButtons('panel');
+			panelMenuLeftClosed();
 		}
 	});
 	$("#panelMenuRight" + window.localStorage.getItem("divIdGlobal")).panel({
 		open: function (e, ui) {
 			if (e) { e.preventDefault(); }
 			window.localStorage.setItem("panelRight", 'open');
+			hideNonContextButtons('panel');
 		}
 	});
 	$("#panelMenuRight" + window.localStorage.getItem("divIdGlobal")).panel({
 		close: function (e, ui) {
 			if (e) { e.preventDefault(); }
 			window.localStorage.setItem("panelRight", 'closed');
+			showNonContextButtons('panel');
 		}
 	});
+}
+// hide non-contextual buttons when panel opens
+function hideNonContextButtons(type) {
+	if ($('#headerShare' + window.localStorage.getItem("divIdGlobal")).length > 0) {
+		$('#headerShare' + window.localStorage.getItem("divIdGlobal")).hide();
+	}
+	// use this part if you want to hide buttons in action bars of which the buttons do not apply to every page
+	if ($('#headerOtherButton' + window.localStorage.getItem("divIdGlobal")).length > 0 && type !== "somethingOtherThenPanel") {
+		$('#headerOtherButton' + window.localStorage.getItem("divIdGlobal")).hide();
+	}
+}
+
+// show non-contextual buttons when panel closes
+function showNonContextButtons(type) {
+	if ($('#headerShare' + window.localStorage.getItem("divIdGlobal")).length > 0) {
+		$('#headerShare' + window.localStorage.getItem("divIdGlobal")).show();
+	}
+	// use this part if you want to show buttons in action bars of which the buttons do not apply to every page
+	if ($('#headerOtherButton' + window.localStorage.getItem("divIdGlobal")).length > 0 && type !== "somethingOtherThenPanel") {
+		$('#headerOtherButton' + window.localStorage.getItem("divIdGlobal")).show();
+	}
+}
+
+// show title icon with the dashes more to the left
+function panelMenuLeftOpened() {
+	$("#headerTitle" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_launcher_full_menu_opened.png");
+}
+
+// show title icon with the dashes more to the right
+function panelMenuLeftClosed() {
+	$("#headerTitle" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_launcher_full_menu.png");
 }
 
 // toggle panel menu (open/close)
