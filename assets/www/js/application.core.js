@@ -2,6 +2,62 @@
 // var window, cordova, $, document, navigator, ga_storage, handleAutoChangerSuccess, handleAutoChangerError, handleAcServiceSuccess, handleAcBootServiceSuccess, handleAcWallWidthSuccess, handleAcTimerSuccess, toast, updateView, handleUpdateCheckerSuccess, handleUpdateCheckerError, onDeviceReady, adjustStyle, createDatabase, updateDatabase, onPause, onResume, pressBackButton, initSettings, setTimeout, togglePanel, onConfirmBackup, onConfirmRestore, checkConnection, getFavorites, showTopicContent, checkContentVersionIndex, releaseAudio, pauseAudio, Connection, showTopicContentOffline, hideNonContextButtons, panelMenuLeftOpened, showNonContextButtons, panelMenuLeftClosed;
 
 /* PhoneGap plugin functions */
+// Appstore
+function appstore(link, type) {
+	var appstores = cordova.require("cordova/plugin/appstore");
+	appstores.show(
+		{link: link, type: type},
+		function () {
+			console.info("PhoneGap Plugin: Appstore: callback success");
+		},
+		function () {
+			console.error("PhoneGap Plugin: Appstore: callback error");
+		}
+	);
+}
+
+// PackageVersion
+function getPackageVersion() {
+	var packageVersion = cordova.require("cordova/plugin/packageversion"), currentVersion;
+	packageVersion.get(
+		function (version) {
+			console.info("PhoneGap Plugin: PackageVersion: callback success");
+			currentVersion = version;
+		},
+		function () {
+			console.error("PhoneGap Plugin: PackageVersion: callback error");
+			currentVersion = "unknown";
+		}
+	);
+	return currentVersion;
+}
+
+// HomeButton
+function homeButton() {
+	var home = cordova.require("cordova/plugin/homebutton");
+	home.show(
+		function () {
+			console.info("PhoneGap Plugin: HomeButton: callback success");
+		},
+		function () {
+			console.error("PhoneGap Plugin: HomeButton: callback error");
+		}
+	);
+}
+
+// Share
+function share(subject, text) {
+	var shares = cordova.require("cordova/plugin/share");
+	shares.show(
+		{subject: subject, text: text},
+		function () {
+			console.info("PhoneGap Plugin: Share: callback success");
+		},
+		function () {
+			console.error("PhoneGap Plugin: Share: callback error");
+		}
+	);
+}
 
 // Toasts
 function toast(text, duration) {
@@ -36,50 +92,6 @@ function toast(text, duration) {
 			}
 		);
 	}
-}
-
-// Share
-function share(subject, text) {
-	var shares = cordova.require("cordova/plugin/share");
-	shares.show(
-		{subject: subject, text: text},
-		function () {
-			console.info("PhoneGap Plugin: Share: callback success");
-		},
-		function () {
-			console.error("PhoneGap Plugin: Share: callback error");
-		}
-	);
-}
-
-// Appstore
-function appstore(link, type) {
-	var appstores = cordova.require("cordova/plugin/appstore");
-	appstores.show(
-		{link: link, type: type},
-		function () {
-			console.info("PhoneGap Plugin: Appstore: callback success");
-		},
-		function () {
-			console.error("PhoneGap Plugin: Appstore: callback error");
-		}
-	);
-}
-
-// PackageVersion
-function getPackageVersion() {
-	var packageVersion = cordova.require("cordova/plugin/packageversion"), currentVersion;
-	packageVersion.get(
-		function (version) {
-			console.info("PhoneGap Plugin: PackageVersion: callback success");
-			currentVersion = version;
-		},
-		function () {
-			console.error("PhoneGap Plugin: PackageVersion: callback error");
-			currentVersion = "unknown";
-		}
-	);
-	return currentVersion;
 }
 /* END PhoneGap plugins */
 
@@ -133,7 +145,8 @@ function pressBackButton() {
 	// if panel is not open, then go on
 	if (window.localStorage.getItem('panelLeft') === 'closed' && window.localStorage.getItem('panelRight') === 'closed') {
 		if ($.mobile.activePage.is('#indexPage')) {
-			navigator.app.exitApp();
+			// navigator.app.exitApp(); // This will exit the app.
+			homeButton(); // This will push the app to the background.
 		} else {
 			window.history.back();
 		}

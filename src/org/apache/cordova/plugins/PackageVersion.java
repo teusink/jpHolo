@@ -11,6 +11,9 @@ import android.util.Log;
 
 public class PackageVersion extends CordovaPlugin {
 
+	public static final String LOG_PROV = "PhoneGapLog";
+	public static final String LOG_NAME = "PackageVersion Plugin";
+
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
 		if (action.equals("get")) {
@@ -22,7 +25,7 @@ public class PackageVersion extends CordovaPlugin {
 			}
 			return true;
 		} else {
-			Log.e("PhoneGapLog", "PackageVersion Plugin: Error: " + PluginResult.Status.INVALID_ACTION);
+			Log.e(LOG_PROV, LOG_NAME + ": Error: " + PluginResult.Status.INVALID_ACTION);
 			callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
 			return false;
 		}
@@ -35,7 +38,7 @@ public class PackageVersion extends CordovaPlugin {
 			pInfo = cordova.getActivity().getPackageManager().getPackageInfo("org.teusink.jpholo", 0);
 			version = pInfo.versionName;
 		} catch (NameNotFoundException e) {
-			version = "0";
+			version = "0.0.0";
 		}
 		return version;
 	}

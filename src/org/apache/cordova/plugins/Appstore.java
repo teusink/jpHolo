@@ -14,6 +14,9 @@ import android.util.Log;
 
 public class Appstore extends CordovaPlugin {
 
+	public static final String LOG_PROV = "PhoneGapLog";
+	public static final String LOG_NAME = "Appstore Plugin";
+
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
 		try {
@@ -43,12 +46,12 @@ public class Appstore extends CordovaPlugin {
 				callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, false));
 				return true;
 			} else {
-				Log.e("PhoneGapLog", "Appstore Plugin: Error: " + PluginResult.Status.INVALID_ACTION);
+				Log.e(LOG_PROV, LOG_NAME + ": Error: " + PluginResult.Status.INVALID_ACTION);
 				callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
 				return false;
 			}
 		} catch (JSONException e) {
-			Log.e("PhoneGapLog", "Appstore Plugin: Error: " + PluginResult.Status.JSON_EXCEPTION);
+			Log.e(LOG_PROV, LOG_NAME + ": Error: " + PluginResult.Status.JSON_EXCEPTION);
 			e.printStackTrace();
 			callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.JSON_EXCEPTION));
 			return false;

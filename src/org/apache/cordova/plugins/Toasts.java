@@ -15,6 +15,8 @@ public class Toasts extends CordovaPlugin {
 	private static final String CANCEL_ACTION = "cancel";
 	private static final int TOAST_MESSAGE_INDEX = 0;
 	private Toast toast = null;
+	public static final String LOG_PROV = "PhoneGapLog";
+	public static final String LOG_NAME = "Toasts Plugin";
 
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
@@ -25,7 +27,7 @@ public class Toasts extends CordovaPlugin {
 			try {
 				message = args.getString(TOAST_MESSAGE_INDEX);
 			} catch (JSONException e) {
-				Log.e("PhoneGapLog", "Toasts Plugin: Error: " + PluginResult.Status.JSON_EXCEPTION);
+				Log.e(LOG_PROV, LOG_NAME + ": Error: " + PluginResult.Status.JSON_EXCEPTION);
 				e.printStackTrace();
 				callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.JSON_EXCEPTION));
 				return false;

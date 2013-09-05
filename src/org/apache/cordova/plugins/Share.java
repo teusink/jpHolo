@@ -12,6 +12,9 @@ import android.util.Log;
 
 public class Share extends CordovaPlugin {
 
+	public static final String LOG_PROV = "PhoneGapLog";
+	public static final String LOG_NAME = "Share Plugin";
+
 	private void doSendIntent(String subject, String text) {
 		Intent sendIntent = new Intent(android.content.Intent.ACTION_SEND);
 		sendIntent.setType("text/plain");
@@ -28,7 +31,7 @@ public class Share extends CordovaPlugin {
 			callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
 			return true;
 		} catch (JSONException e) {
-			Log.e("PhoneGapLog", "Share Plugin: Error: " + PluginResult.Status.JSON_EXCEPTION);
+			Log.e(LOG_PROV, LOG_NAME + ": Error: " + PluginResult.Status.JSON_EXCEPTION);
 			e.printStackTrace();
 			callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.JSON_EXCEPTION));
 			return false;

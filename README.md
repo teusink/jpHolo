@@ -10,6 +10,7 @@ An application template based on jQuery Mobile and PhoneGap, featuring an Androi
 - Toast messages.
 - Share intent.
 - Google Play Store intent.
+- Home button simulator.
 - Retrieve current package version that is set in the manifest file.
 - Navigation Drawer.
 
@@ -34,6 +35,10 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 - Completing the Light interface.
 
 <h2>Change-log</h2>
+
+<h3>2013-09-05</h3>
+- Changed PhoneGap plugins a bit with logging (nothing special).
+- Backbutton does not exit app anymore, but push it to background (saves reloading). When Android does not have enough memory it will eventually push the app out of memory.
 
 <h3>2013-09-02</h3>
 - When left panel opens the header icon changes to the opened style. Like Google meant it.
