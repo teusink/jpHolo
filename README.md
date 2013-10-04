@@ -6,7 +6,7 @@ An application template based on jQuery Mobile and PhoneGap, featuring an Androi
 <h2>Features</h2>
 
 - Application template based on jQuery Mobile 1.3.2 and PhoneGap 2.9.0.
-- Android Holo Theme look: Light with Dark action bar (full), Dark (full), and Light (partial).
+- Android Holo Theme look: Light with Dark action bar (full), Dark (full), and Light.
 - Toast messages.
 - Share intent.
 - Google Play Store intent.
