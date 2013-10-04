@@ -21,36 +21,47 @@ An application template based on jQuery Mobile and PhoneGap, featuring an Androi
 
 <h3>Included resources</h3>
 
-- Gimp images files (xcf) to make your own png/jpg files.
-- Full html, css, and javascript sources.
+- Gimp images files (XCF) to make your own PNG/JPG files.
+- Full HTML, CSS, and JavaScript sources.
 
 <h3>Examples</h3>
 
 See my blog about this: http://teusink.blogspot.nl/2013/04/android-example-app-with-phonegap-and.html
 Working example can be found on Google Play Store. It is my own app DroidPapers: https://play.google.com/store/apps/details?id=org.teusink.droidpapers
 
-<h2>Planned work</h2>
+<h2>Pending work</h2>
 - Upgrade to jQuery Mobile 1.4.0.
-- Upgrade to PhoneGap 3.0.4 (perhaps skip to PhoneGap 3.1.0).
-- Completing the Light interface.
+- Upgrade to PhoneGap 3.1.x.
 
 <h2>Change-log</h2>
 
+<h3>2013-10-04</h3>
+- Bit better screen estate usage for smaller tablets.
+- Added Holo Light theme header and icons (theme complete now).
+- Improved theme. Also included a picture of all jQuery Mobile theme swatches.
+- Moved JavaScript and onclick listeners from HTML files to JavaScript files.
+- Changed function "getPackageVersion" to a callback function.
+- Renamed jpHolo related JavaScript libraries and CSS files.
+- Added PhoneGap plugin: AndroidPreferences.
+- Added	PhoneGap plugin: BackgroundService ( https://github.com/Red-Folder/Cordova-Plugin-BackgroundService ), with thanks to Red-Folder.
+- Added Android Service feature (based on plugin BackgroundService) to demonstrate the way how to incorporate a service in a web-app.
+- Reinstated the back-button handling to before. HomeButton plugin is still included, but not used.
+
 <h3>2013-09-05</h3>
 - Changed PhoneGap plugins a bit with logging (nothing special).
-- Backbutton does not exit app anymore, but push it to background (saves reloading). When Android does not have enough memory it will eventually push the app out of memory.
+- Back-button does not exit app any more, but push it to background (saves reloading). When Android does not have enough memory it will eventually push the app out of memory.
 
 <h3>2013-09-02</h3>
 - When left panel opens the header icon changes to the opened style. Like Google meant it.
 - Included 2 new image files because of the change above.
 - When a panel opens, non-contextual action bar buttons hide (and show when panel closes). Like Google meant it :).
-- Changed energize.js a bit. Ancher tags (<a>) aren't speed up now to prevent click events being fired twice. Moved from minified version to normal version.
+- Changed energize.js a bit. Anchor tags (<a>) aren't speed up now to prevent click events being fired twice. Moved from minified version to normal version.
 - Added a note to application.smartphone.css when using virtual keyboard in your app.
 
 <h3>2013-08-14</h3>
 - Improved click energizer (energize-min.js).
 - Completed all references on homepage.
-- Remove jQuery Mobile popup.
+- Remove jQuery Mobile pop-up.
 - Removed not needed files.
 
 <h3>2013-08-11</h3>
@@ -70,7 +81,7 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 <h3>2013-07-26</h3>
 - Add the new (and all) Roboto TrueType fonts.
 - Improved icon images with new Roboto font.
-- Improved css a bit due to new fonts.
+- Improved CSS a bit due to new fonts.
 
 <h3>2013-07-21</h3>
 - Upgrade to jQuery Mobile 1.3.2.
@@ -110,7 +121,7 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 <h3>2013-05-22 (on Teusink.org Blog)</h3>
 - PhoneGap 2.7.0
 - Improved JavaScript code with JSLint
-- Changed panel behavior to the official Google style presented at Google I/O 2013.
+- Changed panel behaviour to the official Google style presented at Google I/O 2013.
 
 <h3>2013-04-29 (on Teusink.org Blog)</h3>
 - Initial release

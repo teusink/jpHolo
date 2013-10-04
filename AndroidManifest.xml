@@ -25,6 +25,15 @@
         android:allowBackup="false"
         android:theme="@android:style/Theme.Black.NoTitleBar">
         
+        <service
+			android:name="org.teusink.jpholo.AndroidService" 
+			android:enabled="true"
+			android:exported="false">
+			<intent-filter>
+				<action android:name="org.teusink.jpholo.AndroidService"/> 
+			</intent-filter>
+		</service>
+        
         <activity
             android:name="org.teusink.jpholo.StartActivity"            
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale">

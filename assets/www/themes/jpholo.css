@@ -5,7 +5,8 @@ Android ICS colors:
 	Charcoal: 222222 (dark grey)
 	Honest	: 33B5E5 (cyan)
 	Imdur	: 555555 (grey)
-	Grey	: 696969 (dim grey, action bar)
+	Grey	: 696969 (dim grey)
+	Grey	: F3F3F3 (action bar)
 	Grey	: CCCCCC (border)
 	Grey	: F9F9F9 (background)
 */
@@ -46,6 +47,13 @@ div.headerDark {
 	z-index: 1001;
 	height: 2.85em;
 	border-bottom: 1px solid #0099CC !important;
+	margin: 0;
+	padding: 0;
+}
+div.headerLight {
+	z-index: 1001;
+	height: 2.85em;
+	border-bottom: 1px solid #F3F3F3 !important;
 	margin: 0;
 	padding: 0;
 }
@@ -172,6 +180,23 @@ p.panelTextDivider {
 }
 p.warning {
 	color: red;
+}
+p.bigSettings {
+	margin: 0;
+	padding: 0;
+}
+p.tinySettings {
+	font-family: RobotoThin !important;
+	font-weight: normal !important;
+	font-size: 0.8em;
+	margin: 0;
+	padding: 0;
+}
+p.thinSettings{
+	font-family: RobotoThin !important;
+	font-weight: normal !important;
+	margin: 0;
+	padding: 0;
 }
 a.panelText {
 	font-size: 1em !important;

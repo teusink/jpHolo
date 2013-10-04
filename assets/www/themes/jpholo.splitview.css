@@ -26,11 +26,11 @@
 .content-secondary {
 	text-align: left;
 	float: left;
-	width: 34%;
+	width: 38%;
 }
 .content-secondary, .type-interior .content-secondary {
 	margin: 0 0 20px 2%;
-	padding: 0 4% 0 0;
+	padding: 0 1% 0 0;
 	position: relative;
 }
 .type-index .content-secondary {
@@ -47,6 +47,6 @@
 	width: 56%;
 }
 .type-interior .content-primary {
-	padding: 1.5em 6% 3em 0;
+	padding: 1.3em 4% 3em 0;
 	margin: 0;
 }

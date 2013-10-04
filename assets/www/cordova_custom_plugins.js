@@ -1,4 +1,23 @@
 /* PhoneGap plugin constructors */
+
+// AndroidService
+cordova.define('cordova/plugin/androidservice', function (require, exports, module) {
+	CreateBackgroundService('org.teusink.jpholo.AndroidService', require, exports, module); // JSLint error "Missing 'new' is oke here 
+});
+
+// AndroidPreferences
+cordova.define("cordova/plugin/androidpreferences", function (require, exports, module) {
+    var exec = require("cordova/exec");
+	module.exports = {
+        get: function (message, win, fail) {
+			exec(win, fail, "AndroidPreferences", "get", [message]);
+		},
+		set: function (message, win, fail) {
+			exec(win, fail, "AndroidPreferences", "set", [message]);
+		}
+    };
+});
+
 // Appstore intents
 cordova.define("cordova/plugin/appstore", function (require, exports, module) {
     var exec = require("cordova/exec");
@@ -25,6 +44,16 @@ cordova.define("cordova/plugin/packageversion", function (require, exports, modu
 	module.exports = {
 		get: function (win, fail) {
 			exec(win, fail, "PackageVersion", "get", []);
+		}
+	};
+});
+
+// PreferredScreenSize
+cordova.define("cordova/plugin/preferredscreensize", function (require, exports, module) {
+	var exec = require("cordova/exec");
+	module.exports = {
+		get: function (win, fail) {
+			exec(win, fail, "PreferredScreenSize", "get", []);
 		}
 	};
 });

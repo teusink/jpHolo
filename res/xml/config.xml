@@ -53,10 +53,15 @@
 	<feature name="SplashScreen"><param name="android-package" value="org.apache.cordova.SplashScreen" /></feature>
 	<feature name="Storage"><param name="android-package" value="org.apache.cordova.Storage" /></feature>
 	
+	<!-- additional external library plugins -->
+	<feature name="BackgroundServicePlugin"><param name="android-package" value="com.red_folder.phonegap.plugin.backgroundservice.BackgroundServicePlugin" /></feature>
+	
 	<!-- additional plugins -->
+	<feature name="AndroidPreferences"><param name="android-package" value="org.apache.cordova.plugins.AndroidPreferences" /></feature>
 	<feature name="Appstore"><param name="android-package" value="org.apache.cordova.plugins.Appstore" /></feature>
 	<feature name="HomeButton"><param name="android-package" value="org.apache.cordova.plugins.HomeButton" /></feature>
 	<feature name="PackageVersion"><param name="android-package" value="org.apache.cordova.plugins.PackageVersion" /></feature>
+	<feature name="PreferredScreenSize"><param name="android-package" value="org.apache.cordova.plugins.PreferredScreenSize" /></feature>
 	<feature name="Share"><param name="android-package" value="org.apache.cordova.plugins.Share" /></feature>
 	<feature name="Toasts"><param name="android-package" value="org.apache.cordova.plugins.Toasts" /></feature>	
 	

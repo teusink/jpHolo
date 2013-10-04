@@ -9,14 +9,18 @@
 		<link rel="stylesheet" type="text/css" href="themes/AndroidHolo.min.css" /><!-- ThemeRoller theme -->
 		<link rel="stylesheet" type="text/css" href="themes/jquery.mobile.structure-1.3.2.min.css" />
 		
-		<!-- Application -->
-		<link rel="stylesheet" type="text/css" href="themes/application.css" />
-		<link rel="stylesheet" type="text/css" href="themes/application.splitview.css" id="sizeStylesheet" />
-		<link rel="stylesheet" type="text/css" href="themes/application.tablet.css" id="sizeStylesheet" />
+		<!-- jpHolo theme -->
+		<link rel="stylesheet" type="text/css" href="themes/jpholo.css" />
+		<link rel="stylesheet" type="text/css" href="themes/jpholo.splitview.css" />
+		<link rel="stylesheet" type="text/css" href="themes/jpholo.tablet.css" id="sizeStylesheet" />
 		
 		<!-- JavaScript -->
+		<!-- Set document, used in jpholo.core.js -->
+		<script type="text/javascript">window.indexFile = "index_tablet.html"; </script>
+		
 		<!-- Cordova PhoneGap -->
 		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="backgroundService-2.9.0.js"></script>
 		<script type="text/javascript" src="cordova_custom_plugins.js"></script>
 		
 		<!-- jQuery and jQuery Mobile -->
@@ -24,12 +28,15 @@
 		<script type="text/javascript" src="js/jquery.mobile.settings.js"></script><!-- this must be loaded before jQuery Mobile -->
 		<script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>
 		
+		<!-- jpHolo core -->
+		<script type="text/javascript" src="js/jpholo.core.js"></script>
+		<script type="text/javascript" src="js/jpholo.core.services.js"></script>
+		
 		<!-- Other frameworks -->
 		<script type="text/javascript" src="js/energize.js"></script><!-- for speeding op tap events -->
 		
 		<!-- Application -->
-		<script type="text/javascript">window.indexFile = "index_tablet.html"; </script>
-		<script type="text/javascript" src="js/application.core.js"></script>
+		<!-- your scripts -->
 		
 		<title>jpHolo</title>
 	</head>
@@ -50,7 +57,7 @@
 			
 			<div class="headerSticky" data-role="header" data-tap-toggle="false" data-position="fixed" data-theme="a">
 				<div>
-					<p class="headerBarText"><img id="headerTitleIndex" onclick="togglePanel('#panelMenu' + window.localStorage.getItem('divIdGlobal'));" class="headerIconTitle" src="images/icons/ic_launcher_full_menu.png" /><img id="headerShareIndex" onclick="share(window.localStorage.getItem('shareTagSubject'),window.localStorage.getItem('shareTagText'));" class="headerIconShare" src="images/icons/ic_action_share_header.png" /><img id="headerOverflowIndex" onclick="togglePanel('#panelMenuRight' + window.localStorage.getItem('divIdGlobal'));" class="headerIconOverflow" src="images/icons/ic_action_overflow_header.png" />
+					<p class="headerBarText"><img id="headerTitleIndex" class="headerIconTitle" src="images/icons/ic_launcher_full_menu.png" /><img id="headerShareIndex" class="headerIconShare" src="images/icons/ic_action_share_header.png" /><img id="headerOverflowIndex" class="headerIconOverflow" src="images/icons/ic_action_overflow_header.png" />
 					&nbsp;</p>
 				</div><!-- populate the panel menu, also with the id Index in this case -->
 			</div><!-- /header -->
@@ -61,7 +68,7 @@
 				
 					<h1>Index</h1>
 					<p>Holo Light theme with Dark action bar.</p>				
-					<a onclick="clearFirstBoot();" data-role="button">Clear to first boot</a>
+					<a id="clearFirstBoot" data-role="button">Clear to first boot</a>
 					
 				</div><!-- /contentsecundary -->
 			
@@ -74,19 +81,20 @@
 					- Platform: <a href="http://jquerymobile.com/" target="_blank">jQuery Mobile</a><br />
 					- Web: <a href="http://www.androidicons.com/" target="_blank">Android Icons</a><br />
 					- jQuery Mobile plugin: <a href="https://github.com/teusinkorg/energize.js" target="_blank">Energize.js</a><br />
+					- PhoneGap plugin: <a href="https://github.com/Red-Folder/Cordova-Plugin-BackgroundService" target="_blank">Background Service</a><br />
 					- PhoneGap plugin: <a href="http://teusink.blogspot.nl/2013/04/phonegap-android-share-plugin.html" target="_blank">Share</a><br />
 					- PhoneGap plugin: <a href="http://teusink.blogspot.nl/2013/04/phonegap-android-toast-plugin.html" target="_blank">Toast</a><br />
 					- PhoneGap plugin: <a href="http://teusink.blogspot.nl/2013/08/phonegap-android-appstore-plugin.html" target="_blank">Appstore</a><br />
 					- PhoneGap plugin: PackageVersion<br />
+					- PhoneGap plugin: <a href="http://teusink.blogspot.nl/2013/09/phonegap-android-androidpreferences.html" target="_blank">AndroidPreferences</a>
 					</p>
 					
 					<h1>Suggestions</h1>
 					<p>- jQuery Mobile plugin: <a href="http://jqmiconpack.andymatthews.net/#/" target="_blank">JQM Icons</a><br />
-					- PhoneGap plugin: <a href="https://github.com/Red-Folder/Cordova-Plugin-BackgroundService" target="_blank">Background Service</a><br />
 					- PhoneGap plugin: <a href="https://github.com/phonegap-build/PushPlugin" target="_blank">Google Cloud Messaging</a><br />
 					- PhoneGap plugin: <a href="https://github.com/phonegap-build/GAPlugin" target="_blank">Google Analytics</a><br />
 					- PhoneGap plugin: <a href="http://teusink.blogspot.nl/2013/07/phonegap-android-cachecleaner-plugin.html" target="_blank">CacheCleaner</a><br />
-					- PhoneGap plugin: <a href="http://teusink.blogspot.nl/2013/04/phonegap-android-downloader-plugin.html" target="_blank">Downloader</a><br />
+					- PhoneGap plugin: <a href="http://teusink.blogspot.nl/2013/04/phonegap-android-downloader-plugin.html" target="_blank">Downloader</a>
 					</p>
 				
 				</div><!-- /contentprimary -->
@@ -95,8 +103,8 @@
 			
 			<div data-role="footer" data-tap-toggle="false" data-position="fixed" data-theme="f" class="footerSticky"><!-- this class makes sure there is a blue line above footer -->
 				<div>
-					<img id="footerShareIndex" onclick="share(window.localStorage.getItem('shareTagSubject'),window.localStorage.getItem('shareTagText'));" src="./images/icons/ic_action_share_header.png" class="footerIconLeft">
-					<img id="footerToastIndex" onclick="toast('This is a toast message','short');" src="./images/icons/ic_action_list_header.png" class="footerIconRight">
+					<img id="footerShareIndex" src="./images/icons/ic_action_share_header.png" class="footerIconLeft">
+					<img id="footerToastIndex" src="./images/icons/ic_action_list_header.png" class="footerIconRight">
 				</div>
 			</div><!-- /footer -->
 		
@@ -118,7 +126,7 @@
 			
 			<div data-role="header" data-tap-toggle="false" data-position="fixed" data-theme="a" class="headerDark"><!-- this class makes sure there is a blue line beneath header -->
 				<div>
-					<p class="headerBarText"><img id="headerTitleSecond" onclick="togglePanel('#panelMenu' + window.localStorage.getItem('divIdGlobal'));" class="headerIconTitle" src="images/icons/ic_launcher_full_menu.png" /><img id="headerShareSecond" onclick="share(window.localStorage.getItem('shareTagSubject'),window.localStorage.getItem('shareTagText'));" class="headerIconShare" src="images/icons/ic_action_share_header.png" /><img id="headerOverflowSecond" onclick="togglePanel('#panelMenuRight' + window.localStorage.getItem('divIdGlobal'));" class="headerIconOverflow" src="images/icons/ic_action_overflow_header.png" />
+					<p class="headerBarText"><img id="headerTitleSecond" class="headerIconTitle" src="images/icons/ic_launcher_full_menu.png" /><img id="headerShareSecond" class="headerIconShare" src="images/icons/ic_action_share_header.png" /><img id="headerOverflowSecond" class="headerIconOverflow" src="images/icons/ic_action_overflow_header.png" />
 					&nbsp;</p>
 				</div>
 			</div><!-- /header -->
@@ -150,8 +158,8 @@
 			
 			<div data-role="footer" data-tap-toggle="false" data-position="fixed" data-theme="a" class="footerDark"><!-- this class makes sure there is a blue line above footer -->
 				<div>
-					<img id="footerShareSecond" onclick="share(window.localStorage.getItem('shareTagSubject'),window.localStorage.getItem('shareTagText'));" src="./images/icons/ic_action_share_header.png" class="footerIconLeft">
-					<img id="footerToastSecond" onclick="toast('This is a toast message','short');" src="./images/icons/ic_action_list_header.png" class="footerIconRight">
+					<img id="footerShareSecond" src="./images/icons/ic_action_share_header.png" class="footerIconLeft">
+					<img id="footerToastSecond" src="./images/icons/ic_action_list_header.png" class="footerIconRight">
 				</div>
 			</div><!-- /footer -->
 		
@@ -171,9 +179,9 @@
 			</div>
 			<!-- /panel -->
 			
-			<div data-role="header" data-tap-toggle="false" data-position="fixed" data-theme="e" class="headerSticky headerDark">
+			<div data-role="header" data-tap-toggle="false" data-position="fixed" data-theme="e" class="headerLight">
 				<div>
-					<p class="headerBarText"><img id="headerTitleThird" onclick="togglePanel('#panelMenu' + window.localStorage.getItem('divIdGlobal'));" class="headerIconTitle" src="images/icons/ic_launcher_full_arrow.png" /><img id="headerShareThird" onclick="share(window.localStorage.getItem('shareTagSubject'),window.localStorage.getItem('shareTagText'));" class="headerIconShare" src="images/icons/ic_action_share_header.png" /><img id="headerOverflowThird" onclick="togglePanel('#panelMenuRight' + window.localStorage.getItem('divIdGlobal'));" class="headerIconOverflow" src="images/icons/ic_action_overflow_header.png" />
+					<p class="headerBarText"><img id="headerTitleThird" class="headerIconTitle" src="images/icons/ic_launcher_full_arrow_light.png" /><img id="headerShareThird" class="headerIconShare" src="images/icons/ic_action_share_header.png" /><img id="headerOverflowThird" class="headerIconOverflow" src="images/icons/ic_action_overflow_header_light.png" />
 					&nbsp;</p>
 				</div>
 			</div><!-- /header -->
@@ -183,7 +191,7 @@
 				<div class="content-secondary">
 				
 					<h1>Page 3</h1>
-					<p>Holo Light theme page (not very well worked out yet).</p>
+					<p>Holo Light theme page.</p>
 					
 				</div><!-- /contentsecundary -->
 			
@@ -204,5 +212,108 @@
 			</div><!-- /content -->
 		
 		</div><!-- /page -->
+		
+		<div id="servicePage" data-role="page" data-theme="a">
+			
+			<!-- left panel  -->
+			<div id="panelMenuService" data-role="panel" data-theme="b" data-position="left" data-display="overlay" data-dismissible="true" data-position-fixed="true" data-swipe-close="true" data-animate="true">
+				<ul id="panelMenuServiceUL" data-theme="b" data-role="listview"></ul>
+			</div>
+			<!-- /panel -->
+			
+			<!-- right panel  -->
+			<div id="panelMenuRightService" data-role="panel" data-theme="b" data-position="right" data-display="overlay" data-dismissible="true" data-position-fixed="true" data-swipe-close="true" data-animate="true">
+				<ul id="panelMenuRightServiceUL" data-theme="b" data-role="listview"></ul>
+			</div>
+			<!-- /panel -->
+			
+			<div data-role="header" data-tap-toggle="false" data-position="fixed" data-theme="a" class="headerSticky">
+				<div>
+					<p class="headerBarText"><img id="headerTitleService" class="headerIconTitle" src="images/icons/ic_launcher_full_menu.png" /><img id="headerShareService" class="headerIconShare" src="images/icons/ic_action_share_header_light.png" /><img id="headerOverflowService" class="headerIconOverflow" src="images/icons/ic_action_overflow_header.png" />
+					&nbsp;</p>
+				</div>
+			</div><!-- /header -->
+			
+			<div data-role="content" data-theme="a">
+		
+				<table>
+				
+				<tr class="tdTitle">
+					<td colspan=2>Service settings</td>
+				</tr>
+				
+				<tr class="lineBreak">
+					<td class="center" colspan=2><p class="thinSettings">Android Service. A service that can execute native Java code in the background in a PhoneGap app on the Android platform.</p></td>
+				</tr>
+				
+				<tr class="lineBreak">
+					<td class="left"><p class="bigSettings">Service enabled</p><p class="tinySettings">Enable or disable the service.</p></td>
+					<td class="right">
+						<select name="flipServiceStatus" id="serviceStatus" data-role="slider" data-mini="true" data-track-theme="d">
+							<option value="off">off</option>
+							<option value="on">on</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr class="lineBreak">
+					<td class="left"><p class="bigSettings">Set toast duration</p><p class="tinySettings">Show a toast for a shorter or longer period.</p></td>
+					<td class="right">
+						<select name="flipServiceToastDuration" id="serviceToastDuration" data-role="slider" data-mini="true" data-track-theme="d">
+							<option value="short">short</option>
+							<option value="long">long</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr class="nonLineBreak">
+					<td class="left"><p class="bigSettings">Interval timer enabled</p><p class="tinySettings">Execute the service on a given time interval.</p></td>
+					<td class="right">
+						<select name="flipServiceTimer" id="serviceTimer" data-role="slider" data-mini="true" data-track-theme="d">
+							<option value="off">off</option>
+							<option value="on">on</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr class="lineBreak">
+					<td class="left vTop"><p class="bigSettings">Set interval to once every...</p><div id="timerDurationStatus" class="darkcyan"></div></td>
+					<td class="right">
+						<div data-role="controlgroup" class="settingButtons">
+							<button id="toggleTimer1" data-mini="true">1 min</button>
+							<button id="toggleTimer2" data-mini="true">30 min</button>
+							<button id="toggleTimer3" data-mini="true">1 hour</button>
+							<button id="toggleTimer4" data-mini="true">6 hours</button>
+							<button id="toggleTimer5" data-mini="true">12 hours</button>
+							<button id="toggleTimer6" data-mini="true">1 day</button>
+						</div>
+					</td>
+				</tr>
+				
+				<tr class="lineBreak">
+					<td class="left vTop"><p class="bigSettings">Run once</p><p class="tinySettings">Execute the service now and only once.</p></td>
+					<td class="right">
+						<div data-role="controlgroup" class="settingButtons">
+							<button id="serviceRunOnce" data-mini="true">NOW</button>
+						</div>
+					</td>
+				</tr>
+				
+				<tr class="lineBreak">
+					<td class="left"><p class="bigSettings">Start service at boot</p><p class="tinySettings">Restart the service when the device is restarted.</p></td>
+					<td class="right">
+						<select name="flipServiceBootStatus" id="serviceBootStatus" data-role="slider" data-mini="true" data-track-theme="d">
+							<option value="off">off</option>
+							<option value="on">on</option>
+						</select>
+					</td>
+				</tr>
+				
+				</table>
+			
+			</div><!-- /content -->
+		
+		</div><!-- /page -->
+		
 	</body>
 </html>
