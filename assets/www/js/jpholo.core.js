@@ -381,6 +381,17 @@ function pressEffectHeader(share, action, holo) {
 	// restore icons
 	if (action === "menu") {
 		$("#headerTitle" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_launcher_full_menu" + holo + ".png");
+		// detect swiperight to open left panel upon swiperight
+		$(document).off('swiperight').on('swiperight', "#" + $.mobile.activePage.attr("id"), function (e) {
+			if (e) { e.preventDefault(); }
+			// check if there are no open panels, otherwise ignore swipe
+			if (window.localStorage.getItem('panelLeft') !== "open" && window.localStorage.getItem('panelRight') !== "open") {
+				togglePanel('#panelMenu' + window.localStorage.getItem("divIdGlobal"));
+			}
+		});
+	} else {
+		// remove swipe event, because there is no page visible with a panelmenu
+		$(document).off('swiperight');
 	}
 	showNonContextButtons('panel');
 	// header title press effect (left panel)

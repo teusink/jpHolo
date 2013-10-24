@@ -35,6 +35,9 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 
 <h2>Change-log</h2>
 
+<h3>2013-10-24</h3>
+- Added event (swipe to right) to open left panel menu.
+
 <h3>2013-10-04</h3>
 - Bit better screen estate usage for smaller tablets.
 - Added Holo Light theme header and icons (theme complete now).
