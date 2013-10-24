@@ -58,7 +58,7 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 - When left panel opens the header icon changes to the opened style. Like Google meant it.
 - Included 2 new image files because of the change above.
 - When a panel opens, non-contextual action bar buttons hide (and show when panel closes). Like Google meant it :).
-- Changed energize.js a bit. Anchor tags (<a>) aren't speed up now to prevent click events being fired twice. Moved from minified version to normal version.
+- Changed energize.js a bit. Anchor tags aren't speed up now to prevent click events being fired twice. Moved from minified version to normal version.
 - Added a note to application.smartphone.css when using virtual keyboard in your app.
 
 <h3>2013-08-14</h3>
