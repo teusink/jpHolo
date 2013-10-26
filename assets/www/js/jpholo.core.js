@@ -370,6 +370,20 @@ function togglePanel(panel) {
 	$(panel).panel("toggle");
 }
 
+// get the systemspecs
+function getSystemSpecs() {
+	var $content = $('[id="systemSpecs"]'),
+		tag;
+	tag =	'<p id="systemSpecs">' +
+			'Device model: ' + device.model + '<br />' +
+			'Device platform: ' + device.platform + ' ' + device.version + '<br />' +
+			'PhoneGap version: ' + cordova.version + '<br />' +
+			'jQuery version: ' + jQuery.fn.jquery + '<br />' +
+			'jQuery Mobile version: ' + $.mobile.version + '<br />' +
+			'</p>';
+	$content.replaceWith(tag);
+}
+
 // press effect in header bar
 function pressEffectHeader(share, action, holo) {
 	/** use action "menu" when using app icon as side panel (#panelMenu...)
@@ -575,6 +589,7 @@ function initPageVarsOnShow(id) {
 		pressEffectFooter(true, true, "");
 	} else if (id === "Second") {
 		pressEffectFooter(true, true, "");
+		getSystemSpecs();
 	} else if (id === "Third") {
 		pressEffectFooter(true, true, "_light");
 	} else if (id === "Service") {
