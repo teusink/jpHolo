@@ -5,73 +5,75 @@
 
 // Android Service
 function androidServiceHandler(action, input) {
-	var androidservice = cordova.require('cordova/plugin/androidservice');
-	if (action === "getStatus") {
-		androidservice.getStatus(
-			function (r) { handleAndroidServiceSuccess(r); },
-			function (e) { handleAndroidServiceError(e); }
-		);
-	} else if (action === "runOnce") {
-		androidservice.runOnce(
-			function (r) { handleAndroidServiceSuccess(r); },
-			function (e) { handleAndroidServiceError(e); }
-		);
-	} else if (action === "startService") {
-		androidservice.startService(
-			function (r) { handleAndroidServiceSuccess(r); },
-			function (e) { handleAndroidServiceError(e); }
-		);
-	} else if (action === "stopService") {
-		androidservice.stopService(
-			function (r) { handleAndroidServiceSuccess(r); },
-			function (e) { handleAndroidServiceError(e); }
-		);
-	} else if (action === "registerForBootStart") {
-		androidservice.registerForBootStart(
-			function (r) { handleAndroidServiceSuccess(r); },
-			function (e) { handleAndroidServiceError(e); }
-		);
-	} else if (action === "deregisterForBootStart") {
-		androidservice.deregisterForBootStart(
-			function (r) { handleAndroidServiceSuccess(r); },
-			function (e) { handleAndroidServiceError(e); }
-		);
-	} else if (action === "enableTimer") {
-		androidservice.enableTimer(
-			input,
-			function (r) { handleAndroidServiceSuccess(r); },
-			function (e) { handleAndroidServiceError(e); }
-		);
-	} else if (action === "preSetTimer") {
-		toast('Setting service timer interval to: ' + input + ' ms.', 'short');
-		switch (input) {
-		case 60000:
-			androidServiceHandler("enableTimer", 60000);
-			break;
-		case 1800000:
-			androidServiceHandler("enableTimer", 1800000);
-			break;
-		case 3600000:
-			androidServiceHandler("enableTimer", 3600000);
-			break;
-		case 21600000:
-			androidServiceHandler("enableTimer", 21600000);
-			break;
-		case 43200000:
-			androidServiceHandler("enableTimer", 43200000);
-			break;
-		case 86400000:
-			androidServiceHandler("enableTimer", 86400000);
-			break;
-		default:
-			androidServiceHandler("enableTimer", 86400000);
-			break;
+	if (window.phonegapExcluded === false) {
+		var androidservice = cordova.require('cordova/plugin/androidservice');
+		if (action === "getStatus") {
+			androidservice.getStatus(
+				function (r) { handleAndroidServiceSuccess(r); },
+				function (e) { handleAndroidServiceError(e); }
+			);
+		} else if (action === "runOnce") {
+			androidservice.runOnce(
+				function (r) { handleAndroidServiceSuccess(r); },
+				function (e) { handleAndroidServiceError(e); }
+			);
+		} else if (action === "startService") {
+			androidservice.startService(
+				function (r) { handleAndroidServiceSuccess(r); },
+				function (e) { handleAndroidServiceError(e); }
+			);
+		} else if (action === "stopService") {
+			androidservice.stopService(
+				function (r) { handleAndroidServiceSuccess(r); },
+				function (e) { handleAndroidServiceError(e); }
+			);
+		} else if (action === "registerForBootStart") {
+			androidservice.registerForBootStart(
+				function (r) { handleAndroidServiceSuccess(r); },
+				function (e) { handleAndroidServiceError(e); }
+			);
+		} else if (action === "deregisterForBootStart") {
+			androidservice.deregisterForBootStart(
+				function (r) { handleAndroidServiceSuccess(r); },
+				function (e) { handleAndroidServiceError(e); }
+			);
+		} else if (action === "enableTimer") {
+			androidservice.enableTimer(
+				input,
+				function (r) { handleAndroidServiceSuccess(r); },
+				function (e) { handleAndroidServiceError(e); }
+			);
+		} else if (action === "preSetTimer") {
+			toast('Setting service timer interval to: ' + input + ' ms.', 'short');
+			switch (input) {
+			case 60000:
+				androidServiceHandler("enableTimer", 60000);
+				break;
+			case 1800000:
+				androidServiceHandler("enableTimer", 1800000);
+				break;
+			case 3600000:
+				androidServiceHandler("enableTimer", 3600000);
+				break;
+			case 21600000:
+				androidServiceHandler("enableTimer", 21600000);
+				break;
+			case 43200000:
+				androidServiceHandler("enableTimer", 43200000);
+				break;
+			case 86400000:
+				androidServiceHandler("enableTimer", 86400000);
+				break;
+			default:
+				androidServiceHandler("enableTimer", 86400000);
+				break;
+			}
+		} else if (action === "disableTimer") {
+			androidservice.disableTimer(
+				function (r) { handleAndroidServiceSuccess(r); },
+				function (e) { handleAndroidServiceError(e); }
+			);
 		}
-	} else if (action === "disableTimer") {
-		androidservice.disableTimer(
-			function (r) { handleAndroidServiceSuccess(r); },
-			function (e) { handleAndroidServiceError(e); }
-		);
 	}
 }
 // handlers for service

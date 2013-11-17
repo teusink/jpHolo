@@ -5,37 +5,49 @@
 
 // AndroidPreferences
 function handleAndroidPreferences(action, prefLib, prefName, prefValue, callback) {
-	var androidPref = cordova.require("cordova/plugin/androidpreferences"),
-		value;
-	if (prefLib !== "" && prefName !== "") {
-		if (action === "get") {
-			androidPref.get(
-				{preferenceLib: prefLib, preferenceName: prefName, preferenceValue: prefValue},
-				function (returnValue) {
-					console.info("PhoneGap Plugin: AndroidPreferences: callback success");
-					value = returnValue;
-					callback(value);
-				},
-				function () {
-					console.error("PhoneGap Plugin: AndroidPreferences: callback error");
-					value = "";
-					callback(value);
-				}
-			);
-		} else if (action === "set") {
-			androidPref.set(
-				{preferenceLib: prefLib, preferenceName: prefName, preferenceValue: prefValue},
-				function () {
-					console.info("PhoneGap Plugin: AndroidPreferences: callback success");
-					value = "";
-					callback(value);
-				},
-				function () {
-					console.error("PhoneGap Plugin: AndroidPreferences: callback error");
-					value = "";
-					callback(value);
-				}
-			);
+	if (window.phonegapExcluded === false) {
+		var androidPref = cordova.require("cordova/plugin/androidpreferences"),
+			value;
+		if (prefLib !== "" && prefName !== "") {
+			if (action === "get") {
+				androidPref.get(
+					{preferenceLib: prefLib, preferenceName: prefName, preferenceValue: prefValue},
+					function (returnValue) {
+						console.info("PhoneGap Plugin: AndroidPreferences: callback success");
+						value = returnValue;
+						callback(value);
+					},
+					function () {
+						console.error("PhoneGap Plugin: AndroidPreferences: callback error");
+						value = "";
+						callback(value);
+					}
+				);
+			} else if (action === "set") {
+				androidPref.set(
+					{preferenceLib: prefLib, preferenceName: prefName, preferenceValue: prefValue},
+					function () {
+						console.info("PhoneGap Plugin: AndroidPreferences: callback success");
+						value = "";
+						callback(value);
+					},
+					function () {
+						console.error("PhoneGap Plugin: AndroidPreferences: callback error");
+						value = "";
+						callback(value);
+					}
+				);
+			}
+		}
+	} else {
+		if (prefLib !== "" && prefName !== "") {
+			if (action === "get") {
+				var prefValue = window.localStorage.getItem(prefLib + prefName);
+				callback(prefValue);
+			} else if (action === "set") {
+				window.localStorage.setItem(prefLib + prefName, prefValue);
+				callback(prefValue);
+			}
 		}
 	}
 }
@@ -45,109 +57,138 @@ function emptyCallback() {
 
 // Appstore
 function appstore(link, type) {
-	var appstores = cordova.require("cordova/plugin/appstore");
-	appstores.show(
-		{link: link, type: type},
-		function () {
-			console.info("PhoneGap Plugin: Appstore: callback success");
-		},
-		function () {
-			console.error("PhoneGap Plugin: Appstore: callback error");
+	if (window.phonegapExcluded === false) {
+		var appstores = cordova.require("cordova/plugin/appstore");
+		appstores.show(
+			{link: link, type: type},
+			function () {
+				console.info("PhoneGap Plugin: Appstore: callback success");
+			},
+			function () {
+				console.error("PhoneGap Plugin: Appstore: callback error");
+			}
+		);
+	} else {
+		if (type === 'app') {
+			window.open('https://play.google.com/store/apps/details?id=' + link, '_blank');
+		} else if (type === 'pub') {
+			window.open('https://play.google.com/store/apps/developer?id=' + link, '_blank');
 		}
-	);
+	}
 }
 
 // PackageVersion
 function getPackageVersion(callback) {
-	var packageVersion = cordova.require("cordova/plugin/packageversion"), currentVersion;
-	packageVersion.get(
-		function (version) {
-			console.info("PhoneGap Plugin: PackageVersion: callback success");
-			currentVersion = version;
-			callback(currentVersion);
-		},
-		function () {
-			console.error("PhoneGap Plugin: PackageVersion: callback error");
-			currentVersion = "unknown";
-			callback(currentVersion);
-		}
-	);
+	if (window.phonegapExcluded === false) {
+		var packageVersion = cordova.require("cordova/plugin/packageversion"), currentVersion;
+		packageVersion.get(
+			function (version) {
+				console.info("PhoneGap Plugin: PackageVersion: callback success");
+				currentVersion = version;
+				callback(currentVersion);
+			},
+			function () {
+				console.error("PhoneGap Plugin: PackageVersion: callback error");
+				currentVersion = "unknown";
+				callback(currentVersion);
+			}
+		);
+	} else {
+		currentVersion = "unknown";
+		callback(currentVersion);
+	}
 }
 
 // PreferredScreenSize
 function handlePreferredScreenSize(callback) {
-	var preferredScreenSize = cordova.require("cordova/plugin/preferredscreensize");
-	preferredScreenSize.getSystem(
-		function (currentScreenSize) {
-			console.info("PhoneGap Plugin: PreferredScreenSize: callback success");
-			callback(currentScreenSize);
-		},
-		function () {
-			console.error("PhoneGap Plugin: PreferredScreenSize: callback error");
-			callback("unknown");
-		}
-	);
+	if (window.phonegapExcluded === false) {
+		var preferredScreenSize = cordova.require("cordova/plugin/preferredscreensize");
+		preferredScreenSize.getSystem(
+			function (currentScreenSize) {
+				console.info("PhoneGap Plugin: PreferredScreenSize: callback success");
+				callback(currentScreenSize);
+			},
+			function () {
+				console.error("PhoneGap Plugin: PreferredScreenSize: callback error");
+				callback("unknown");
+			}
+		);
+	} else {
+		callback("unknown");
+	}
 }
 
 // HomeButton
 function homeButton() {
-	var home = cordova.require("cordova/plugin/homebutton");
-	home.show(
-		function () {
-			console.info("PhoneGap Plugin: HomeButton: callback success");
-		},
-		function () {
-			console.error("PhoneGap Plugin: HomeButton: callback error");
-		}
-	);
+	if (window.phonegapExcluded === false) {
+		var home = cordova.require("cordova/plugin/homebutton");
+		home.show(
+			function () {
+				console.info("PhoneGap Plugin: HomeButton: callback success");
+			},
+			function () {
+				console.error("PhoneGap Plugin: HomeButton: callback error");
+			}
+		);
+	} else {
+		window.open(window.indexFile);
+	}
 }
 
 // Share
 function share(subject, text) {
-	var shares = cordova.require("cordova/plugin/share");
-	shares.show(
-		{subject: subject, text: text},
-		function () {
-			console.info("PhoneGap Plugin: Share: callback success");
-		},
-		function () {
-			console.error("PhoneGap Plugin: Share: callback error");
-		}
-	);
+	if (window.phonegapExcluded === false) {
+		var shares = cordova.require("cordova/plugin/share");
+		shares.show(
+			{subject: subject, text: text},
+			function () {
+				console.info("PhoneGap Plugin: Share: callback success");
+			},
+			function () {
+				console.error("PhoneGap Plugin: Share: callback error");
+			}
+		);
+	} else {
+		alert(subject + '\n\n' + text);
+	}
 }
 
 // Toasts
 function toast(text, duration) {
-	var toasts = cordova.require("cordova/plugin/toasts");
-	if (duration === "short") {
-		toasts.showShort(
-			text,
-			function () {
-				console.info("PhoneGap Plugin: Toast short: callback success");
-			},
-			function () {
-				console.error("PhoneGap Plugin: Toast short: callback error");
-			}
-		);
-	} else if (duration === "long") {
-		toasts.showLong(
-			text,
-			function () {
-				console.info("PhoneGap Plugin: Toast long: callback success");
-			},
-			function () {
-				console.error("PhoneGap Plugin: Toast long: callback error");
-			}
-		);
+	if (window.phonegapExcluded === false) {
+		var toasts = cordova.require("cordova/plugin/toasts");
+		if (duration === "short") {
+			toasts.showShort(
+				text,
+				function () {
+					console.info("PhoneGap Plugin: Toast short: callback success");
+				},
+				function () {
+					console.error("PhoneGap Plugin: Toast short: callback error");
+				}
+			);
+		} else if (duration === "long") {
+			toasts.showLong(
+				text,
+				function () {
+					console.info("PhoneGap Plugin: Toast long: callback success");
+				},
+				function () {
+					console.error("PhoneGap Plugin: Toast long: callback error");
+				}
+			);
+		} else {
+			toasts.cancel(
+				function () {
+					console.info("PhoneGap Plugin: Toast cancel: callback success");
+				},
+				function () {
+					console.error("PhoneGap Plugin: Toast cancel: callback error");
+				}
+			);
+		}
 	} else {
-		toasts.cancel(
-			function () {
-				console.info("PhoneGap Plugin: Toast cancel: callback success");
-			},
-			function () {
-				console.error("PhoneGap Plugin: Toast cancel: callback error");
-			}
-		);
+		alert(text);
 	}
 }
 /* END PhoneGap plugins */
@@ -374,13 +415,22 @@ function togglePanel(panel) {
 function getSystemSpecs() {
 	var $content = $('[id="systemSpecs"]'),
 		tag;
-	tag =	'<p id="systemSpecs">' +
-			'Device model: ' + device.model + '<br />' +
-			'Device platform: ' + device.platform + ' ' + device.version + '<br />' +
-			'PhoneGap version: ' + cordova.version + '<br />' +
-			'jQuery version: ' + jQuery.fn.jquery + '<br />' +
-			'jQuery Mobile version: ' + $.mobile.version + '<br />' +
-			'</p>';
+	if (window.phonegapExcluded === false) {
+		tag =	'<p id="systemSpecs">' +
+				'Device model: ' + device.model + '<br />' +
+				'Device platform: ' + device.platform + ' ' + device.version + '<br />' +
+				'PhoneGap version: ' + cordova.version + '<br />' +
+				'jQuery version: ' + jQuery.fn.jquery + '<br />' +
+				'jQuery Mobile version: ' + $.mobile.version + '<br />' +
+				'</p>';
+	} else {
+		tag =	'<p id="systemSpecs">' +
+				'Operating System: ' + navigator.platform + '<br />' +
+				'Browser: ' + navigator.appName + ' ' + navigator.appVersion + '<br />' +
+				'jQuery version: ' + jQuery.fn.jquery + '<br />' +
+				'jQuery Mobile version: ' + $.mobile.version + '<br />' +
+				'</p>';
+	}
 	$content.replaceWith(tag);
 }
 

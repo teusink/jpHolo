@@ -15,9 +15,12 @@
 		
 		<!-- JavaScript -->
 		<!-- Set document, used in jpholo.core.js -->
-		<script type="text/javascript">window.indexFile = "index_tablet.html"; </script>
+		<script type="text/javascript">
+			window.indexFile = "index_smartphone.html";
+			window.phonegapExcluded = false; // set this value to either true or false, depending on if you load the Cordova PhoneGap scripts.
+		</script>
 		
-		<!-- Cordova PhoneGap -->
+		<!-- Cordova PhoneGap --><!-- exclude the scripts below if you are not deploying with PhoneGap -->
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="backgroundService-3.1.0.js"></script>
 		<script type="text/javascript" src="cordova_custom_plugins.js"></script>

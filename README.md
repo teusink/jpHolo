@@ -1,9 +1,11 @@
 jpHolo
 ======
 
+<h2>What is jpHolo?</h2>
+
 An application template based on jQuery Mobile and PhoneGap, featuring an Android Holo styled interface.
 
-<h2>Features</h2>
+<h3>Features</h3>
 
 - Application template based on jQuery Mobile 1.3.2 and PhoneGap 3.1.0.
 - Android Holo Theme look: Holo Light with Dark action bar, Holo Dark, and Holo Light.
@@ -14,7 +16,7 @@ An application template based on jQuery Mobile and PhoneGap, featuring an Androi
 - Retrieve current package version that is set in the manifest file.
 - Navigation Drawer.
 
-<h2>Requirements</h2>
+<h3>Requirements</h3>
 
 - Android 2.3.3 and higher. Android 4.0.x may have some small different behaviours in the GUI compared to 2.3.x and 4.1.x and higher.
 - It is an Eclipse project, so you need to use Eclipse or convert the project to another IDE.
@@ -24,15 +26,34 @@ An application template based on jQuery Mobile and PhoneGap, featuring an Androi
 - Gimp images files (XCF) to make your own PNG/JPG files.
 - Full HTML, CSS, and JavaScript sources.
 
-<h3>Examples</h3>
+<h2>PhoneGap instructions</h2>
+- Setup a development environment. Follow this blog of mine to do that for Windows: http://teusink.blogspot.nl/2013/07/guide-phonegap-3-android-windows.html
+- Download this project.
+- Import this project in Eclipse.
+- Start developing!
+
+<h3>PhoneGap examples</h3>
 
 See my blog about this: http://teusink.blogspot.nl/2013/04/android-example-app-with-phonegap-and.html
 Working example can be found on Google Play Store. It is my own app DroidPapers: https://play.google.com/store/apps/details?id=org.teusink.droidpapers
 
-<h2>Pending work</h2>
-- When released, upgrade to jQuery Mobile 1.4.0.
+<h2>Web instructions</h2>
+- Set in both index_smartphone.html and index_tablet.html the value "window.phonegapExcluded" to true.
+- Exclude the scripts that are mentioned below "<!-- Cordova PhoneGap -->". The scripts are: cordova.js, backgroundService-x.x.x.js and cordova_custom_plugins.js.
+- Upload the contents of the www folder from the project to your webhosting.
+- Start developing!
+
+<h3>Web examples</h3>
+- jpHolo Smartphone: http://www.teusink.org/blog/jpholo/index_smartphone.html
+- jpHolo Tablet: http://www.teusink.org/blog/jpholo/index_tablet.html
 
 <h2>Change-log</h2>
+
+<h3>Pending work</h3>
+- When released, upgrade to jQuery Mobile 1.4.0.
+
+<h3>2013-11-17</h3>
+- Changed the core scripts and html files a bit to make easy transfer to a webhosting possible. See the instructions above.
 
 <h3>2013-10-26</h3>
 - Upgraded to the new PhoneGap 3.1.0 framework.
