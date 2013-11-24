@@ -18,48 +18,50 @@ public class Appstore extends CordovaPlugin {
 	public static final String LOG_NAME = "Appstore Plugin";
 
 	@Override
-	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
-		try {
-			JSONObject jo = args.getJSONObject(0);
-			String appstoreLink = jo.getString("link");
-			String appstoreType = jo.getString("type");
-			if (action.equals("show")) {
-				Intent intent = new Intent(Intent.ACTION_VIEW);
-				if (appInstalledOrNot("com.android.vending")) {
-					if (appstoreType.equals("app")) {
-						// org.teusink.droidpapers
-						intent.setData(Uri.parse("market://details?id=" + appstoreLink));
-					} else if (appstoreType.equals("pub")) {
-						// Teusink.org
-						intent.setData(Uri.parse("market://search?q=pub:" + appstoreLink));
+	public boolean execute(final String action, final JSONArray args, final CallbackContext callbackContext) {
+		cordova.getThreadPool().execute(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					JSONObject jo = args.getJSONObject(0);
+					String appstoreLink = jo.getString("link");
+					String appstoreType = jo.getString("type");
+					if (action.equals("show")) {
+						Intent intent = new Intent(Intent.ACTION_VIEW);
+						if (appInstalledOrNot("com.android.vending")) {
+							if (appstoreType.equals("app")) {
+								// org.teusink.droidpapers
+								intent.setData(Uri.parse("market://details?id=" + appstoreLink));
+							} else if (appstoreType.equals("pub")) {
+								// Teusink.org
+								intent.setData(Uri.parse("market://search?q=pub:" + appstoreLink));
+							}
+						} else {
+							if (appstoreType.equals("app")) {
+								// org.teusink.droidpapers
+								intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=" + appstoreLink));
+							} else if (appstoreType.equals("pub")) {
+								// Teusink.org
+								intent.setData(Uri.parse("https://play.google.com/store/apps/developer?id=" + appstoreLink));
+							}
+						}
+						cordova.getActivity().startActivityForResult(intent, 0);
+						callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, false));
+					} else {
+						Log.e(LOG_PROV, LOG_NAME + ": Error: " + PluginResult.Status.INVALID_ACTION);
+						callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
 					}
-				} else {
-					if (appstoreType.equals("app")) {
-						// org.teusink.droidpapers
-						intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=" + appstoreLink));
-					} else if (appstoreType.equals("pub")) {
-						// Teusink.org
-						intent.setData(Uri.parse("https://play.google.com/store/apps/developer?id=" + appstoreLink));
-					}
+				} catch (JSONException e) {
+					Log.e(LOG_PROV, LOG_NAME + ": Error: " + PluginResult.Status.JSON_EXCEPTION);
+					e.printStackTrace();
+					callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.JSON_EXCEPTION));
 				}
-				this.cordova.startActivityForResult(this, intent, 0);
-				callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, false));
-				return true;
-			} else {
-				Log.e(LOG_PROV, LOG_NAME + ": Error: " + PluginResult.Status.INVALID_ACTION);
-				callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
-				return false;
 			}
-		} catch (JSONException e) {
-			Log.e(LOG_PROV, LOG_NAME + ": Error: " + PluginResult.Status.JSON_EXCEPTION);
-			e.printStackTrace();
-			callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.JSON_EXCEPTION));
-			return false;
-		}
+		});
+		return true;
 	}
 
-	private boolean appInstalledOrNot(String uri)
-	{
+	private boolean appInstalledOrNot(String uri) {
 		PackageManager manager = cordova.getActivity().getPackageManager();
 		boolean app_installed = false;
 		try {

@@ -52,6 +52,9 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 <h3>Pending work</h3>
 - When released, upgrade to jQuery Mobile 1.4.0.
 
+<h3>2013-11-24</h3>
+- Some small changes and improvements.
+
 <h3>2013-11-17</h3>
 - Changed the core scripts and html files a bit to make easy transfer to a webhosting possible. See the instructions above.
 

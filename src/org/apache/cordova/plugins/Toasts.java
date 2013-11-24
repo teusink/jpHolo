@@ -11,34 +11,36 @@ import android.widget.Toast;
 
 public class Toasts extends CordovaPlugin {
 
-	private static final String LONG_TOAST_ACTION = "show_long";
-	private static final String CANCEL_ACTION = "cancel";
-	private static final int TOAST_MESSAGE_INDEX = 0;
-	private Toast toast = null;
 	public static final String LOG_PROV = "PhoneGapLog";
 	public static final String LOG_NAME = "Toasts Plugin";
 
+	private Toast toast = null;
+
 	@Override
-	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
-		if (action.equals(CANCEL_ACTION)) {
-			cancelToast();
-		} else {
-			String message;
-			try {
-				message = args.getString(TOAST_MESSAGE_INDEX);
-			} catch (JSONException e) {
-				Log.e(LOG_PROV, LOG_NAME + ": Error: " + PluginResult.Status.JSON_EXCEPTION);
-				e.printStackTrace();
-				callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.JSON_EXCEPTION));
-				return false;
+	public boolean execute(final String action, final JSONArray args, final CallbackContext callbackContext) {
+		cordova.getThreadPool().execute(new Runnable() {
+			@Override
+			public void run() {
+				if (action.equals("cancel")) {
+					cancelToast();
+				} else {
+					String message = "";
+					try {
+						message = args.getString(0);
+					} catch (JSONException e) {
+						Log.e(LOG_PROV, LOG_NAME + ": Error: " + PluginResult.Status.JSON_EXCEPTION);
+						e.printStackTrace();
+						callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.JSON_EXCEPTION));
+					}
+					if (action.equals("show_long")) {
+						showToast(message, Toast.LENGTH_LONG);
+					} else {
+						showToast(message, Toast.LENGTH_SHORT);
+					}
+				}
+				callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
 			}
-			if (action.equals(LONG_TOAST_ACTION)) {
-				showToast(message, Toast.LENGTH_LONG);
-			} else {
-				showToast(message, Toast.LENGTH_SHORT);
-			}
-		}
-		callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
+		});
 		return true;
 	}
 

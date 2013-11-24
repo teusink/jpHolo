@@ -14,12 +14,17 @@ public class HomeButton extends CordovaPlugin {
 	public static final String LOG_NAME = "HomeButton Plugin";
 
 	@Override
-	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
-		Log.d(LOG_PROV, LOG_NAME + ": Simulated home button.");
-		Intent i = new Intent(Intent.ACTION_MAIN);
-		i.addCategory(Intent.CATEGORY_HOME);
-		this.cordova.startActivityForResult(this, i, 0);
-		callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
+	public boolean execute(final String action, final JSONArray args, final CallbackContext callbackContext) {
+		cordova.getThreadPool().execute(new Runnable() {
+			@Override
+			public void run() {
+				Log.d(LOG_PROV, LOG_NAME + ": Simulated home button.");
+				Intent i = new Intent(Intent.ACTION_MAIN);
+				i.addCategory(Intent.CATEGORY_HOME);
+				cordova.getActivity().startActivityForResult(i, 0);
+				callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
+			}
+		});
 		return true;
 	}
 

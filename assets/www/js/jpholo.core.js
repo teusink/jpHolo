@@ -89,12 +89,12 @@ function getPackageVersion(callback) {
 			},
 			function () {
 				console.error("PhoneGap Plugin: PackageVersion: callback error");
-				currentVersion = "unknown";
+				currentVersion = "0.0.0";
 				callback(currentVersion);
 			}
 		);
 	} else {
-		currentVersion = "unknown";
+		currentVersion = "web";
 		callback(currentVersion);
 	}
 }
@@ -114,7 +114,7 @@ function handlePreferredScreenSize(callback) {
 			}
 		);
 	} else {
-		callback("unknown");
+		callback("web");
 	}
 }
 
@@ -149,7 +149,9 @@ function share(subject, text) {
 			}
 		);
 	} else {
-		alert(subject + '\n\n' + text);
+		subject = subject.replace('', '%20');
+		text = text.replace('', '%20');
+		window.location.href = "mailto:someone@example.com?subject=" + subject + "&body=" + text;
 	}
 }
 
@@ -325,7 +327,7 @@ function panelMenuRight(divId) {
 	$(panel).append('<li data-icon="false"><a class="panelText" onclick="appstore(\'Teusink.org\', \'pub\')"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Teusink.org</a></li>');
 	$(panel).append('<li data-role="list-divider"><p class="panelTextDivider">App info</p></li>');
 	getPackageVersion(function (version) {
-		$(panel).append('<li data-icon="false"><a class="panelText" onclick="toast(\'Current version: ' + version + '\', \'short\')"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Current version</a></li>');
+		$(panel).append('<li data-icon="false"><a class="panelText" onclick="toast(\'Current version: ' + version + '\', \'short\')"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Current version</a></li>').listview('refresh');
 	});
 	$(panel).listview('refresh');
 }
