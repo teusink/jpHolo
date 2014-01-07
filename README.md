@@ -50,7 +50,11 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 <h2>Change-log</h2>
 
 <h3>Pending work</h3>
-- When released, upgrade to jQuery Mobile 1.4.0.
+- Upgrade to jQuery Mobile 1.4.0.
+- Upgrade to PhoneGap 3.3.0.
+- Chrome Remote Debugging.
+- Multi-language.
+- Remove of energize.js due to incompatibilities with ChromeView in Android KitKat 4.4.
 
 <h3>2013-11-24</h3>
 - Some small changes and improvements.
