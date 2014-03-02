@@ -73,7 +73,6 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 - Replaced sliders with the new flipswitches.
 
 <h3>1.4.4: 2013-11-24</h3>
-=======
 - Upgrade to jQuery Mobile 1.4.0.
 - Upgrade to PhoneGap 3.3.0.
 - Chrome Remote Debugging.
@@ -81,7 +80,6 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 - Remove of energize.js due to incompatibilities with ChromeView in Android KitKat 4.4.
 
 <h3>2013-11-24</h3>
->>>>>>> 1cf2afb943cb8188546bccdcfd2444929356b46b
 - Some small changes and improvements.
 
 <h3>1.4.3: 2013-11-17</h3>
