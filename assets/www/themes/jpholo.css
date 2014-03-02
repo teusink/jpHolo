@@ -10,7 +10,12 @@ Android ICS colors:
 	Grey	: CCCCCC (border)
 	Grey	: F9F9F9 (background)
 */
-@font-face { /* include more or less fonts if needed */
+
+/* BEGIN: jQuery Mobile overrides */
+/* END: jQuery Mobile overrides */
+
+/* BEGIN: Fonts and default text style */
+@font-face {
 	font-family: RobotoThin;
 	src: url('Roboto-Thin.ttf') format('truetype');
 	font-weight: normal;
@@ -29,52 +34,134 @@ body * {
 	font-weight: normal !important;
 	white-space: normal !important;
 	word-wrap: break-word !important;
+	outline: none !important;
+	/* -webkit-overflow-scrolling: touch !important; */
 }
-.ui-btn-inner {
-	border-top: 0 !important;
+h1, h2, h3, h4, h5, h6 * {
+	font-family: RobotoThin !important;
+	font-weight: normal !important;
 }
-.ui-dialog-contain {
-	max-width: 13.75em;
+h1 { font-size: 1.375em; }
+h2 { font-size: 1.25em; }
+h3 { font-size: 1.125em; }
+h4 { font-size: 1em; }
+h5 { font-size: 0.875em; }
+h6 { font-size: 0.75em; }
+/* END: Fonts and default text style */
+
+/* BEGIN: Font overriding */
+.title {
+	font-family: RobotoThin !important;
+	font-weight: normal !important;
 }
-ui.page {
-	border-left: 1px #000000 !important;
-	border-right: 1px #000000 !important;
+.subTitle {
+	color: #33B4E5;
 }
-div.load_images {
-	display: none;
+.note {
+	color: #33B4E5;
 }
-div.headerDark {
-	z-index: 1001;
-	height: 2.85em;
-	border-bottom: 1px solid #0099CC !important;
+.small {
+	color: #33B4E5;
+	text-align: center;
+}
+p.headerBarText {
+	font-size: 1em;
+	color: #000000;
+}
+p.panelTextDivider {
+	font-family: RobotoThin !important;
+	font-weight: normal !important;
+	height: 1.875em !important;
+	font-size: 1.25em !important;
+	margin-bottom: -0.25em !important;
+	margin-top: 0.375em !important;
+}
+p.warning {
+	color: red;
+}
+p.bigSettings {
 	margin: 0;
 	padding: 0;
 }
-div.headerLight {
-	z-index: 1001;
-	height: 2.85em;
-	border-bottom: 1px solid #F3F3F3 !important;
+p.tinySettings {
+	font-family: RobotoThin !important;
+	font-weight: normal !important;
+	font-size: 0.8em;
 	margin: 0;
 	padding: 0;
 }
-div.footerDark {
-	height: 2.85em;
-	border-top: 1px solid #0099CC !important;
+p.thinSettings{
+	font-family: RobotoThin !important;
+	font-weight: normal !important;
 	margin: 0;
 	padding: 0;
 }
+a.panelText {
+	font-size: 1.05em !important;
+	margin-bottom: 0em !important;
+	margin-top: 0em !important;
+}
+ul.actionList {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+/* END: Font overriding */
+
+/* BEGIN: Tables */
+table {
+	width: 100%;
+	border-spacing: 0;
+}
+tr.lineBreak td {
+	border-top: 0;
+	border-right: 0;
+	border-bottom: 1px solid #E0E0E0;
+	border-left: 0;
+	padding: 0.6em;
+}
+tr.nonLineBreak td {
+	border: 0;
+	padding: 0.6em 0.6em 0 0.6em;
+}
+td.vTop {
+	vertical-align: top;
+}
+td.left {
+	text-align: left;
+}
+td.center {
+	text-align: center;
+}
+td.right {
+	text-align: right;
+	width: 5em;
+}
+tr.tdTitle td {
+	font-variant: small-caps;
+	text-align: center;
+	border-right: 0;
+	border-bottom: 2px solid #E0E0E0;
+	border-left: 0;
+	padding: 0.625em;
+}
+/* END: Tables */
+
+/* BEGIN: Images, Divs and more */
 div.headerSticky {
-	z-index: 1001;
+	z-index: 1002;
 	height: 2.85em;
-	border-bottom: 1px solid #222222 !important;
-	margin: 0;
+	border-bottom: 0px solid #222222 !important; /* before: 1px */
+	margin: -1px 0 0 0;
 	padding: 0;
 }
 div.footerSticky {
 	height: 2.85em;
-	border-top: 1px solid #555555 !important;
+	border-top: 0px solid #555555 !important; /* before: 1px */
 	margin: 0;
 	padding: 0;
+}
+img.holoPressEffect {
+	background-color: #444444;
 }
 img.headerIconTitle {
 	height: 2.85em;
@@ -85,7 +172,7 @@ img.headerIconTitle {
 	margin: 0;
 	padding: 0;
 }
-img.headerIconOverflow {
+img.headerIconFirstRight {
 	height: 2.85em;
 	border: 0;
 	position: absolute;
@@ -95,7 +182,7 @@ img.headerIconOverflow {
 	margin: 0;
 	padding: 0;
 }
-img.headerIconShare {
+img.headerIconSecondRight {
 	height: 2.85em;
 	border: 0;
 	position: absolute;
@@ -105,12 +192,12 @@ img.headerIconShare {
 	margin: 0;
 	padding: 0;
 }
-img.headerIconRefresh {
+img.headerIconThirdRight {
 	height: 2.85em;
 	border: 0;
 	position: absolute;
 	float: right;
-	right: 5.625em;
+	right: 5.624em;
 	top: 0;
 	margin: 0;
 	padding: 0;
@@ -136,112 +223,155 @@ img.largerIcon {
 	max-width: 1.375em !important;
 	margin-top: -0.375em !important;
 }
-h1, h2, h3, h4, h5, h6 * {
-	font-family: RobotoThin !important;
-	font-weight: normal !important;
-}
-h1 {
-	font-size: 1.375em;
-}
-h2 {
-	font-size: 1.25em;
-}
-h3 {
-	font-size: 1.125em;
-}
-h4 {
-	font-size: 1em;
-}
-h5 {
-	font-size: 0.875em;
-}
-h6 {
-	font-size: 0.75em;
-}
-.subTitle {
-	color: #33B4E5;
-}
-.small {
-	color: #33B4E5;
-	text-align: center;
-}
-p.headerBarText {
-	font-size: 1em;
-	color: #000000;
-}
-p.panelTextDivider {
-	font-family: RobotoThin !important;
-	font-weight: normal !important;
-	color: #33B4E5 !important;
-	height: 1.875em !important;
-	font-size: 1em !important;
-	margin-bottom: -0.25em !important;
-	margin-top: 0.375em !important;
-}
-p.warning {
-	color: red;
-}
-p.bigSettings {
-	margin: 0;
+div.settingButtons {
+	width: 4.7em;
+	float: right;
 	padding: 0;
-}
-p.tinySettings {
-	font-family: RobotoThin !important;
-	font-weight: normal !important;
-	font-size: 0.8em;
 	margin: 0;
-	padding: 0;
-}
-p.thinSettings{
-	font-family: RobotoThin !important;
-	font-weight: normal !important;
-	margin: 0;
-	padding: 0;
-}
-a.panelText {
-	font-size: 1em !important;
-	margin-bottom: 0em !important;
-	margin-top: 0em !important;
-}
-li.headerSpace {
-	height: 1.55em;
-}
-table {
-	width: 100%;
-	border-spacing: 0;
-}
-tr.lineBreak td {
-	border-top: 0;
-	border-right: 0;
-	border-bottom: 1px solid #E0E0E0;
-	border-left: 0;
-	padding: 0.625em;
-}
-tr.nonLineBreak td {
-	border: 0;
-	padding: 0.625em;
 }
 div.darkcyan {
 	color: #177BBD;
 }
-td.vTop {
-	vertical-align: top;
+div.actionbarTransparant {
+	border: 0;
+	opacity: 0.9 !important;
 }
-td.left {
-	text-align: left;
+.transparant {
+	opacity: 0.9 !important;
 }
-td.center {
-	text-align: center;
+/* END: Images, Divs and more */
+
+/* BEGIN: Icons */
+.ui-icon-expanderclose:after{
+	background-image:url(../images/jqm-icons/expander_close_holo_light.9.png);
+	background-size: 1.375em 1.375em !important;
 }
-td.right {
-	text-align: right;
-	width: 5em;
+.ui-icon-expanderopen:after{
+	background-image:url(../images/jqm-icons/expander_open_holo_light.9.png);
+	background-size: 1.375em 1.375em !important;
 }
-tr.tdTitle td {
-	font-variant: small-caps;
-	text-align: center;
-	border-right: 0;
-	border-bottom: 2px solid #E0E0E0;
-	border-left: 0;
-	padding: 0.625em;
+/* END: Icons */
+
+/* BEGIN: Loading indicator */
+ .loading {
+    position: relative;
+    width: 50px;    /* diameter */
+    height: 50px;    /* diameter */
+	margin-left: 44%;
+	margin-right: 56%;
+	margin-top: 44%;
+	margin-bottom: 56%;
 }
+.outer, .inner, .loading:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+/* Mask */
+ .loading:after {
+    content:" ";
+    margin: 10%;    /* stroke width */
+    border-radius: 100%;
+    background: #ffffff;    /* container background */
+}
+/* Spinning gradients */
+ .outer, .inner {
+    animation-duration: 4s;    /* speed */
+    -webkit-animation-duration: 4s;    /* speed */
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -webkit-animation-timing-function: linear;
+}
+.outer {
+    animation-name: rotate-outer;
+    -webkit-animation-name: rotate-outer;
+}
+.inner {
+    animation-name: rotate-inner;
+    -webkit-animation-name: rotate-inner;
+}
+/* Halfs */
+ .outer:before, .inner:before, .outer:after, .inner:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    content:" ";
+}
+/* Left half */
+ .outer:before, .inner:before {
+    left: 0;
+    right: 50%;
+    border-radius: 72px 0 0 72px;    /* diameter */
+}
+/* Right half */
+ .outer:after, .inner:after {
+    left: 50%;
+    right: 0;
+    border-radius: 0 72px 72px 0;    /* diameter */
+}
+/* Half gradients */
+ .outer:before {
+    background-image: -webkit-linear-gradient(top, hsla(0, 0%, 95%, 0.0), hsla(0, 0%, 95%, 0.5));
+    background-image: -moz-linear-gradient(top, hsla(0, 0%, 95%, 0.0), hsla(0, 0%, 95%, 0.5));
+    background-image: linear-gradient(to bottom, hsla(0, 0%, 95%, 0.0), hsla(0, 0%, 95%, 0.5));
+}
+.outer:after {
+    background-image: -webkit-linear-gradient(top, hsla(0, 0%, 95%, 1.0), hsla(0, 0%, 95%, 0.5));
+    background-image: -moz-linear-gradient(top, hsla(0, 0%, 95%, 1.0), hsla(0, 0%, 95%, 0.5));
+    background-image: linear-gradient(to bottom, hsla(0, 0%, 95%, 1.0), hsla(0, 0%, 95%, 0.5));
+}
+.inner:before {
+    background-image: -webkit-linear-gradient(top, hsla(0, 0%, 95%, 0.5), hsla(0, 0%, 75%, 0.5));
+    background-image: -moz-linear-gradient(top, hsla(0, 0%, 95%, 0.5), hsla(0, 0%, 75%, 0.5));
+    background-image: linear-gradient(to bottom, hsla(0, 0%, 95%, 0.5), hsla(0, 0%, 75%, 0.5));
+}
+.inner:after {
+    background-image: -webkit-linear-gradient(top, hsla(0, 0%, 50%, 0.5), hsla(0, 0%, 75%, 0.5));
+    background-image: -moz-linear-gradient(top, hsla(0, 0%, 50%, 0.5), hsla(0, 0%, 75%, 0.5));
+    background-image: linear-gradient(to bottom, hsla(0, 0%, 50%, 0.5), hsla(0, 0%, 75%, 0.5));
+}
+/* Spinning animations */
+ @keyframes rotate-outer {
+    0% {
+        transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(1080deg);
+        -moz-transform: rotate(1080deg);
+        -webkit-transform: rotate(1080deg);
+    }
+}
+@-webkit-keyframes rotate-outer {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(1080deg);
+    }
+}
+@keyframes rotate-inner {
+    0% {
+        transform: rotate(720deg);
+        -moz-transform: rotate(720deg);
+        -webkit-transform: rotate(720deg);
+    }
+    100% {
+        transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+    }
+}
+@-webkit-keyframes rotate-inner {
+    0% {
+        -webkit-transform: rotate(720deg);
+    }
+    100% {
+        -webkit-transform: rotate(0deg);
+    }
+}
+/* END: Loading indicator */

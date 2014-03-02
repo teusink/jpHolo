@@ -1,5 +1,5 @@
 // JSLint, include this before tests
-// var cordova, window, toast, $, document, handleAndroidServiceSuccess, handleAndroidServiceError, updateView, handleAndroidPreferences, toggleTimerButtons, disableServiceButtons;
+// var cordova, window, toast, $, document, handleAndroidServiceSuccess, handleAndroidServiceError, updateView, handleAndroidPreferences, toggleTimerButtons, disableServiceButtons, emptyCallback;
 
 /* PhoneGap plugin services functions */
 
@@ -99,8 +99,7 @@ function handleAndroidServiceSuccess(data) {
 
 // service view page
 function updateView(data) {
-	var timerDurationStatus = document.getElementById("timerDurationStatus"),
-		currentTimerMilliseconds,
+	var currentTimerMilliseconds,
 		timeDuration;
 	if (data.Configuration !== null) {
 		// nothing needed here, because we use AndroidPreferences
@@ -108,10 +107,11 @@ function updateView(data) {
 		// nothing needed here, because we use AndroidPreferences
 	}
 	if (data.ServiceRunning) {
-		$('#serviceStatus').val('on').slider('refresh');
-		$('#serviceBootStatus').slider("enable");
-		$('#serviceTimer').slider("enable");
-		$('#serviceToastDuration').slider("enable");
+		$('#serviceStatus').val('on');
+		$('#serviceStatus').flipswitch('refresh');
+		$('#serviceBootStatus').flipswitch("enable");
+		$('#serviceTimer').flipswitch("enable");
+		$('#serviceToastDuration').flipswitch("enable");
 		$('#serviceRunOnce').button("enable");
 		if (data.TimerEnabled) {
 			try {
@@ -119,7 +119,8 @@ function updateView(data) {
 			} catch (err5) {
 				currentTimerMilliseconds = 0;
 			}
-			$('#serviceTimer').val('on').slider('refresh');
+			$('#serviceTimer').val('on');
+			$('#serviceTimer').flipswitch('refresh');
 			if (currentTimerMilliseconds === 60000) {
 				toggleTimerButtons('disable', 'enable', 'enable', 'enable', 'enable', 'enable');
 				timeDuration = '1 minute';
@@ -142,22 +143,27 @@ function updateView(data) {
 				toggleTimerButtons('enable', 'enable', 'enable', 'enable', 'enable', 'enable');
 				timeDuration = 'not set';
 			}
-			timerDurationStatus.innerHTML = "Current interval: " + timeDuration;
+			$('#timerDurationStatus').empty().append("Current interval: " + timeDuration);
 		} else {
-			$('#serviceTimer').val('off').slider('refresh');
+			$('#serviceTimer').val('off');
+			$('#serviceTimer').flipswitch('refresh');
 			toggleTimerButtons('disable', 'disable', 'disable', 'disable', 'disable', 'disable');
-			timerDurationStatus.innerHTML = "No timer interval active.";
+			$('#timerDurationStatus').empty().append("No timer interval active.");
 		}
 		if (data.RegisteredForBootStart) {
-			$('#serviceBootStatus').val('on').slider('refresh');
+			$('#serviceBootStatus').val('on');
+			$('#serviceBootStatus').flipswitch('refresh');
 		} else {
-			$('#serviceBootStatus').val('off').slider('refresh');
+			$('#serviceBootStatus').val('off');
+			$('#serviceBootStatus').flipswitch('refresh');
 		}
 		handleAndroidPreferences("get", window.androidPrefsLib, "serviceToastDuration", "", function (toastDurPref) {
 			if (toastDurPref === "long") {
-				$('#serviceToastDuration').val('long').slider('refresh');
+				$('#serviceToastDuration').val('long');
+				$('#serviceToastDuration').flipswitch('refresh');
 			} else {
-				$('#serviceToastDuration').val('short').slider('refresh');
+				$('#serviceToastDuration').val('short');
+				$('#serviceToastDuration').flipswitch('refresh');
 			}
 		});
 	} else {
@@ -178,22 +184,25 @@ function toggleTimerButtons(b1, b2, b3, b4, b5, b6) {
 
 // disabling all buttons
 function disableServiceButtons() {
-	// set slider value
-	$('#serviceStatus').val('off').slider('refresh');
-	$('#serviceBootStatus').val('off').slider('refresh');
-	$('#serviceTimer').val('off').slider('refresh');
-	$('#serviceToastDuration').val('off').slider('refresh');
-	// disable slider
-	$('#serviceBootStatus').slider("disable");
-	$('#serviceTimer').slider("disable");
-	$('#serviceToastDuration').slider("disable");
+	// set flipswitch value
+	$('#serviceStatus').val('off');
+	$('#serviceStatus').flipswitch('refresh');
+	$('#serviceBootStatus').val('off');
+	$('#serviceBootStatus').flipswitch('refresh');
+	$('#serviceTimer').val('off');
+	$('#serviceTimer').flipswitch('refresh');
+	$('#serviceToastDuration').val('off');
+	$('#serviceToastDuration').flipswitch('refresh');
+	// disable flipswitch
+	$('#serviceBootStatus').flipswitch("disable");
+	$('#serviceTimer').flipswitch("disable");
+	$('#serviceToastDuration').flipswitch("disable");
 	$('#serviceRunOnce').button("disable");
 }
 
-// init service settings sliders
+// init service settings flipswitches
 function initServiceSettings() {
-	$("#serviceStatus").off("slidestop").on("slidestop", function (e) {
-		if (e) { e.preventDefault(); }
+	$("#serviceStatus").off("change").on("change", function () {
 		if ($('#serviceStatus').val() === 'on') {
 			// console.info("PhoneGap Plugin: Android Service: started service.");
 			handleAndroidPreferences("set", window.androidPrefsLib, "serviceStatus", "on", function () {
@@ -206,8 +215,7 @@ function initServiceSettings() {
 			});
 		}
 	});
-	$("#serviceBootStatus").off("slidestop").on("slidestop", function (e) {
-		if (e) { e.preventDefault(); }
+	$("#serviceBootStatus").off("change").on("change", function () {
 		if ($('#serviceBootStatus').val() === 'on') {
 			// console.info("PhoneGap Plugin: Android Service: registered service for boot start.");
 			androidServiceHandler("registerForBootStart", "none");
@@ -216,8 +224,7 @@ function initServiceSettings() {
 			androidServiceHandler("deregisterForBootStart", "none");
 		}
 	});
-	$("#serviceTimer").off("slidestop").on("slidestop", function (e) {
-		if (e) { e.preventDefault(); }
+	$("#serviceTimer").off("change").on("change", function () {
 		if ($('#serviceTimer').val() === 'on') {
 			// console.info("PhoneGap Plugin: Android Service: enable service timer.");
 			androidServiceHandler("enableTimer", 86400000);
@@ -227,44 +234,37 @@ function initServiceSettings() {
 		}
 	});
 	$('#toggleTimer1').off("click").on("click",
-		function (e) {
-			if (e) { e.preventDefault(); }
+		function () {
 			// console.info("PhoneGap Plugin: Android Service: set service timer to: 60000.");
 			androidServiceHandler('preSetTimer', 60000);
 		});
 	$('#toggleTimer2').off("click").on("click",
-		function (e) {
-			if (e) { e.preventDefault(); }
+		function () {
 			// console.info("PhoneGap Plugin: Android Service: set service timer to: 1800000.");
 			androidServiceHandler('preSetTimer', 1800000);
 		});
 	$('#toggleTimer3').off("click").on("click",
-		function (e) {
-			if (e) { e.preventDefault(); }
+		function () {
 			// console.info("PhoneGap Plugin: Android Service: set service timer to: 3600000.");
 			androidServiceHandler('preSetTimer', 3600000);
 		});
 	$('#toggleTimer4').off("click").on("click",
-		function (e) {
-			if (e) { e.preventDefault(); }
+		function () {
 			// console.info("PhoneGap Plugin: Android Service: set service timer to: 21600000.");
 			androidServiceHandler('preSetTimer', 21600000);
 		});
 	$('#toggleTimer5').off("click").on("click",
-		function (e) {
-			if (e) { e.preventDefault(); }
+		function () {
 			// console.info("PhoneGap Plugin: Android Service: set service timer to: 43200000.");
 			androidServiceHandler('preSetTimer', 43200000);
 		});
 	$('#toggleTimer6').off("click").on("click",
-		function (e) {
-			if (e) { e.preventDefault(); }
+		function () {
 			// console.info("PhoneGap Plugin: Android Service: set service timer to: 86400000.");
 			androidServiceHandler('preSetTimer', 86400000);
 		});
-	$('#serviceToastDuration').off("slidestop").on("slidestop",
-		function (e) {
-			if (e) { e.preventDefault(); }
+	$('#serviceToastDuration').off("change").on("change",
+		function () {
 			handleAndroidPreferences("get", window.androidPrefsLib, "serviceToastDuration", "", function (prefValue) {
 				if (prefValue === "long") {
 					handleAndroidPreferences("set", window.androidPrefsLib, "serviceToastDuration", "short", emptyCallback);
@@ -274,8 +274,7 @@ function initServiceSettings() {
 			});
 		});
 	$('#serviceRunOnce').off("click").on("click",
-		function (e) {
-			if (e) { e.preventDefault(); }
+		function () {
 			// You could also use the option setConfig here. In the Java code you will have to handle the preferences then. But because of the plugin AndroidPreferences in jpHolo, we will use that.
 			// console.info("PhoneGap Plugin: Android Service: run the service once.");
 			androidServiceHandler('runOnce', "none");

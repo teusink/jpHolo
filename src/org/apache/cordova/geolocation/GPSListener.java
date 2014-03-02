@@ -19,7 +19,6 @@
 
 package org.apache.cordova.geolocation;
 
-
 import android.location.LocationManager;
 
 /**

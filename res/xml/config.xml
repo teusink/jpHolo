@@ -23,13 +23,13 @@
 	<!-- Log level: ERROR, WARN, INFO, DEBUG, VERBOSE  (default=ERROR) -->
 	<!-- General preferences -->
 	<preference name="loglevel" value="ERROR" />
-	<preference name="phonegap-version" value="3.1.0" />
+	<preference name="phonegap-version" value="3.3.0" />
 	<preference name="orientation" value="both" />
 	<preference name="fullscreen" value="false" />
 	<!-- Android preferences -->
 	<preference name="android-minSdkVersion" value="10" />
 	<!-- <preference name="android-maxSdkVersion" value="17" /> unset!! -->
-	<preference name="android-targetSdkVersion" value="17" />
+	<preference name="android-targetSdkVersion" value="19" />
 	<preference name="android-installLocation" value="internalOnly" />
 	<preference name="android-windowSoftInputMode" value="stateUnspecified" />
 	<preference name="splash-screen-duration" value="0" />
@@ -42,8 +42,8 @@
 	<!-- PhoneGap features -->
 	<feature name="App"><param name="android-package" value="org.apache.cordova.App" /></feature>
 	<!-- PhoneGap optional plugins -->
-	<feature name="Battery"><param name="android-package" value="org.apache.cordova.batterystatus.BatteryListener" /></feature>
-    <feature name="Camera"><param name="android-package" value="org.apache.cordova.camera.CameraLauncher" /></feature>
+    <feature name="Battery"><param name="android-package" value="org.apache.cordova.batterystatus.BatteryListener" /></feature>
+	<feature name="Camera"><param name="android-package" value="org.apache.cordova.camera.CameraLauncher" /></feature>
     <feature name="Contacts"><param name="android-package" value="org.apache.cordova.contacts.ContactManager" /></feature>
     <feature name="Device"><param name="android-package" value="org.apache.cordova.device.Device" /></feature>
     <feature name="Accelerometer"><param name="android-package" value="org.apache.cordova.devicemotion.AccelListener" /></feature>
@@ -64,12 +64,12 @@
 	<feature name="BackgroundServicePlugin"><param name="android-package" value="com.red_folder.phonegap.plugin.backgroundservice.BackgroundServicePlugin" /></feature>
 	
 	<!-- additional plugins -->
-	<feature name="AndroidPreferences"><param name="android-package" value="org.apache.cordova.plugins.AndroidPreferences" /></feature>
-	<feature name="Appstore"><param name="android-package" value="org.apache.cordova.plugins.Appstore" /></feature>
-	<feature name="HomeButton"><param name="android-package" value="org.apache.cordova.plugins.HomeButton" /></feature>
-	<feature name="PackageVersion"><param name="android-package" value="org.apache.cordova.plugins.PackageVersion" /></feature>
-	<feature name="PreferredScreenSize"><param name="android-package" value="org.apache.cordova.plugins.PreferredScreenSize" /></feature>
-	<feature name="Share"><param name="android-package" value="org.apache.cordova.plugins.Share" /></feature>
-	<feature name="Toasts"><param name="android-package" value="org.apache.cordova.plugins.Toasts" /></feature>	
+	<feature name="AndroidPreferences"><param name="android-package" value="org.teusink.plugins.AndroidPreferences" /></feature>
+	<feature name="Appstore"><param name="android-package" value="org.teusink.plugins.Appstore" /></feature>
+	<feature name="HomeButton"><param name="android-package" value="org.teusink.plugins.HomeButton" /></feature>
+	<feature name="PackageVersion"><param name="android-package" value="org.teusink.plugins.PackageVersion" /></feature>
+	<feature name="PreferredScreenSize"><param name="android-package" value="org.teusink.plugins.PreferredScreenSize" /></feature>
+	<feature name="Share"><param name="android-package" value="org.teusink.plugins.Share" /></feature>
+	<feature name="Toasts"><param name="android-package" value="org.teusink.plugins.Toasts" /></feature>	
 	
 </widget>

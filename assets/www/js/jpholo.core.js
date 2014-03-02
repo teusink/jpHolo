@@ -1,7 +1,16 @@
 // JSLint, include this before tests
-// var window, cordova, $, document, navigator, onDeviceReady, onResume, onPause, pressBackButton, setTimeout, togglePanel, checkConnection, Connection, hideNonContextButtons, panelMenuLeftOpened, showNonContextButtons, initServiceSettings, panelMenuLeftClosed, initServiceSettingsSliders, androidServiceHandler;
+// var window, cordova, $, document, jQuery, navigator, device, onDeviceReady, onResume, onPause, pressBackButton, setTimeout, togglePanel, checkConnection, Connection, hideNonContextButtons, panelMenuLeftOpened, showNonContextButtons, initServiceSettings, panelMenuLeftClosed, androidServiceHandler, startPreLoadImages, onMenuKeyDown, onSearchKeyDown, checkOpenPanels;
+
+// global settings
+window.androidPrefsLib = "jpHoloSharedPreferences";
+window.loadingAnimation = '<div class="loading"><div class="outer"></div><div class="inner"></div></div>';
+$.i18n.init({ getAsync: false, debug: true, fallbackLng: 'en' });
 
 /* PhoneGap plugin functions */
+
+// needed to do an empty callback when setting a value
+function emptyCallback() {
+}
 
 // AndroidPreferences
 function handleAndroidPreferences(action, prefLib, prefName, prefValue, callback) {
@@ -42,7 +51,7 @@ function handleAndroidPreferences(action, prefLib, prefName, prefValue, callback
 	} else {
 		if (prefLib !== "" && prefName !== "") {
 			if (action === "get") {
-				var prefValue = window.localStorage.getItem(prefLib + prefName);
+				prefValue = window.localStorage.getItem(prefLib + prefName);
 				callback(prefValue);
 			} else if (action === "set") {
 				window.localStorage.setItem(prefLib + prefName, prefValue);
@@ -50,9 +59,6 @@ function handleAndroidPreferences(action, prefLib, prefName, prefValue, callback
 			}
 		}
 	}
-}
-// needed to do an empty callback when setting a value
-function emptyCallback() {
 }
 
 // Appstore
@@ -62,10 +68,10 @@ function appstore(link, type) {
 		appstores.show(
 			{link: link, type: type},
 			function () {
-				console.info("PhoneGap Plugin: Appstore: callback success");
+				console.info("PhoneGap Plugin: Appstore: show: callback success");
 			},
 			function () {
-				console.error("PhoneGap Plugin: Appstore: callback error");
+				console.error("PhoneGap Plugin: Appstore: show: callback error");
 			}
 		);
 	} else {
@@ -77,10 +83,30 @@ function appstore(link, type) {
 	}
 }
 
+// Appstore check
+function appstoreCheck(callback) {
+	if (window.phonegapExcluded === false) {
+		var appstores = cordova.require("cordova/plugin/appstore");
+		appstores.check(
+			function (appstore) {
+				console.info("PhoneGap Plugin: Appstore: check: callback success");
+				callback(appstore);
+			},
+			function () {
+				console.error("PhoneGap Plugin: Appstore: check: callback error");
+				callback("unknown");
+			}
+		);
+	} else {
+		callback("unknown");
+	}
+}
+
 // PackageVersion
 function getPackageVersion(callback) {
+	var currentVersion;
 	if (window.phonegapExcluded === false) {
-		var packageVersion = cordova.require("cordova/plugin/packageversion"), currentVersion;
+		var packageVersion = cordova.require("cordova/plugin/packageversion");
 		packageVersion.get(
 			function (version) {
 				console.info("PhoneGap Plugin: PackageVersion: callback success");
@@ -89,7 +115,7 @@ function getPackageVersion(callback) {
 			},
 			function () {
 				console.error("PhoneGap Plugin: PackageVersion: callback error");
-				currentVersion = "0.0.0";
+				currentVersion = "unknown";
 				callback(currentVersion);
 			}
 		);
@@ -163,29 +189,29 @@ function toast(text, duration) {
 			toasts.showShort(
 				text,
 				function () {
-					console.info("PhoneGap Plugin: Toast short: callback success");
+					console.info("PhoneGap Plugin: Toasts short: callback success");
 				},
 				function () {
-					console.error("PhoneGap Plugin: Toast short: callback error");
+					console.error("PhoneGap Plugin: Toasts short: callback error");
 				}
 			);
 		} else if (duration === "long") {
 			toasts.showLong(
 				text,
 				function () {
-					console.info("PhoneGap Plugin: Toast long: callback success");
+					console.info("PhoneGap Plugin: Toasts long: callback success");
 				},
 				function () {
-					console.error("PhoneGap Plugin: Toast long: callback error");
+					console.error("PhoneGap Plugin: Toasts long: callback error");
 				}
 			);
 		} else {
 			toasts.cancel(
 				function () {
-					console.info("PhoneGap Plugin: Toast cancel: callback success");
+					console.info("PhoneGap Plugin: Toasts cancel: callback success");
 				},
 				function () {
-					console.error("PhoneGap Plugin: Toast cancel: callback error");
+					console.error("PhoneGap Plugin: Toasts cancel: callback error");
 				}
 			);
 		}
@@ -195,43 +221,80 @@ function toast(text, duration) {
 }
 /* END PhoneGap plugins */
 
-// global settings
-window.androidPrefsLib = "jpHoloSharedPreferences";
-
 // device ready
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
 	// let the function "isDeviceReady" know that the event "deviceready" has been fired
 	window.deviceReady = true;
+	// prelude app images for faster GUI
+	startPreLoadImages();
 	// execute when app resumes from pause
 	document.addEventListener("resume", onResume, false);
 	// execute when app goes to pause (home button or opening other app)
 	document.addEventListener("pause", onPause, false);
 	// override default backbutton behavior with own
 	document.addEventListener("backbutton", pressBackButton, false);
+	// override default menubutton behavior with own
+	document.addEventListener("menubutton", onMenuKeyDown, false);
+	// override default searchbutton behavior with own
+	document.addEventListener("searchbutton", onSearchKeyDown, false);
 	// check if Android Service is running and needs to be running and act accordingly
 	androidServiceHandler("getStatus", "none");
 	// demonstrate panel menu on first boot
 	if (window.localStorage.getItem('firstBoot') !== 'done') {
-		$("#headerTitle" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_launcher_full_menu_selected.png"); // if you use a light theme as first page, change the src
+		var headerTitle = $("#headerTitle" + window.localStorage.getItem("divIdGlobal"));
+		headerTitle.addClass("holoPressEffect");
 		setTimeout(function () {
 			togglePanel('#panelMenuIndex');
 		}, 500);
 		setTimeout(function () {
-			$("#headerTitle" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_launcher_full_menu.png"); // if you use a light theme as first page, change the src
+			headerTitle.removeClass("holoPressEffect");
 			togglePanel('#panelMenuIndex');
 		}, 1500);
 		window.localStorage.setItem('firstBoot', 'done');
 	}
 }
 
-// function to execute other code AFTER the deviceready event
-function isDeviceReady(action) {
+// event handler orientationchange
+$(window).bind('orientationchange',
+	function (event) {
+		if (event.orientation === 'portrait') {
+			//do something
+		} else if (event.orientation === 'landscape') {
+			//do something
+		}
+	});
+
+// image preloader
+jQuery.preloadImages = function () {
+	var i;
+	for (i = 0; i < arguments.length; i = i + 1) {
+		jQuery("<img>").attr("src", arguments[i]);
+	}
+};
+
+// actually preload images
+function startPreLoadImages() {
+	$.preloadImages(
+		"./images/icons/ic_action_home.png",
+		"./images/icons/ic_action_info.png",
+		"./images/icons/ic_action_list_header.png",
+		"./images/icons/ic_action_overflow_header.png",
+		"./images/icons/ic_action_share_header.png",
+		"./images/icons/ic_launcher_full_arrow.png",
+		"./images/icons/ic_launcher_full_menu.png",
+		"./images/icons/ic_launcher_full_menu_opened.png",
+		"./images/icons/ic_launcher_full_noarrow.png"
+	);
+}
+
+// callback function to check if device is ready
+function isDeviceReady(value, action) {
 	if (window.deviceReady === true) {
 		var connection = checkConnection();
 		switch (action) {
 		case "toastReady":
-			toast("Holo Light with Dark action bar example\nDevice is ready according to PhoneGap.\nConnection type: " + connection, "short");
+			toast("Holo Light with Dark action bar example\nDevice is ready according to PhoneGap.\nConnection type: " + connection + "\n\nThis is your value: " + value, "short");
 			break;
 		case "action2":
 			// code
@@ -241,15 +304,20 @@ function isDeviceReady(action) {
 			break;
 		}
 	} else {
-		window.setTimeout("isDeviceReady(\"" + action + "\");", 100);
+		window.setTimeout("isDeviceReady(\"" + value + "\", \"" + action + "\");", 100);
 	}
+}
+
+// clean URI preferences variables
+function cleanUriVars() {
+	handleAndroidPreferences("set", window.androidPrefsLib, "UriMessage", "", emptyCallback);
 }
 
 // override default back button handling
 function pressBackButton() {
 	// if panel is not open, then go on
-	if (window.localStorage.getItem('panelLeft') === 'closed' && window.localStorage.getItem('panelRight') === 'closed') {
-		if ($.mobile.activePage.is('#indexPage')) {
+	if (checkOpenPanels() === false) {
+		if ($.mobile.pageContainer.pagecontainer("getActivePage")[0].id === "indexPage") {
 			navigator.app.exitApp(); // This will exit the app.
 			// homeButton(); // This will push the app to the background.
 		} else {
@@ -266,6 +334,16 @@ function pressBackButton() {
 			$(divRightId).panel("close");
 		}
 	}
+}
+
+// menu button
+function onMenuKeyDown() {
+    togglePanel('#panelMenuRight' + window.localStorage.getItem("divIdGlobal"));
+}
+
+// search button
+function onSearchKeyDown() {
+    toast('You want to search?', 'short');
 }
 
 // pause app
@@ -305,64 +383,66 @@ function clearFirstBoot() {
 
 // default left panelmenu (define menu for all pages)
 function panelMenu(divId) {
-	var panel = '#panelMenu' + divId + 'UL';
-	$(panel).children().remove('li');
-	$(panel).append('<li data-icon="false" class="headerSpace"><p>&nbsp;</p></li>'); // empty space, needed for header
-	$(panel).append('<li data-role="list-divider"><p class="panelTextDivider">jpHolo</p></li>');
-	$(panel).append('<li data-icon="false"><a class="panelText" href="#indexPage"><img src="./images/icons/ic_action_home.png" class="ui-li-icon largerIcon">Holo light/dark</a></li>');
-	$(panel).append('<li data-role="list-divider"><p class="panelTextDivider">Other pages</p></li>');
-	$(panel).append('<li data-icon="false"><a class="panelText" href="#secondPage"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Holo dark</a></li>');
-	$(panel).append('<li data-icon="false"><a class="panelText" href="#thirdPage"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Holo light</a></li>');
-	$(panel).append('<li data-icon="false"><a class="panelText" href="#servicePage"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Service page</a></li>');
-	$(panel).listview('refresh');
+	var panel = $('#panelMenu' + divId + 'UL');
+	panel.children().remove('li');
+	panel.append('<li data-icon="false" class="headerSpace"><p>&nbsp;</p></li>'); // empty space, needed for header
+	panel.append('<li data-role="list-divider"><p class="panelTextDivider">jpHolo</p></li>');
+	panel.append('<li data-icon="false"><a class="panelText" href="#indexPage"><img src="./images/icons/ic_action_home.png" class="ui-li-icon largerIcon">Main page</a></li>');
+	panel.append('<li data-role="list-divider"><p class="panelTextDivider">Other pages</p></li>');
+	panel.append('<li data-icon="false"><a class="panelText" href="#otherPage"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Other page</a></li>');
+	panel.append('<li data-icon="false"><a class="panelText" href="#servicePage"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Service page</a></li>');
+	panel.listview('refresh');
 }
 
 // default right panelmenu (define menu for all pages)
 function panelMenuRight(divId) {
-	var panel = '#panelMenuRight' + divId + 'UL';
-	$(panel).children().remove('li');
-	$(panel).append('<li data-icon="false" class="headerSpace"><p>&nbsp;</p></li>'); // empty space, needed for header
-	$(panel).append('<li data-role="list-divider"><p class="panelTextDivider">Play Store links</p></li>');
-	$(panel).append('<li data-icon="false"><a class="panelText" onclick="appstore(\'org.teusink.droidpapers\', \'app\')"><img src="./images/icons/ic_action_home.png" class="ui-li-icon largerIcon">DroidPapers</a></li>');
-	$(panel).append('<li data-icon="false"><a class="panelText" onclick="appstore(\'Teusink.org\', \'pub\')"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Teusink.org</a></li>');
-	$(panel).append('<li data-role="list-divider"><p class="panelTextDivider">App info</p></li>');
+	var panel = $('#panelMenuRight' + divId + 'UL');
+	panel.children().remove('li');
+	panel.append('<li data-icon="false" class="headerSpace"><p>&nbsp;</p></li>'); // empty space, needed for header
+	panel.append('<li data-role="list-divider"><p class="panelTextDivider">Play Store links</p></li>');
+	panel.append('<li data-icon="false"><a class="panelText" onclick="appstore(\'org.teusink.droidpapers\', \'app\')"><img src="./images/icons/ic_action_home.png" class="ui-li-icon largerIcon">DroidPapers</a></li>');
+	panel.append('<li data-icon="false"><a class="panelText" onclick="appstore(\'Teusink.org\', \'pub\')"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Teusink.org</a></li>');
+	panel.append('<li data-role="list-divider"><p class="panelTextDivider">App info</p></li>');
 	getPackageVersion(function (version) {
-		$(panel).append('<li data-icon="false"><a class="panelText" onclick="toast(\'Current version: ' + version + '\', \'short\')"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Current version</a></li>').listview('refresh');
+		panel.append('<li data-icon="false"><a class="panelText" onclick="toast(\'Current version: ' + version + '\', \'short\')"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Current version</a></li>').listview('refresh');
 	});
-	$(panel).listview('refresh');
+	panel.listview('refresh');
 }
 
 // panel open and closed handling
-function panelHandling(holo) {
-	$("#panelMenu" + window.localStorage.getItem("divIdGlobal")).panel({
-		open: function (e, ui) {
-			if (e) { e.preventDefault(); }
+function panelHandling() {
+	var currentId = window.localStorage.getItem("divIdGlobal");
+	$("#panelMenu" + currentId).panel({
+		open: function () {
 			window.localStorage.setItem("panelLeft", 'open');
 			hideNonContextButtons('panel');
-			panelMenuLeftOpened(holo);
+			panelMenuLeftOpened();
 		}
 	});
-	$("#panelMenu" + window.localStorage.getItem("divIdGlobal")).panel({
-		close: function (e, ui) {
-			if (e) { e.preventDefault(); }
+	$("#panelMenu" + currentId).panel({
+		close: function () {
 			window.localStorage.setItem("panelLeft", 'closed');
 			showNonContextButtons('panel');
-			panelMenuLeftClosed(holo);
+			panelMenuLeftClosed();
 		}
 	});
-	$("#panelMenuRight" + window.localStorage.getItem("divIdGlobal")).panel({
-		open: function (e, ui) {
-			if (e) { e.preventDefault(); }
+	$("#panelMenu" + currentId + "UL").on("click", "li", function () {
+		$('#panelMenu' + currentId).panel("close");
+	});
+	$("#panelMenuRight" + currentId).panel({
+		open: function () {
 			window.localStorage.setItem("panelRight", 'open');
 			hideNonContextButtons('panel');
 		}
 	});
-	$("#panelMenuRight" + window.localStorage.getItem("divIdGlobal")).panel({
-		close: function (e, ui) {
-			if (e) { e.preventDefault(); }
+	$("#panelMenuRight" + currentId).panel({
+		close: function () {
 			window.localStorage.setItem("panelRight", 'closed');
 			showNonContextButtons('panel');
 		}
+	});
+	$("#panelMenuRight" + currentId + "UL").on("click", "li", function () {
+		$('#panelMenuRight' + currentId).panel("close");
 	});
 }
 
@@ -372,39 +452,49 @@ function resetPanelState() {
 	window.localStorage.setItem('panelRight', 'closed');
 }
 
+// check if there is a panel open or not
+function checkOpenPanels() {
+	if (window.localStorage.getItem('panelLeft') === "closed" && window.localStorage.getItem('panelRight') === "closed") {
+		return false;
+	}
+	return true;
+}
+
 // hide non-contextual buttons when panel opens
 function hideNonContextButtons(type) {
-	if ($('#headerShare' + window.localStorage.getItem("divIdGlobal")).length > 0) {
-		$('#headerShare' + window.localStorage.getItem("divIdGlobal")).hide();
+	var currentId = window.localStorage.getItem("divIdGlobal");
+	if ($('#headerShare' + currentId).length > 0) {
+		$('#headerShare' + currentId).hide();
 	}
 	// use this part if you want to hide buttons in action bars of which the buttons do not apply to every page
-	if ($('#headerOtherButton' + window.localStorage.getItem("divIdGlobal")).length > 0 && type !== "somethingOtherThenPanel") {
-		$('#headerOtherButton' + window.localStorage.getItem("divIdGlobal")).hide();
+	if ($('#headerOtherButton' + currentId).length > 0 && type !== "somethingOtherThenPanel") {
+		$('#headerOtherButton' + currentId).hide();
 	}
 }
 
 // show non-contextual buttons when panel closes
 function showNonContextButtons(type) {
-	if ($('#headerShare' + window.localStorage.getItem("divIdGlobal")).length > 0) {
-		$('#headerShare' + window.localStorage.getItem("divIdGlobal")).show();
+	var currentId = window.localStorage.getItem("divIdGlobal");
+	if ($('#headerShare' + currentId).length > 0) {
+		$('#headerShare' + currentId).show();
 	}
 	// use this part if you want to show buttons in action bars of which the buttons do not apply to every page
-	if ($('#headerOtherButton' + window.localStorage.getItem("divIdGlobal")).length > 0 && type !== "somethingOtherThenPanel") {
-		$('#headerOtherButton' + window.localStorage.getItem("divIdGlobal")).show();
+	if ($('#headerOtherButton' + currentId).length > 0 && type !== "somethingOtherThenPanel") {
+		$('#headerOtherButton' + currentId).show();
 	}
 }
 
 // show title icon with the dashes more to the left
-function panelMenuLeftOpened(holo) {
+function panelMenuLeftOpened() {
 	if (window.localStorage.getItem("pageNaveType") === "menu") {
-		$("#headerTitle" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_launcher_full_menu_opened" + holo + ".png");
+		$("#headerTitle" + window.localStorage.getItem("divIdGlobal")).attr("src", "./images/icons/ic_launcher_full_menu_opened.png");
 	}
 }
 
 // show title icon with the dashes more to the right
-function panelMenuLeftClosed(holo) {
+function panelMenuLeftClosed() {
 	if (window.localStorage.getItem("pageNaveType") === "menu") {
-		$("#headerTitle" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_launcher_full_menu" + holo + ".png");
+		$("#headerTitle" + window.localStorage.getItem("divIdGlobal")).attr("src", "./images/icons/ic_launcher_full_menu.png");
 	}
 }
 
@@ -415,7 +505,7 @@ function togglePanel(panel) {
 
 // get the systemspecs
 function getSystemSpecs() {
-	var $content = $('[id="systemSpecs"]'),
+	var $content = $('#systemSpecs'),
 		tag;
 	if (window.phonegapExcluded === false) {
 		tag =	'<p id="systemSpecs">' +
@@ -437,101 +527,71 @@ function getSystemSpecs() {
 }
 
 // press effect in header bar
-function pressEffectHeader(share, action, holo) {
+function pressEffectHeader(share, action) {
 	/** use action "menu" when using app icon as side panel (#panelMenu...)
 	*	use action "back" when using app icon as back
-	*	use holo "" when using dark action bar
-	*	use holo "_light" when using light action bar
 	*/
 	window.localStorage.setItem("pageNaveType", action);
+	var currentId = window.localStorage.getItem("divIdGlobal");
 	// restore icons
 	if (action === "menu") {
-		$("#headerTitle" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_launcher_full_menu" + holo + ".png");
+		$("#headerTitle" + currentId).attr("src", "./images/icons/ic_launcher_full_menu.png");
 		// detect swiperight to open left panel upon swiperight
-		$(document).off('swiperight').on('swiperight', "#" + $.mobile.activePage.attr("id"), function (e) {
-			if (e) { e.preventDefault(); }
+		$("#" + $.mobile.pageContainer.pagecontainer("getActivePage")[0].id).off('swiperight').on('swiperight', function () {
 			// check if there are no open panels, otherwise ignore swipe
 			if (window.localStorage.getItem('panelLeft') !== "open" && window.localStorage.getItem('panelRight') !== "open") {
-				togglePanel('#panelMenu' + window.localStorage.getItem("divIdGlobal"));
+				togglePanel('#panelMenu' + currentId);
 			}
 		});
 	} else {
 		// remove swipe event, because there is no page visible with a panelmenu
-		$(document).off('swiperight');
+		$("#" + $.mobile.pageContainer.pagecontainer("getActivePage")[0].id).off('swiperight');
 	}
 	showNonContextButtons('panel');
 	// header title press effect (left panel)
-	$(document).on('vmousedown', "#headerTitle" + window.localStorage.getItem("divIdGlobal"), function (e) {
-		if (e) { e.preventDefault(); }
-		if (action !== "back") {
-			if (window.localStorage.getItem('panelLeft') !== 'open') {
-				$("#headerTitle" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_launcher_full_menu_selected" + holo + ".png");
-			} else {
-				$("#headerTitle" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_launcher_full_menu_selected_opened" + holo + ".png");
-			}
-		} else {
-			$("#headerTitle" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_launcher_full_arrow_selected" + holo + ".png");
-		}
+	$("#headerTitle" + currentId).on('touchstart', function () {
+		$(this).addClass("holoPressEffect");
 	});
-	$(document).on('vmouseup', "#headerTitle" + window.localStorage.getItem("divIdGlobal"), function (e) {
-		if (e) { e.preventDefault(); }
-		if (action !== "back") {
-			if (window.localStorage.getItem('panelLeft') !== 'open') {
-				$("#headerTitle" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_launcher_full_menu" + holo + ".png");
-			} else {
-				$("#headerTitle" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_launcher_full_menu_opened" + holo + ".png");
-			}
-		} else {
-			$("#headerTitle" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_launcher_full_arrow" + holo + ".png");
-		}
+	$("#headerTitle" + currentId).on('touchend', function () {
+		$(this).removeClass("holoPressEffect");
 	});
 	// overflow title press effect (right panel)
-	$(document).on('vmousedown', "#headerOverflow" + window.localStorage.getItem("divIdGlobal"), function (e) {
-		if (e) { e.preventDefault(); }
-		$("#headerOverflow" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_action_overflow_selected_header" + holo + ".png");
+	$("#headerOverflow" + currentId).on('touchstart', function () {
+		$(this).addClass("holoPressEffect");
 	});
-	$(document).on('vmouseup', "#headerOverflow" + window.localStorage.getItem("divIdGlobal"), function (e) {
-		if (e) { e.preventDefault(); }
-		$("#headerOverflow" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_action_overflow_header" + holo + ".png");
+	$("#headerOverflow" + currentId).on('touchend', function () {
+		$(this).removeClass("holoPressEffect");
 	});
 	// share press effect
 	if (share === true) {
-		$(document).on('vmousedown', "#headerShare" + window.localStorage.getItem("divIdGlobal"), function (e) {
-			if (e) { e.preventDefault(); }
-			$("#headerShare" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_action_share_selected_header" + holo + ".png");
+		$("#headerShare" + currentId).on('touchstart', function () {
+			$(this).addClass("holoPressEffect");
 		});
-		$(document).on('vmouseup', "#headerShare" + window.localStorage.getItem("divIdGlobal"), function (e) {
-			if (e) { e.preventDefault(); }
-			$("#headerShare" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_action_share_header" + holo + ".png");
+		$("#headerShare" + currentId).on('touchend', function () {
+			$(this).removeClass("holoPressEffect");
 		});
 	}
 }
 
 // press effect in footer bar
-function pressEffectFooter(button1, button2, holo) {
-	/** use holo "" when using dark action bar
-	*	use holo "_light" when using light action bar
-	*/
+function pressEffectFooter(button1, button2) {
+	var currentId = window.localStorage.getItem("divIdGlobal");
 	// button1 press effect
 	if (button1 === true) {
-		$(document).on('vmousedown', "#footerShare" + window.localStorage.getItem("divIdGlobal"), function (e) {
-			if (e) { e.preventDefault(); }
-			$("#footerShare" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_action_share_selected_header" + holo + ".png");
+		$("#footerShare" + currentId).on('touchstart', function () {
+			$(this).addClass("holoPressEffect");
 		});
-		$(document).on('vmouseup', "#footerShare" + window.localStorage.getItem("divIdGlobal"), function (e) {
-			if (e) { e.preventDefault(); }
-			$("#footerShare" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_action_share_header" + holo + ".png");
+		$("#footerShare" + currentId).on('touchend', function () {
+			$(this).removeClass("holoPressEffect");
 		});
 	}
 	// button2 press effect
 	if (button2 === true) {
-		$(document).on('vmousedown', "#footerToast" + window.localStorage.getItem("divIdGlobal"), function (e) {
-			if (e) { e.preventDefault(); }
-			$("#footerToast" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_action_list_selected_header" + holo + ".png");
+		$("#footerToast" + currentId).on('touchstart', function () {
+			$(this).addClass("holoPressEffect");
 		});
-		$(document).on('vmouseup', "#footerToast" + window.localStorage.getItem("divIdGlobal"), function (e) {
-			if (e) { e.preventDefault(); }
-			$("#footerToast" + window.localStorage.getItem("divIdGlobal")).attr("src", "images/icons/ic_action_list_header" + holo + ".png");
+		$("#footerToast" + currentId).on('touchend', function () {
+			$(this).removeClass("holoPressEffect");
 		});
 	}
 }
@@ -543,8 +603,7 @@ function htmlClickEventHandlers(id, action) {
 	*/
 	// every page
 	$('#headerTitle' + id).off("click").on("click",
-		function (e) {
-			if (e) { e.preventDefault(); }
+		function () {
 			if (action !== "back") {
 				togglePanel('#panelMenu' + id);
 			} else {
@@ -552,46 +611,45 @@ function htmlClickEventHandlers(id, action) {
 			}
 		});
 	$('#headerShare' + id).off("click").on("click",
-		function (e) {
-			if (e) { e.preventDefault(); }
+		function () {
 			share(window.localStorage.getItem('shareTagSubject'), window.localStorage.getItem('shareTagText'));
 		});
-	$('#headerShare' + id).off("taphold").on("taphold",
-		function (e) {
-			if (e) { e.preventDefault(); }
+	$('#headerShare' + id).on("taphold",
+		function () {
 			toast("Share.", "short");
 		});
 	$('#headerOverflow' + id).off("click").on("click",
-		function (e) {
-			if (e) { e.preventDefault(); }
+		function () {
 			togglePanel('#panelMenuRight' + id);
 		});
 	// specific page...
 	if (id === "Index") {
 		$('#clearFirstBoot').off("click").on("click",
-			function (e) {
-				if (e) { e.preventDefault(); }
+			function () {
 				clearFirstBoot();
 			});
 	} else if (id === "Second") {
 		// do nothing
-	} else if (id === "Third") {
+	} else if (id === "Other") {
 		// do nothing
 	} else if (id === "Service") {
 		initServiceSettings();
 	}
 	// every page but...
-	if (id !== "Third") {
+	if (id !== "Other") {
 		$('#footerShare' + id).off("click").on("click",
-			function (e) {
-				if (e) { e.preventDefault(); }
+			function () {
 				share(window.localStorage.getItem('shareTagSubject'), window.localStorage.getItem('shareTagText'));
 			});
-		$('#footerToast' + id).off("click").on("click",
-			function (e) {
-				if (e) { e.preventDefault(); }
-				toast('This is a toast message', 'short');
-			});
+		$('#footerShare' + id).on("taphold", function () {
+			toast("Share.", "short");
+		});
+		$('#footerToast' + id).off("click").on("click", function () {
+			toast('This is a toast message', 'short');
+		});
+		$('#footerToast' + id).on("taphold", function () {
+			toast("Toast.", "short");
+		});
 	}
 }
 
@@ -602,18 +660,16 @@ function initPageVarsOnCreate(id) {
 	if (id !== "Index") {
 		toast('This is not the Index page', 'short');
 	}
-	if (id !== "Third") {
+	if (id !== "Other") {
 		htmlClickEventHandlers(id, "menu");
 	} else {
 		htmlClickEventHandlers(id, "back");
 	}
 	// specific page...
 	if (id === "Index") {
-		isDeviceReady("toastReady");
-	} else if (id === "Second") {
-		toast('Holo Dark example', 'short');
-	} else if (id === "Third") {
-		toast('Holo Light example', 'short');
+		isDeviceReady("valueTester", "toastReady");
+	} else if (id === "Other") {
+		// do nothing
 	} else if (id === "Service") {
 		// do nothing
 	}
@@ -628,66 +684,55 @@ function initPageVarsOnShow(id) {
 	window.localStorage.setItem("shareTagText", 'A nice PhoneGap and JQM example by Teusink.org http://teusink.blogspot.com/2013/04/android-example-app-with-phonegap-and.html #TeusinkOrg');
 	panelMenu(id);
 	panelMenuRight(id);
-	panelHandling("");
+	panelHandling();
 	// every page but...
-	if (id !== "Third") {
-		pressEffectHeader(true, "menu", "");
+	if (id !== "Other") {
+		pressEffectHeader(true, "menu");
 	} else {
-		// panelHandling("_light"); // this one is not active, because the Third page does not have a panel menu
-		pressEffectHeader(true, "back", "_light");
+		pressEffectHeader(true, "back");
 	}
 	// specific page...
 	if (id === "Index") {
-		pressEffectFooter(true, true, "");
-	} else if (id === "Second") {
-		pressEffectFooter(true, true, "");
+		pressEffectFooter(true, true);
+	} else if (id === "Other") {
+		pressEffectFooter(true, true);
 		getSystemSpecs();
-	} else if (id === "Third") {
-		pressEffectFooter(true, true, "_light");
 	} else if (id === "Service") {
-		pressEffectFooter(true, true, "");
+		pressEffectFooter(true, true);
 		androidServiceHandler("getStatus", "none");
 	}
 }
 
 // below is to tie page events to pages so that the 2 functions above (initPageVarsOn...) will execute
 
+// store important vars, like previous page id
+function startBeforeShowVars(data) {
+	window.localStorage.setItem("previousPageId", data.prevPage.attr("id"));
+}
+
 // #indexPage
-$(document).on('pagebeforeshow', '#indexPage', function (e) {
-	if (e) { e.preventDefault(); }
+$(document).on('pagebeforeshow', '#indexPage', function (event, data) {
+	startBeforeShowVars(data);
 	initPageVarsOnShow('Index');
 });
-$(document).on('pagecreate', '#indexPage', function (e) {
-	if (e) { e.preventDefault(); }
+$(document).on('pagecreate', '#indexPage', function () {
 	initPageVarsOnCreate('Index');
 });
 
-// #secondPage
-$(document).on('pagebeforeshow', '#secondPage', function (e) {
-	if (e) { e.preventDefault(); }
-	initPageVarsOnShow('Second');
+// #otherPage
+$(document).on('pagebeforeshow', '#otherPage', function (event, data) {
+	startBeforeShowVars(data);
+	initPageVarsOnShow('Other');
 });
-$(document).on('pagecreate', '#secondPage', function (e) {
-	if (e) { e.preventDefault(); }
-	initPageVarsOnCreate('Second');
-});
-
-// #thirdPage
-$(document).on('pagebeforeshow', '#thirdPage', function (e) {
-	if (e) { e.preventDefault(); }
-	initPageVarsOnShow('Third');
-});
-$(document).on('pagecreate', '#thirdPage', function (e) {
-	if (e) { e.preventDefault(); }
-	initPageVarsOnCreate('Third');
+$(document).on('pagecreate', '#otherPage', function () {
+	initPageVarsOnCreate('Other');
 });
 
 // #servicePage
-$(document).on('pagebeforeshow', '#servicePage', function (e) {
-	if (e) { e.preventDefault(); }
+$(document).on('pagebeforeshow', '#servicePage', function (event, data) {
+	startBeforeShowVars(data);
 	initPageVarsOnShow('Service');
 });
-$(document).on('pagecreate', '#servicePage', function (e) {
-	if (e) { e.preventDefault(); }
+$(document).on('pagecreate', '#servicePage', function () {
 	initPageVarsOnCreate('Service');
 });
