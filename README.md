@@ -50,7 +50,6 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 <h2>Change-log</h2>
 
 <h3>Pending work</h3>
-<<<<<<< HEAD
 - Documentation.
 
 <h3>2.0.0: 2014-03-02</h3>
