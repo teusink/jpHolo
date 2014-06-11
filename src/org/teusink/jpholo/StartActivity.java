@@ -13,7 +13,7 @@ public class StartActivity extends CordovaActivity {
 
 	@SuppressLint("NewApi")
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		super.init();
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -28,7 +28,7 @@ public class StartActivity extends CordovaActivity {
 		}
 	}
 
-	private void initiateApp(String screenSize) {
+	private void initiateApp(final String screenSize) {
 		if (screenSize.equals("tablet")) {
 			super.loadUrl("file:///android_asset/www/index_tablet.html");
 		} else {

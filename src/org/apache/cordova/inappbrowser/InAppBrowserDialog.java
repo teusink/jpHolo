@@ -16,35 +16,34 @@
        specific language governing permissions and limitations
        under the License.
 */
+package org.apache.cordova.inappbrowser;
 
-package org.apache.cordova.geolocation;
-
-import android.location.LocationManager;
+import android.app.Dialog;
+import android.content.Context;
 
 /**
- * This class handles requests for GPS location services.
- *
+ * Created by Oliver on 22/11/2013.
  */
-public class GPSListener extends CordovaLocationListener {
-    public GPSListener(LocationManager locationManager, GeoBroker m) {
-        super(locationManager, m, "[Cordova GPSListener]");
+public class InAppBrowserDialog extends Dialog {
+    Context context;
+    InAppBrowser inAppBrowser = null;
+
+    public InAppBrowserDialog(Context context, int theme) {
+        super(context, theme);
+        this.context = context;
     }
 
+    public void setInAppBroswer(InAppBrowser browser) {
+        this.inAppBrowser = browser;
+    }
 
-    /**
-     * Start requesting location updates.
-     *
-     * @param interval
-     */
-    @Override
-    protected void start() {
-        if (!this.running) {
-            if (this.locationManager.getProvider(LocationManager.GPS_PROVIDER) != null) {
-                this.running = true;
-                this.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 0, this);
-            } else {
-                this.fail(CordovaLocationListener.POSITION_UNAVAILABLE, "GPS provider is not available.");
-            }
+    public void onBackPressed () {
+        if (this.inAppBrowser == null) {
+            this.dismiss();
+        } else {
+            // better to go through the in inAppBrowser
+            // because it does a clean up
+            this.inAppBrowser.closeDialog();
         }
     }
 }

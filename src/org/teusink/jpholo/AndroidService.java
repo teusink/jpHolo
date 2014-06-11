@@ -18,43 +18,47 @@ public class AndroidService extends BackgroundService {
 	private String configSetting = "";
 
 	public static final String PREFS_NAME = "jpHoloSharedPreferences";
-	public static final String LOG_PROV = "PhoneGapLog";
-	public static final String LOG_NAME = "Background Service";
+	public static final String LOG_PROV = "jpHoloLog";
+	public static final String LOG_NAME = "Background Service: ";
 
 	Handler handler = new Handler();
 
 	@Override
 	protected JSONObject doWork() {
-		JSONObject result = new JSONObject();
-		String msg = "Service executed.";
+		final JSONObject result = new JSONObject();
+		final String msg = "Service executed.";
 		runService();
 		try {
 			result.put("Message", msg);
-		} catch (JSONException e) {
-			Log.e(LOG_PROV, LOG_NAME + ": Error.");
+		} catch (final JSONException e) {
+			Log.e(LOG_PROV, LOG_NAME + "JSONException Error");
 			e.printStackTrace();
 		}
-		Log.d(LOG_PROV, LOG_NAME + ": " + msg);
+		Log.d(LOG_PROV, LOG_NAME + msg);
 		return result;
 	}
 
 	@Override
 	protected JSONObject getConfig() {
-		JSONObject result = new JSONObject();
+		final JSONObject result = new JSONObject();
 		try {
 			result.put("mConfig", this.configSetting);
-		} catch (JSONException e) {
+		} catch (final JSONException e) {
+			Log.e(LOG_PROV, LOG_NAME + "JSONException Error");
+			e.printStackTrace();
 		}
 		return result;
 	}
 
 	@Override
-	protected void setConfig(JSONObject config) {
+	protected void setConfig(final JSONObject config) {
 		try {
 			if (config.has("mConfig")) {
 				this.configSetting = config.getString("mConfig");
 			}
-		} catch (JSONException e) {
+		} catch (final JSONException e) {
+			Log.e(LOG_PROV, LOG_NAME + "JSONException Error");
+			e.printStackTrace();
 		}
 
 	}
@@ -73,7 +77,7 @@ public class AndroidService extends BackgroundService {
 	}
 
 	private void runService() {
-		SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+		final SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 		String serviceToastDuration = settings.getString("serviceToastDuration", "");
 		if (!serviceToastDuration.equals("long")) {
 			serviceToastDuration = "short";

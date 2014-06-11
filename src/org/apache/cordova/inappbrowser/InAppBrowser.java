@@ -19,12 +19,14 @@
 package org.apache.cordova.inappbrowser;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
+import org.apache.cordova.inappbrowser.InAppBrowserDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -77,13 +79,12 @@ public class InAppBrowser extends CordovaPlugin {
     private static final String CLEAR_ALL_CACHE = "clearcache";
     private static final String CLEAR_SESSION_CACHE = "clearsessioncache";
 
-    private Dialog dialog;
+    private InAppBrowserDialog dialog;
     private WebView inAppWebView;
     private EditText edittext;
     private CallbackContext callbackContext;
     private boolean showLocationBar = true;
     private boolean openWindowHidden = false;
-    private String buttonLabel = "Done";
     private boolean clearAllCache= false;
     private boolean clearSessionCache=false;
 
@@ -251,11 +252,16 @@ public class InAppBrowser extends CordovaPlugin {
             scriptToInject = source;
         }
         final String finalScriptToInject = scriptToInject;
-        // This action will have the side-effect of blurring the currently focused element
         this.cordova.getActivity().runOnUiThread(new Runnable() {
+            @SuppressLint("NewApi")
             @Override
             public void run() {
-                inAppWebView.loadUrl("javascript:" + finalScriptToInject);
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+                    // This action will have the side-effect of blurring the currently focused element
+                    inAppWebView.loadUrl("javascript:" + finalScriptToInject);
+                } else {
+                    inAppWebView.evaluateJavascript(finalScriptToInject, null);
+                }
             }
         });
     }
@@ -278,7 +284,7 @@ public class InAppBrowser extends CordovaPlugin {
                 if (option.hasMoreElements()) {
                     String key = option.nextToken();
                     if (key.equalsIgnoreCase(CLOSE_BUTTON_CAPTION)) {
-                        this.buttonLabel = option.nextToken();
+                        option.nextToken();
                     } else {
                         Boolean value = option.nextToken().equals("no") ? Boolean.FALSE : Boolean.TRUE;
                         map.put(key, value);
@@ -329,12 +335,21 @@ public class InAppBrowser extends CordovaPlugin {
         this.cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                childView.loadUrl("about:blank");
+                childView.setWebViewClient(new WebViewClient() {
+                    // NB: wait for about:blank before dismissing
+                    public void onPageFinished(WebView view, String url) {
                 if (dialog != null) {
                     dialog.dismiss();
                 }
             }
         });
+                // NB: From SDK 19: "If you call methods on WebView from any thread 
+                // other than your app's UI thread, it can cause unexpected results."
+                // http://developer.android.com/guide/webapps/migrating.html#Threads
+                childView.loadUrl("about:blank");
+            }
+        });
+
         try {
             JSONObject obj = new JSONObject();
             obj.put("type", EXIT_EVENT);
@@ -342,7 +357,6 @@ public class InAppBrowser extends CordovaPlugin {
         } catch (JSONException ex) {
             Log.d(LOG_TAG, "Should never happen");
         }
-        
     }
 
     /**
@@ -388,6 +402,10 @@ public class InAppBrowser extends CordovaPlugin {
      */
     private boolean getShowLocationBar() {
         return this.showLocationBar;
+    }
+
+    private InAppBrowser getInAppBrowser(){
+        return this;
     }
 
     /**
@@ -438,18 +456,15 @@ public class InAppBrowser extends CordovaPlugin {
                 return value;
             }
 
-            @SuppressWarnings("deprecation")
+            @SuppressLint("NewApi")
+			@SuppressWarnings("deprecation")
 			public void run() {
                 // Let's create the main dialog
-                dialog = new Dialog(cordova.getActivity(), android.R.style.Theme_NoTitleBar);
+                dialog = new InAppBrowserDialog(cordova.getActivity(), android.R.style.Theme_NoTitleBar);
                 dialog.getWindow().getAttributes().windowAnimations = android.R.style.Animation_Dialog;
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setCancelable(true);
-                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        public void onDismiss(DialogInterface dialog) {
-                            closeDialog();
-                        }
-                });
+                dialog.setInAppBroswer(getInAppBrowser());
 
                 // Main container layout
                 LinearLayout main = new LinearLayout(cordova.getActivity());
@@ -478,7 +493,20 @@ public class InAppBrowser extends CordovaPlugin {
                 back.setLayoutParams(backLayoutParams);
                 back.setContentDescription("Back Button");
                 back.setId(2);
+                /*
                 back.setText("<");
+                */
+                Resources activityRes = cordova.getActivity().getResources();
+                int backResId = activityRes.getIdentifier("ic_action_previous_item", "drawable", cordova.getActivity().getPackageName());
+                Drawable backIcon = activityRes.getDrawable(backResId);
+                if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN)
+                {
+                    back.setBackgroundDrawable(backIcon);
+                }
+                else
+                {
+                    back.setBackground(backIcon);
+                }
                 back.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         goBack();
@@ -492,7 +520,17 @@ public class InAppBrowser extends CordovaPlugin {
                 forward.setLayoutParams(forwardLayoutParams);
                 forward.setContentDescription("Forward Button");
                 forward.setId(3);
-                forward.setText(">");
+                //forward.setText(">");
+                int fwdResId = activityRes.getIdentifier("ic_action_next_item", "drawable", cordova.getActivity().getPackageName());
+                Drawable fwdIcon = activityRes.getDrawable(fwdResId);
+                if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN)
+                {
+                    forward.setBackgroundDrawable(fwdIcon);
+                }
+                else
+                {
+                    forward.setBackground(fwdIcon);
+                }
                 forward.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         goForward();
@@ -529,7 +567,17 @@ public class InAppBrowser extends CordovaPlugin {
                 close.setLayoutParams(closeLayoutParams);
                 forward.setContentDescription("Close Button");
                 close.setId(5);
-                close.setText(buttonLabel);
+                //close.setText(buttonLabel);
+                int closeResId = activityRes.getIdentifier("ic_action_remove", "drawable", cordova.getActivity().getPackageName());
+                Drawable closeIcon = activityRes.getDrawable(closeResId);
+                if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN)
+                {
+                    close.setBackgroundDrawable(closeIcon);
+                }
+                else
+                {
+                    close.setBackground(closeIcon);
+                }
                 close.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         closeDialog();

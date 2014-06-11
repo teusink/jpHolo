@@ -10,24 +10,29 @@ import android.util.Log;
 
 public class PreferredScreenSize extends CordovaPlugin {
 
-	public static final String LOG_PROV = "PhoneGapLog";
-	public static final String LOG_NAME = "PreferredScreenSize Plugin";
+	public static final String LOG_PROV = "jpHoloLog";
+	public static final String LOG_NAME = "PreferredScreenSize Plugin: ";
 
 	@Override
-	public boolean execute(final String action, final JSONArray args, final CallbackContext callbackContext) {
+	public boolean execute(final String action, final JSONArray args,
+			final CallbackContext callbackContext) {
 		cordova.getThreadPool().execute(new Runnable() {
 			@Override
 			public void run() {
 				if (action.equals("getSystem")) {
 					final String currentScreenSize = checkScreenSize();
 					if (currentScreenSize != null && currentScreenSize != "") {
-						callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, currentScreenSize));
+						callbackContext.sendPluginResult(new PluginResult(
+								PluginResult.Status.OK, currentScreenSize));
 					} else {
-						callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "normal"));
+						callbackContext.sendPluginResult(new PluginResult(
+								PluginResult.Status.OK, "normal"));
 					}
 				} else {
-					Log.e(LOG_PROV, LOG_NAME + ": Error: " + PluginResult.Status.INVALID_ACTION);
-					callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
+					Log.e(LOG_PROV, LOG_NAME + "Error: "
+							+ PluginResult.Status.INVALID_ACTION);
+					callbackContext.sendPluginResult(new PluginResult(
+							PluginResult.Status.INVALID_ACTION));
 				}
 			}
 		});

@@ -18,7 +18,7 @@ public class StartActivityUri extends CordovaActivity {
 
 	@SuppressLint("NewApi")
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		super.init();
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

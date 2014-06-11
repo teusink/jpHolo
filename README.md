@@ -52,6 +52,14 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 <h3>Pending work</h3>
 - Documentation.
 
+<h3>2.0.1: 2014-06-11</h3>
+- Upgrade to Cordova PhoneGap 3.5.0.
+- Upgrade to jQuery 2.1.1.
+- Upgrade to i18next 1.7.3.
+- Updated Cordova PhoneGap plugins.
+- Updated fastclick.js.
+- Code improvements to plugins.
+
 <h3>2.0.0: 2014-03-02</h3>
 - Upgrade to Cordova PhoneGap 3.3.0.
 - Upgrade to jQuery Mobile 1.4.2.

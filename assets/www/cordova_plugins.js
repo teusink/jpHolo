@@ -92,6 +92,10 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/org.apache.cordova.contacts/www/ContactFieldType.js",
+        "id": "org.apache.cordova.contacts.ContactFieldType"
+    },
+    {
         "file": "plugins/org.apache.cordova.device/www/device.js",
         "id": "org.apache.cordova.device.device",
         "clobbers": [
@@ -256,6 +260,10 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/org.apache.cordova.file/www/fileSystems.js",
+        "id": "org.apache.cordova.file.fileSystems"
+    },
+    {
         "file": "plugins/org.apache.cordova.file/www/requestFileSystem.js",
         "id": "org.apache.cordova.file.requestFileSystem",
         "clobbers": [
@@ -265,36 +273,42 @@ module.exports = [
     {
         "file": "plugins/org.apache.cordova.file/www/resolveLocalFileSystemURI.js",
         "id": "org.apache.cordova.file.resolveLocalFileSystemURI",
-        "clobbers": [
-            "window.resolveLocalFileSystemURI"
+        "merges": [
+            "window"
         ]
     },
     {
-        "file": "plugins/org.apache.cordova.geolocation/www/Coordinates.js",
-        "id": "org.apache.cordova.geolocation.Coordinates",
-        "clobbers": [
-            "Coordinates"
+        "file": "plugins/org.apache.cordova.file/www/android/FileSystem.js",
+        "id": "org.apache.cordova.file.androidFileSystem",
+        "merges": [
+            "FileSystem"
         ]
     },
     {
-        "file": "plugins/org.apache.cordova.geolocation/www/PositionError.js",
-        "id": "org.apache.cordova.geolocation.PositionError",
+        "file": "plugins/org.apache.cordova.file/www/fileSystems-roots.js",
+        "id": "org.apache.cordova.file.fileSystems-roots",
+        "runs": true
+    },
+    {
+        "file": "plugins/org.apache.cordova.file/www/fileSystemPaths.js",
+        "id": "org.apache.cordova.file.fileSystemPaths",
+        "merges": [
+            "cordova"
+        ],
+        "runs": true
+    },
+    {
+        "file": "plugins/org.apache.cordova.file-transfer/www/FileTransferError.js",
+        "id": "org.apache.cordova.file-transfer.FileTransferError",
         "clobbers": [
-            "PositionError"
+            "window.FileTransferError"
         ]
     },
     {
-        "file": "plugins/org.apache.cordova.geolocation/www/Position.js",
-        "id": "org.apache.cordova.geolocation.Position",
+        "file": "plugins/org.apache.cordova.file-transfer/www/FileTransfer.js",
+        "id": "org.apache.cordova.file-transfer.FileTransfer",
         "clobbers": [
-            "Position"
-        ]
-    },
-    {
-        "file": "plugins/org.apache.cordova.geolocation/www/geolocation.js",
-        "id": "org.apache.cordova.geolocation.geolocation",
-        "clobbers": [
-            "navigator.geolocation"
+            "window.FileTransfer"
         ]
     },
     {
@@ -312,6 +326,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/org.apache.cordova.inappbrowser/www/inappbrowser.js",
+        "id": "org.apache.cordova.inappbrowser.inappbrowser",
+        "clobbers": [
+            "window.open"
+        ]
+    },
+    {
         "file": "plugins/org.apache.cordova.media/www/MediaError.js",
         "id": "org.apache.cordova.media.MediaError",
         "clobbers": [
@@ -323,49 +344,6 @@ module.exports = [
         "id": "org.apache.cordova.media.Media",
         "clobbers": [
             "window.Media"
-        ]
-    },
-    {
-        "file": "plugins/org.apache.cordova.network-information/www/network.js",
-        "id": "org.apache.cordova.network-information.network",
-        "clobbers": [
-            "navigator.connection",
-            "navigator.network.connection"
-        ]
-    },
-    {
-        "file": "plugins/org.apache.cordova.network-information/www/Connection.js",
-        "id": "org.apache.cordova.network-information.Connection",
-        "clobbers": [
-            "Connection"
-        ]
-    },
-    {
-        "file": "plugins/org.apache.cordova.splashscreen/www/splashscreen.js",
-        "id": "org.apache.cordova.splashscreen.SplashScreen",
-        "clobbers": [
-            "navigator.splashscreen"
-        ]
-    },
-    {
-        "file": "plugins/org.apache.cordova.vibration/www/vibration.js",
-        "id": "org.apache.cordova.vibration.notification",
-        "merges": [
-            "navigator.notification"
-        ]
-    },
-    {
-        "file": "plugins/org.apache.cordova.file-transfer/www/FileTransferError.js",
-        "id": "org.apache.cordova.file-transfer.FileTransferError",
-        "clobbers": [
-            "window.FileTransferError"
-        ]
-    },
-    {
-        "file": "plugins/org.apache.cordova.file-transfer/www/FileTransfer.js",
-        "id": "org.apache.cordova.file-transfer.FileTransfer",
-        "clobbers": [
-            "window.FileTransfer"
         ]
     },
     {
@@ -418,34 +396,64 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/org.apache.cordova.inappbrowser/www/InAppBrowser.js",
-        "id": "org.apache.cordova.inappbrowser.InAppBrowser",
+        "file": "plugins/org.apache.cordova.network-information/www/network.js",
+        "id": "org.apache.cordova.network-information.network",
         "clobbers": [
-            "window.open"
+            "navigator.connection",
+            "navigator.network.connection"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.network-information/www/Connection.js",
+        "id": "org.apache.cordova.network-information.Connection",
+        "clobbers": [
+            "Connection"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.splashscreen/www/splashscreen.js",
+        "id": "org.apache.cordova.splashscreen.SplashScreen",
+        "clobbers": [
+            "navigator.splashscreen"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.statusbar/www/statusbar.js",
+        "id": "org.apache.cordova.statusbar.statusbar",
+        "clobbers": [
+            "window.StatusBar"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.vibration/www/vibration.js",
+        "id": "org.apache.cordova.vibration.notification",
+        "merges": [
+            "navigator.notification"
         ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "org.apache.cordova.battery-status": "0.2.6",
-    "org.apache.cordova.camera": "0.2.6",
-    "org.apache.cordova.console": "0.2.6",
-    "org.apache.cordova.contacts": "0.2.7",
-    "org.apache.cordova.device": "0.2.7",
-    "org.apache.cordova.device-motion": "0.2.5",
-    "org.apache.cordova.device-orientation": "0.3.4",
-    "org.apache.cordova.dialogs": "0.2.5",
-    "org.apache.cordova.file": "0.2.5",
-    "org.apache.cordova.geolocation": "0.3.5",
-    "org.apache.cordova.globalization": "0.2.5",
-    "org.apache.cordova.media": "0.2.7",
-    "org.apache.cordova.network-information": "0.2.6",
-    "org.apache.cordova.splashscreen": "0.2.6",
-    "org.apache.cordova.vibration": "0.3.6",
-    "org.apache.cordova.file-transfer": "0.4.0",
-    "org.apache.cordova.media-capture": "0.2.6",
-    "org.apache.cordova.inappbrowser": "0.3.0"
+    "org.apache.cordova.battery-status": "0.2.10-dev",
+    "org.apache.cordova.camera": "0.3.1-dev",
+    "org.apache.cordova.console": "0.2.10-dev",
+    "org.apache.cordova.contacts": "0.2.12-dev",
+    "org.apache.cordova.device": "0.2.11-dev",
+    "org.apache.cordova.device-motion": "0.2.9-dev",
+    "org.apache.cordova.device-orientation": "0.3.8-dev",
+    "org.apache.cordova.dialogs": "0.2.9-dev",
+    "org.apache.cordova.file": "1.2.1-dev",
+    "org.apache.cordova.file-transfer": "0.4.5-dev",
+    "org.apache.cordova.geolocation": "0.3.9-dev",
+    "org.apache.cordova.globalization": "0.2.9-dev",
+    "org.apache.cordova.inappbrowser": "0.5.1-dev",
+    "org.apache.cordova.media": "0.2.12-dev",
+    "org.apache.cordova.media-capture": "0.3.2-dev",
+    "org.apache.cordova.network-information": "0.2.10-dev",
+    "org.apache.cordova.splashscreen": "0.3.2-dev",
+    "org.apache.cordova.statusbar": "0.1.7-dev",
+    "org.apache.cordova.vibration": "0.3.10-dev"
 }
 // BOTTOM OF METADATA
 });
