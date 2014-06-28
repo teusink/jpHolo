@@ -52,6 +52,9 @@ Working example can be found on Google Play Store. It is my own app DroidPapers:
 <h3>Pending work</h3>
 - Documentation.
 
+<h3>2.0.2: 2014-06-11</h3>
+- Improvements to the theme.
+
 <h3>2.0.1: 2014-06-11</h3>
 - Upgrade to Cordova PhoneGap 3.5.0.
 - Upgrade to jQuery 2.1.1.
