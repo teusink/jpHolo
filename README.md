@@ -41,10 +41,10 @@ Working examples can be found on Google Play Store.
 - DroidPapers: https://play.google.com/store/apps/details?id=org.teusink.droidpapers
 
 <h3>Screenshots</h3>
-![alt tag](https://raw.github.com/teusinkorg/jpHolo/blob/master/res_sources/screenshots/phone1.png)
-![alt tag](https://raw.github.com/teusinkorg/jpHolo/blob/master/res_sources/screenshots/phone2.png)
-![alt tag](https://raw.github.com/teusinkorg/jpHolo/blob/master/res_sources/screenshots/tablet1.png)
-![alt tag](https://raw.github.com/teusinkorg/jpHolo/blob/master/res_sources/screenshots/tablet2.png)
+![alt tag](https://github.com/teusinkorg/jpHolo/blob/master/res_sources/screenshots/phone1.png)
+![alt tag](https://github.com/teusinkorg/jpHolo/blob/master/res_sources/screenshots/phone2.png)
+![alt tag](https://github.com/teusinkorg/jpHolo/blob/master/res_sources/screenshots/tablet1.png)
+![alt tag](https://github.com/teusinkorg/jpHolo/blob/master/res_sources/screenshots/tablet2.png)
 
 <h2>Web instructions</h2>
 - Set in main.html the value "window.phonegapExcluded" to true.
