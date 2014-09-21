@@ -53,12 +53,15 @@ Working examples can be found on Google Play Store.
 - Start developing!
 
 <h3>Web examples</h3>
-- Web: http://www.teusink.org/blog/jpholo/main.html
+- Web: http://jpholo.teusink.org/example/main.html
 
 <h2>Change-log</h2>
 
 <h3>Pending work</h3>
 - Documentation.
+
+<h3>2.1.1: 2014-09-21</h3>
+- Border CSS fix with immersive page
 
 <h3>2.1.0: 2014-09-20</h3>
 - Upgrade to jQuery Mobile 1.4.4
