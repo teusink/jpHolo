@@ -85,8 +85,7 @@ public class DirectoryManager {
      * @param path to the file system
      * @return free space in KB
      */
-    @SuppressWarnings("deprecation")
-	private static long freeSpaceCalculation(String path) {
+    private static long freeSpaceCalculation(String path) {
         StatFs stat = new StatFs(path);
         long blockSize = stat.getBlockSize();
         long availableBlocks = stat.getAvailableBlocks();

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<widget id="org.teusink.jpholo" version="1.0" xmlns="http://www.w3.org/ns/widgets">
+<widget id="org.teusink.jpholo" version="2.1.0" xmlns="http://www.w3.org/ns/widgets">
     <name>jpHolo</name>
 	
     <description>
         Example app with jQuery Mobile, PhoneGap and a native Android interface in holo-style.
     </description>
 	
-    <author email="joram.teusink@gmail.com" href="http://www.teusink.org">
+    <author email="info@teusink.org" href="http://www.teusink.org">
         Teusink.org
     </author>
 	
@@ -15,15 +15,15 @@
 	<!-- <access origin="https://example.com" /> allow any secure requests to example.com -->
 	<!-- <access origin="https://example.com" subdomains="true" /> such as above, but including subdomains, such as www -->
 	<!-- <access origin=".*" /> Allow all domains, suggested development use only -->
-	<access origin="*" />
+	<access origin="" />
 
 	<!-- <content src="http://mysite.com/myapp.html" /> for external pages -->
-	<content src="index_smartphone.html" />
+	<content src="main.html" />
 	
 	<!-- Log level: ERROR, WARN, INFO, DEBUG, VERBOSE  (default=ERROR) -->
 	<!-- General preferences -->
 	<preference name="loglevel" value="ERROR" />
-	<preference name="phonegap-version" value="3.3.0" />
+	<preference name="phonegap-version" value="3.5.1" />
 	<preference name="orientation" value="both" />
 	<preference name="fullscreen" value="false" />
 	<!-- Android preferences -->
@@ -37,7 +37,7 @@
 	<preference name="InAppBrowserStorageEnabled" value="true" />
 	<preference name="loadUrlTimeoutValue" value="60000" />
 	<preference name="backgroundColor" value="0x000" />
-	<preference name="errorUrl" value="index_smartphone.html" />
+	<preference name="errorUrl" value="main.html" />
 	
 	<!-- PhoneGap features -->
 	<feature name="App"><param name="android-package" value="org.apache.cordova.App" /></feature>
@@ -66,7 +66,6 @@
 	<!-- additional plugins -->
 	<feature name="AndroidPreferences"><param name="android-package" value="org.teusink.plugins.AndroidPreferences" /></feature>
 	<feature name="Appstore"><param name="android-package" value="org.teusink.plugins.Appstore" /></feature>
-	<feature name="HomeButton"><param name="android-package" value="org.teusink.plugins.HomeButton" /></feature>
 	<feature name="PackageVersion"><param name="android-package" value="org.teusink.plugins.PackageVersion" /></feature>
 	<feature name="PreferredScreenSize"><param name="android-package" value="org.teusink.plugins.PreferredScreenSize" /></feature>
 	<feature name="Share"><param name="android-package" value="org.teusink.plugins.Share" /></feature>

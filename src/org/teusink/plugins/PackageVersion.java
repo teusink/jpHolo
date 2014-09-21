@@ -45,7 +45,7 @@ public class PackageVersion extends CordovaPlugin {
 		String version = "0.0.0";
 		try {
 			final PackageInfo pInfo = cordova.getActivity().getPackageManager()
-					.getPackageInfo("org.teusink.droidpapers", 0);
+					.getPackageInfo("org.teusink.jpholo", 0);
 			version = pInfo.versionName;
 		} catch (final NameNotFoundException e) {
 			version = "0.0.0";

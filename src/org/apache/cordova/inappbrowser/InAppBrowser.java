@@ -85,6 +85,7 @@ public class InAppBrowser extends CordovaPlugin {
     private CallbackContext callbackContext;
     private boolean showLocationBar = true;
     private boolean openWindowHidden = false;
+    private String buttonLabel = "Done";
     private boolean clearAllCache= false;
     private boolean clearSessionCache=false;
 
@@ -119,21 +120,24 @@ public class InAppBrowser extends CordovaPlugin {
                         // load in webview
                         if (url.startsWith("file://") || url.startsWith("javascript:") 
                                 || Config.isUrlWhiteListed(url)) {
+                            Log.d(LOG_TAG, "loading in webview");
                             webView.loadUrl(url);
                         }
                         //Load the dialer
                         else if (url.startsWith(WebView.SCHEME_TEL))
                         {
                             try {
+                                Log.d(LOG_TAG, "loading in dialer");
                                 Intent intent = new Intent(Intent.ACTION_DIAL);
                                 intent.setData(Uri.parse(url));
-                               cordova.getActivity().startActivity(intent);
+                                cordova.getActivity().startActivity(intent);
                             } catch (android.content.ActivityNotFoundException e) {
                                 LOG.e(LOG_TAG, "Error dialing " + url + ": " + e.toString());
                             }
                         }
                         // load in InAppBrowser
                         else {
+                            Log.d(LOG_TAG, "loading in InAppBrowser");
                             result = showWebPage(url, features);
                         }
                     }
@@ -284,7 +288,7 @@ public class InAppBrowser extends CordovaPlugin {
                 if (option.hasMoreElements()) {
                     String key = option.nextToken();
                     if (key.equalsIgnoreCase(CLOSE_BUTTON_CAPTION)) {
-                        option.nextToken();
+                        this.buttonLabel = option.nextToken();
                     } else {
                         Boolean value = option.nextToken().equals("no") ? Boolean.FALSE : Boolean.TRUE;
                         map.put(key, value);
@@ -456,9 +460,7 @@ public class InAppBrowser extends CordovaPlugin {
                 return value;
             }
 
-            @SuppressLint("NewApi")
-			@SuppressWarnings("deprecation")
-			public void run() {
+            public void run() {
                 // Let's create the main dialog
                 dialog = new InAppBrowserDialog(cordova.getActivity(), android.R.style.Theme_NoTitleBar);
                 dialog.getWindow().getAttributes().windowAnimations = android.R.style.Animation_Dialog;

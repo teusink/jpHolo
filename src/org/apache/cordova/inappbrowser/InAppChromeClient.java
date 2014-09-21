@@ -28,6 +28,7 @@ import android.webkit.JsPromptResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebStorage;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.webkit.GeolocationPermissions.Callback;
 
 public class InAppChromeClient extends WebChromeClient {
@@ -50,8 +51,7 @@ public class InAppChromeClient extends WebChromeClient {
      * @param totalUsedQuota
      * @param quotaUpdater
      */
-    @SuppressWarnings("deprecation")
-	@Override
+    @Override
     public void onExceededDatabaseQuota(String url, String databaseIdentifier, long currentQuota, long estimatedSize,
             long totalUsedQuota, WebStorage.QuotaUpdater quotaUpdater)
     {

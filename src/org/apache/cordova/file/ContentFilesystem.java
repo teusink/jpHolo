@@ -50,7 +50,7 @@ public class ContentFilesystem extends Filesystem {
 		this.name = name;
 		this.cordova = cordova;
 
-		Class<? extends CordovaWebView> webViewClass = webView.getClass();
+		Class webViewClass = webView.getClass();
 		PluginManager pm = null;
 		try {
 			Method gpm = webViewClass.getMethod("getPluginManager");

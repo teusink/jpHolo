@@ -1,7 +1,7 @@
 @charset 'UTF-8';
 @media all and (orientation: landscape) {
 	body {
-		font-size: 85% !important; /* Change this to 100% when using a virtual keyboard in your app. When the keyboard opens the app thinks it is in landscape mode, even when its in portrait mode. */
+		font-size: 100% !important; /* Default 85%, change this to 100% when using a virtual keyboard in your app. When the keyboard opens the app thinks it is in landscape mode, even when its in portrait mode. */
 	}	
 }
 @media all and (orientation: portrait) {

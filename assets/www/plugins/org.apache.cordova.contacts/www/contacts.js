@@ -41,11 +41,13 @@ var contacts = {
      * @param {ContactFindOptions} options that can be applied to contact searching
      * @return array of Contacts matching search criteria
      */
-    find:function(successCB, errorCB, fields, options) {
-        argscheck.checkArgs('fFaO', 'contacts.find', arguments);
+    find:function(fields, successCB, errorCB, options) {
+        argscheck.checkArgs('afFO', 'contacts.find', arguments);
         if (!fields.length) {
             errorCB && errorCB(new ContactError(ContactError.INVALID_ARGUMENT_ERROR));
         } else {
+            // missing 'options' param means return all contacts
+            options = options || {filter: '', multiple: true}
             var win = function(result) {
                 var cs = [];
                 for (var i = 0, l = result.length; i < l; i++) {

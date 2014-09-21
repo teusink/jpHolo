@@ -193,7 +193,7 @@ function disableServiceButtons() {
 	$('#serviceTimer').flipswitch('refresh');
 	$('#serviceToastDuration').val('off');
 	$('#serviceToastDuration').flipswitch('refresh');
-	// disable flipswitch
+	// disable flipswitch/buttons
 	$('#serviceBootStatus').flipswitch("disable");
 	$('#serviceTimer').flipswitch("disable");
 	$('#serviceToastDuration').flipswitch("disable");

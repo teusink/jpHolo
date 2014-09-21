@@ -44,9 +44,9 @@ public class StartActivityUri extends CordovaActivity {
 
 	private void initiateApp(final String screenSize) {
 		if (screenSize.equals("tablet")) {
-			super.loadUrl("file:///android_asset/www/index_tablet.html");
+			super.loadUrl("file:///android_asset/www/main.html");
 		} else {
-			super.loadUrl("file:///android_asset/www/index_smartphone.html");
+			super.loadUrl("file:///android_asset/www/main.html");
 		}
 	}
 

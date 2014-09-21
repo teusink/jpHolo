@@ -1,225 +1,14 @@
+/**
+*	In this file all the core logic is put.
+*	This includes panel menus, headers, footers and generic buttons and functions.
+*/
+
 // JSLint, include this before tests
-// var window, cordova, $, document, jQuery, navigator, device, onDeviceReady, onResume, onPause, pressBackButton, setTimeout, togglePanel, checkConnection, Connection, hideNonContextButtons, panelMenuLeftOpened, showNonContextButtons, initServiceSettings, panelMenuLeftClosed, androidServiceHandler, startPreLoadImages, onMenuKeyDown, onSearchKeyDown, checkOpenPanels;
+// var window, $, document, jQuery, navigator, screen, onDeviceReady, startPreLoadImages, onResume, onPause, pressBackButton, onMenuKeyDown, onSearchKeyDown, androidServiceHandler, setTimeout, togglePanel, checkConnection, toast, handleAndroidPreferences, cleanUriVars, emptyCallback, checkOpenPanels, Connection, getPackageVersion, hideNonContextButtons, panelMenuLeftOpened, showNonContextButtons, panelMenuLeftClosed, adjustStyle, handlePreferredScreenSize;
 
 // global settings
 window.androidPrefsLib = "jpHoloSharedPreferences";
 window.loadingAnimation = '<div class="loading"><div class="outer"></div><div class="inner"></div></div>';
-$.i18n.init({ getAsync: false, debug: true, fallbackLng: 'en' });
-
-/* PhoneGap plugin functions */
-
-// needed to do an empty callback when setting a value
-function emptyCallback() {
-}
-
-// AndroidPreferences
-function handleAndroidPreferences(action, prefLib, prefName, prefValue, callback) {
-	if (window.phonegapExcluded === false) {
-		var androidPref = cordova.require("cordova/plugin/androidpreferences"),
-			value;
-		if (prefLib !== "" && prefName !== "") {
-			if (action === "get") {
-				androidPref.get(
-					{preferenceLib: prefLib, preferenceName: prefName, preferenceValue: prefValue},
-					function (returnValue) {
-						console.info("PhoneGap Plugin: AndroidPreferences: callback success");
-						value = returnValue;
-						callback(value);
-					},
-					function () {
-						console.error("PhoneGap Plugin: AndroidPreferences: callback error");
-						value = "";
-						callback(value);
-					}
-				);
-			} else if (action === "set") {
-				androidPref.set(
-					{preferenceLib: prefLib, preferenceName: prefName, preferenceValue: prefValue},
-					function () {
-						console.info("PhoneGap Plugin: AndroidPreferences: callback success");
-						value = "";
-						callback(value);
-					},
-					function () {
-						console.error("PhoneGap Plugin: AndroidPreferences: callback error");
-						value = "";
-						callback(value);
-					}
-				);
-			}
-		}
-	} else {
-		if (prefLib !== "" && prefName !== "") {
-			if (action === "get") {
-				prefValue = window.localStorage.getItem(prefLib + prefName);
-				callback(prefValue);
-			} else if (action === "set") {
-				window.localStorage.setItem(prefLib + prefName, prefValue);
-				callback(prefValue);
-			}
-		}
-	}
-}
-
-// Appstore
-function appstore(link, type) {
-	if (window.phonegapExcluded === false) {
-		var appstores = cordova.require("cordova/plugin/appstore");
-		appstores.show(
-			{link: link, type: type},
-			function () {
-				console.info("PhoneGap Plugin: Appstore: show: callback success");
-			},
-			function () {
-				console.error("PhoneGap Plugin: Appstore: show: callback error");
-			}
-		);
-	} else {
-		if (type === 'app') {
-			window.open('https://play.google.com/store/apps/details?id=' + link, '_blank');
-		} else if (type === 'pub') {
-			window.open('https://play.google.com/store/apps/developer?id=' + link, '_blank');
-		}
-	}
-}
-
-// Appstore check
-function appstoreCheck(callback) {
-	if (window.phonegapExcluded === false) {
-		var appstores = cordova.require("cordova/plugin/appstore");
-		appstores.check(
-			function (appstore) {
-				console.info("PhoneGap Plugin: Appstore: check: callback success");
-				callback(appstore);
-			},
-			function () {
-				console.error("PhoneGap Plugin: Appstore: check: callback error");
-				callback("unknown");
-			}
-		);
-	} else {
-		callback("unknown");
-	}
-}
-
-// PackageVersion
-function getPackageVersion(callback) {
-	var currentVersion;
-	if (window.phonegapExcluded === false) {
-		var packageVersion = cordova.require("cordova/plugin/packageversion");
-		packageVersion.get(
-			function (version) {
-				console.info("PhoneGap Plugin: PackageVersion: callback success");
-				currentVersion = version;
-				callback(currentVersion);
-			},
-			function () {
-				console.error("PhoneGap Plugin: PackageVersion: callback error");
-				currentVersion = "unknown";
-				callback(currentVersion);
-			}
-		);
-	} else {
-		currentVersion = "web";
-		callback(currentVersion);
-	}
-}
-
-// PreferredScreenSize
-function handlePreferredScreenSize(callback) {
-	if (window.phonegapExcluded === false) {
-		var preferredScreenSize = cordova.require("cordova/plugin/preferredscreensize");
-		preferredScreenSize.getSystem(
-			function (currentScreenSize) {
-				console.info("PhoneGap Plugin: PreferredScreenSize: callback success");
-				callback(currentScreenSize);
-			},
-			function () {
-				console.error("PhoneGap Plugin: PreferredScreenSize: callback error");
-				callback("unknown");
-			}
-		);
-	} else {
-		callback("web");
-	}
-}
-
-// HomeButton
-function homeButton() {
-	if (window.phonegapExcluded === false) {
-		var home = cordova.require("cordova/plugin/homebutton");
-		home.show(
-			function () {
-				console.info("PhoneGap Plugin: HomeButton: callback success");
-			},
-			function () {
-				console.error("PhoneGap Plugin: HomeButton: callback error");
-			}
-		);
-	} else {
-		window.open(window.indexFile);
-	}
-}
-
-// Share
-function share(subject, text) {
-	if (window.phonegapExcluded === false) {
-		var shares = cordova.require("cordova/plugin/share");
-		shares.show(
-			{subject: subject, text: text},
-			function () {
-				console.info("PhoneGap Plugin: Share: callback success");
-			},
-			function () {
-				console.error("PhoneGap Plugin: Share: callback error");
-			}
-		);
-	} else {
-		subject = subject.replace('', '%20');
-		text = text.replace('', '%20');
-		window.location.href = "mailto:someone@example.com?subject=" + subject + "&body=" + text;
-	}
-}
-
-// Toasts
-function toast(text, duration) {
-	if (window.phonegapExcluded === false) {
-		var toasts = cordova.require("cordova/plugin/toasts");
-		if (duration === "short") {
-			toasts.showShort(
-				text,
-				function () {
-					console.info("PhoneGap Plugin: Toasts short: callback success");
-				},
-				function () {
-					console.error("PhoneGap Plugin: Toasts short: callback error");
-				}
-			);
-		} else if (duration === "long") {
-			toasts.showLong(
-				text,
-				function () {
-					console.info("PhoneGap Plugin: Toasts long: callback success");
-				},
-				function () {
-					console.error("PhoneGap Plugin: Toasts long: callback error");
-				}
-			);
-		} else {
-			toasts.cancel(
-				function () {
-					console.info("PhoneGap Plugin: Toasts cancel: callback success");
-				},
-				function () {
-					console.error("PhoneGap Plugin: Toasts cancel: callback error");
-				}
-			);
-		}
-	} else {
-		alert(text);
-	}
-}
-/* END PhoneGap plugins */
 
 // device ready
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -228,6 +17,8 @@ function onDeviceReady() {
 	window.deviceReady = true;
 	// prelude app images for faster GUI
 	startPreLoadImages();
+	// inject device type specific stylesheet
+	adjustStyle();
 	// execute when app resumes from pause
 	document.addEventListener("resume", onResume, false);
 	// execute when app goes to pause (home button or opening other app)
@@ -258,10 +49,54 @@ function onDeviceReady() {
 // event handler orientationchange
 $(window).bind('orientationchange',
 	function (event) {
-		if (event.orientation === 'portrait') {
-			//do something
-		} else if (event.orientation === 'landscape') {
-			//do something
+		if (event.orientation) {
+			var currentId = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
+			if (currentId === 'immersivePage') {
+				var pic_real_width,
+					pic_real_height,
+					page,
+					imageRatio,
+					screenRatio;
+				$("<img />")
+					.attr("src", $("photoImmersive").attr("src"))
+					.load(function () {
+						pic_real_width = this.width;
+						pic_real_height = this.height;
+						imageRatio = pic_real_width / pic_real_height;
+						if (event.orientation === "portrait" && window.innerWidth > window.innerHeight) {
+							screenRatio = window.innerHeight / window.innerWidth;
+						} else if (event.orientation === "landscape" && window.innerWidth < window.innerHeight) {
+							screenRatio = window.innerHeight / window.innerWidth;
+						} else {
+							screenRatio = window.innerWidth / window.innerHeight;
+						}
+						if (pic_real_width > pic_real_height) {
+							if (imageRatio < screenRatio) {
+								$('photoImmersive').removeClass("fillwidth");
+								$('photoImmersive').addClass("fillheight");
+							} else {
+								$('photoImmersive').removeClass("fillheight");
+								$('photoImmersive').addClass("fillwidth");
+							}
+						} else if (pic_real_width < pic_real_height) {
+							if (imageRatio < screenRatio) {
+								$('photoImmersive').removeClass("fillwidth");
+								$('photoImmersive').addClass("fillheight");
+							} else {
+								$('photoImmersive').removeClass("fillheight");
+								$('photoImmersive').addClass("fillwidth");
+							}
+						} else if (pic_real_width === pic_real_height) {
+							if (imageRatio > screenRatio) {
+								$('photoImmersive').removeClass("fillheight");
+								$('photoImmersive').addClass("fillwidth");
+							} else {
+								$('photoImmersive').removeClass("fillwidth");
+								$('photoImmersive').addClass("fillheight");
+							}
+						}
+					});
+			}
 		}
 	});
 
@@ -293,14 +128,24 @@ function isDeviceReady(value, action) {
 	if (window.deviceReady === true) {
 		var connection = checkConnection();
 		switch (action) {
-		case "toastReady":
-			toast("Holo Light with Dark action bar example\nDevice is ready according to PhoneGap.\nConnection type: " + connection + "\n\nThis is your value: " + value, "short");
+		case "InitApp":
+			toast("Holo Light with Dark action bar example\nDevice is ready according to PhoneGap.\nConnection type: " + connection, "short");
 			break;
-		case "action2":
-			// code
-			break;
-		case "action3":
-			// code
+		case "InitUri":
+			var message;
+			handleAndroidPreferences("get", window.androidPrefsLib, "UriMessage", "", function (prefValue) {
+				message = prefValue;
+				if (message !== "") {
+					cleanUriVars();
+					window.localStorage.setItem("uriView", "true");
+					window.localStorage.setItem("uriMessage", message);
+					$("body").pagecontainer("change", "#uriPage");
+				} else {
+					window.localStorage.setItem("uriView", "false");
+					window.localStorage.setItem("uriMessage", "");
+					$("body").pagecontainer("change", "#indexPage");
+				}
+			});
 			break;
 		}
 	} else {
@@ -315,11 +160,14 @@ function cleanUriVars() {
 
 // override default back button handling
 function pressBackButton() {
+	// exit app if you are viewing URI content
+	if (window.localStorage.getItem("uriView") === "true") {
+		window.localStorage.setItem("uriView", "false");
+		navigator.app.exitApp();
 	// if panel is not open, then go on
-	if (checkOpenPanels() === false) {
+	} else if (checkOpenPanels() === false) {
 		if ($.mobile.pageContainer.pagecontainer("getActivePage")[0].id === "indexPage") {
 			navigator.app.exitApp(); // This will exit the app.
-			// homeButton(); // This will push the app to the background.
 		} else {
 			window.history.back();
 		}
@@ -375,11 +223,23 @@ function checkConnection() {
 	return states[networkState];
 }
 
-// clear to first boot state
-function clearFirstBoot() {
-	window.localStorage.clear();
-	navigator.app.exitApp();
+// adjust specific style to tablet or smartphone view
+function adjustStyle() {
+	handlePreferredScreenSize(function (screenValue) {
+		if (screenValue === "xlarge" || screenValue === "large") {
+			$("#sizeStylesheet").attr("href", "./themes/jpholo.tablet.css");
+		} else {
+			$("#sizeStylesheet").attr("href", "./themes/jpholo.smartphone.css");
+		}
+	});
 }
+
+// Open any anchor with http/https through javascript
+$(document).on('click', 'a[href^=http], a[href^=https]', function (event) {
+	event.preventDefault();
+	var url = $(this);
+	window.open(url.attr('href'), '_system');
+});
 
 // default left panelmenu (define menu for all pages)
 function panelMenu(divId) {
@@ -391,6 +251,7 @@ function panelMenu(divId) {
 	panel.append('<li data-role="list-divider"><p class="panelTextDivider">Other pages</p></li>');
 	panel.append('<li data-icon="false"><a class="panelText" href="#otherPage"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Other page</a></li>');
 	panel.append('<li data-icon="false"><a class="panelText" href="#servicePage"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Service page</a></li>');
+	panel.append('<li data-icon="false"><a class="panelText" href="#immersivePage"><img src="./images/icons/ic_action_info.png" class="ui-li-icon largerIcon">Immersive page</a></li>');
 	panel.listview('refresh');
 }
 
@@ -452,14 +313,6 @@ function resetPanelState() {
 	window.localStorage.setItem('panelRight', 'closed');
 }
 
-// check if there is a panel open or not
-function checkOpenPanels() {
-	if (window.localStorage.getItem('panelLeft') === "closed" && window.localStorage.getItem('panelRight') === "closed") {
-		return false;
-	}
-	return true;
-}
-
 // hide non-contextual buttons when panel opens
 function hideNonContextButtons(type) {
 	var currentId = window.localStorage.getItem("divIdGlobal");
@@ -503,29 +356,6 @@ function togglePanel(panel) {
 	$(panel).panel("toggle");
 }
 
-// get the systemspecs
-function getSystemSpecs() {
-	var $content = $('#systemSpecs'),
-		tag;
-	if (window.phonegapExcluded === false) {
-		tag =	'<p id="systemSpecs">' +
-				'Device model: ' + device.model + '<br />' +
-				'Device platform: ' + device.platform + ' ' + device.version + '<br />' +
-				'PhoneGap version: ' + cordova.version + '<br />' +
-				'jQuery version: ' + jQuery.fn.jquery + '<br />' +
-				'jQuery Mobile version: ' + $.mobile.version + '<br />' +
-				'</p>';
-	} else {
-		tag =	'<p id="systemSpecs">' +
-				'Operating System: ' + navigator.platform + '<br />' +
-				'Browser: ' + navigator.appName + ' ' + navigator.appVersion + '<br />' +
-				'jQuery version: ' + jQuery.fn.jquery + '<br />' +
-				'jQuery Mobile version: ' + $.mobile.version + '<br />' +
-				'</p>';
-	}
-	$content.replaceWith(tag);
-}
-
 // press effect in header bar
 function pressEffectHeader(share, action) {
 	/** use action "menu" when using app icon as side panel (#panelMenu...)
@@ -536,38 +366,37 @@ function pressEffectHeader(share, action) {
 	// restore icons
 	if (action === "menu") {
 		$("#headerTitle" + currentId).attr("src", "./images/icons/ic_launcher_full_menu.png");
-		// detect swiperight to open left panel upon swiperight
-		$("#" + $.mobile.pageContainer.pagecontainer("getActivePage")[0].id).off('swiperight').on('swiperight', function () {
-			// check if there are no open panels, otherwise ignore swipe
-			if (window.localStorage.getItem('panelLeft') !== "open" && window.localStorage.getItem('panelRight') !== "open") {
-				togglePanel('#panelMenu' + currentId);
-			}
-		});
-	} else {
-		// remove swipe event, because there is no page visible with a panelmenu
-		$("#" + $.mobile.pageContainer.pagecontainer("getActivePage")[0].id).off('swiperight');
 	}
 	showNonContextButtons('panel');
 	// header title press effect (left panel)
-	$("#headerTitle" + currentId).on('touchstart', function () {
+	$("#headerTitle" + currentId).off('touchstart').on('touchstart', function () {
 		$(this).addClass("holoPressEffect");
 	});
-	$("#headerTitle" + currentId).on('touchend', function () {
+	$("#headerTitle" + currentId).off('touchend').on('touchend', function () {
+		$(this).removeClass("holoPressEffect");
+	});
+	$("#headerTitle" + currentId).off('touchmove').on('touchmove', function () {
 		$(this).removeClass("holoPressEffect");
 	});
 	// overflow title press effect (right panel)
-	$("#headerOverflow" + currentId).on('touchstart', function () {
+	$("#headerOverflow" + currentId).off('touchstart').on('touchstart', function () {
 		$(this).addClass("holoPressEffect");
 	});
-	$("#headerOverflow" + currentId).on('touchend', function () {
+	$("#headerOverflow" + currentId).off('touchend').on('touchend', function () {
+		$(this).removeClass("holoPressEffect");
+	});
+	$("#headerOverflow" + currentId).off('touchmove').on('touchmove', function () {
 		$(this).removeClass("holoPressEffect");
 	});
 	// share press effect
 	if (share === true) {
-		$("#headerShare" + currentId).on('touchstart', function () {
+		$("#headerShare" + currentId).off('touchstart').on('touchstart', function () {
 			$(this).addClass("holoPressEffect");
 		});
-		$("#headerShare" + currentId).on('touchend', function () {
+		$("#headerShare" + currentId).off('touchend').on('touchend', function () {
+			$(this).removeClass("holoPressEffect");
+		});
+		$("#headerShare" + currentId).off('touchmove').on('touchmove', function () {
 			$(this).removeClass("holoPressEffect");
 		});
 	}
@@ -578,161 +407,34 @@ function pressEffectFooter(button1, button2) {
 	var currentId = window.localStorage.getItem("divIdGlobal");
 	// button1 press effect
 	if (button1 === true) {
-		$("#footerShare" + currentId).on('touchstart', function () {
+		$("#footerShare" + currentId).off('touchstart').on('touchstart', function () {
 			$(this).addClass("holoPressEffect");
 		});
-		$("#footerShare" + currentId).on('touchend', function () {
+		$("#footerShare" + currentId).off('touchend').on('touchend', function () {
+			$(this).removeClass("holoPressEffect");
+		});
+		$("#footerShare" + currentId).off('touchmove').on('touchmove', function () {
 			$(this).removeClass("holoPressEffect");
 		});
 	}
 	// button2 press effect
 	if (button2 === true) {
-		$("#footerToast" + currentId).on('touchstart', function () {
+		$("#footerToast" + currentId).off('touchstart').on('touchstart', function () {
 			$(this).addClass("holoPressEffect");
 		});
-		$("#footerToast" + currentId).on('touchend', function () {
+		$("#footerToast" + currentId).off('touchend').on('touchend', function () {
+			$(this).removeClass("holoPressEffect");
+		});
+		$("#footerToast" + currentId).off('touchmove').on('touchmove', function () {
 			$(this).removeClass("holoPressEffect");
 		});
 	}
 }
 
-// assign click events to elements
-function htmlClickEventHandlers(id, action) {
-	/** use action "menu" when using app icon as side panel (#panelMenu...)
-	*	use action "back" when using app icon as back
-	*/
-	// every page
-	$('#headerTitle' + id).off("click").on("click",
-		function () {
-			if (action !== "back") {
-				togglePanel('#panelMenu' + id);
-			} else {
-				window.history.back();
-			}
-		});
-	$('#headerShare' + id).off("click").on("click",
-		function () {
-			share(window.localStorage.getItem('shareTagSubject'), window.localStorage.getItem('shareTagText'));
-		});
-	$('#headerShare' + id).on("taphold",
-		function () {
-			toast("Share.", "short");
-		});
-	$('#headerOverflow' + id).off("click").on("click",
-		function () {
-			togglePanel('#panelMenuRight' + id);
-		});
-	// specific page...
-	if (id === "Index") {
-		$('#clearFirstBoot').off("click").on("click",
-			function () {
-				clearFirstBoot();
-			});
-	} else if (id === "Second") {
-		// do nothing
-	} else if (id === "Other") {
-		// do nothing
-	} else if (id === "Service") {
-		initServiceSettings();
+// check if there is a panel open or not
+function checkOpenPanels() {
+	if (window.localStorage.getItem('panelLeft') === "closed" && window.localStorage.getItem('panelRight') === "closed") {
+		return false;
 	}
-	// every page but...
-	if (id !== "Other") {
-		$('#footerShare' + id).off("click").on("click",
-			function () {
-				share(window.localStorage.getItem('shareTagSubject'), window.localStorage.getItem('shareTagText'));
-			});
-		$('#footerShare' + id).on("taphold", function () {
-			toast("Share.", "short");
-		});
-		$('#footerToast' + id).off("click").on("click", function () {
-			toast('This is a toast message', 'short');
-		});
-		$('#footerToast' + id).on("taphold", function () {
-			toast("Toast.", "short");
-		});
-	}
+	return true;
 }
-
-// initialize page variables and elements on create
-function initPageVarsOnCreate(id) {
-	// every page
-	// every page but...	
-	if (id !== "Index") {
-		toast('This is not the Index page', 'short');
-	}
-	if (id !== "Other") {
-		htmlClickEventHandlers(id, "menu");
-	} else {
-		htmlClickEventHandlers(id, "back");
-	}
-	// specific page...
-	if (id === "Index") {
-		isDeviceReady("valueTester", "toastReady");
-	} else if (id === "Other") {
-		// do nothing
-	} else if (id === "Service") {
-		// do nothing
-	}
-}
-
-// initialize page variables on beforeshow
-function initPageVarsOnShow(id) {
-	// every page...
-	resetPanelState();
-	window.localStorage.setItem("divIdGlobal", id);
-	window.localStorage.setItem("shareTagSubject", 'jpHolo');
-	window.localStorage.setItem("shareTagText", 'A nice PhoneGap and JQM example by Teusink.org http://teusink.blogspot.com/2013/04/android-example-app-with-phonegap-and.html #TeusinkOrg');
-	panelMenu(id);
-	panelMenuRight(id);
-	panelHandling();
-	// every page but...
-	if (id !== "Other") {
-		pressEffectHeader(true, "menu");
-	} else {
-		pressEffectHeader(true, "back");
-	}
-	// specific page...
-	if (id === "Index") {
-		pressEffectFooter(true, true);
-	} else if (id === "Other") {
-		pressEffectFooter(true, true);
-		getSystemSpecs();
-	} else if (id === "Service") {
-		pressEffectFooter(true, true);
-		androidServiceHandler("getStatus", "none");
-	}
-}
-
-// below is to tie page events to pages so that the 2 functions above (initPageVarsOn...) will execute
-
-// store important vars, like previous page id
-function startBeforeShowVars(data) {
-	window.localStorage.setItem("previousPageId", data.prevPage.attr("id"));
-}
-
-// #indexPage
-$(document).on('pagebeforeshow', '#indexPage', function (event, data) {
-	startBeforeShowVars(data);
-	initPageVarsOnShow('Index');
-});
-$(document).on('pagecreate', '#indexPage', function () {
-	initPageVarsOnCreate('Index');
-});
-
-// #otherPage
-$(document).on('pagebeforeshow', '#otherPage', function (event, data) {
-	startBeforeShowVars(data);
-	initPageVarsOnShow('Other');
-});
-$(document).on('pagecreate', '#otherPage', function () {
-	initPageVarsOnCreate('Other');
-});
-
-// #servicePage
-$(document).on('pagebeforeshow', '#servicePage', function (event, data) {
-	startBeforeShowVars(data);
-	initPageVarsOnShow('Service');
-});
-$(document).on('pagecreate', '#servicePage', function () {
-	initPageVarsOnCreate('Service');
-});

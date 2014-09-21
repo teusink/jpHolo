@@ -7,14 +7,15 @@ An application template based on jQuery Mobile and Cordova PhoneGap, featuring a
 
 <h3>Features</h3>
 
-- Application template based on jQuery Mobile 1.4 and Cordova PhoneGap 3.3.
-- Android Holo Theme look (including sources for Holo Dark and Holo Light).
+- Application template based on jQuery Mobile and Cordova PhoneGap.
+- Android Holo Theme (light theme, dark action bar).
+- Navigation Drawer, header and footer in Holo style.
+- Loading Animation in Holo style.
 - Toast messages.
-- Share intent.
-- Google Play Store intent.
-- Home button simulator.
+- Share Intent.
+- Uri Intent.
+- Google Play Store and Amazon Appstore Intent.
 - Retrieve current package version that is set in the manifest file.
-- Navigation Drawer.
 
 <h3>Requirements</h3>
 
@@ -24,7 +25,7 @@ An application template based on jQuery Mobile and Cordova PhoneGap, featuring a
 <h3>Included resources</h3>
 
 - Gimp images files (XCF) to make your own PNG/JPG files.
-- Full HTML, CSS, and JavaScript sources.
+- All HTML, CSS, and JavaScript sources.
 
 <h2>PhoneGap instructions</h2>
 - Setup a development environment. Follow this blog of mine to do that for Windows: http://teusink.blogspot.nl/2013/07/guide-phonegap-3-android-windows.html
@@ -35,22 +36,44 @@ An application template based on jQuery Mobile and Cordova PhoneGap, featuring a
 <h3>PhoneGap examples</h3>
 
 See my blog about this: http://teusink.blogspot.nl/2013/04/android-example-app-with-phonegap-and.html
-Working example can be found on Google Play Store. It is my own app DroidPapers: https://play.google.com/store/apps/details?id=org.teusink.droidpapers
+Working examples can be found on Google Play Store.
+- jpHolo: https://play.google.com/store/apps/details?id=org.teusink.jpholo
+- DroidPapers: https://play.google.com/store/apps/details?id=org.teusink.droidpapers
+
+<h3>Screenshots</h3>
+![alt tag](https://raw.github.com/teusinkorg/jpholo/res_sources/screenshots/phone1.png)
+![alt tag](https://raw.github.com/teusinkorg/jpholo/res_sources/screenshots/phone2.png)
+![alt tag](https://raw.github.com/teusinkorg/jpholo/res_sources/screenshots/tablet1.png)
+![alt tag](https://raw.github.com/teusinkorg/jpholo/res_sources/screenshots/tablet2.png)
 
 <h2>Web instructions</h2>
-- Set in both index_smartphone.html and index_tablet.html the value "window.phonegapExcluded" to true.
+- Set in main.html the value "window.phonegapExcluded" to true.
 - Exclude the scripts that are mentioned below "<!-- Cordova PhoneGap -->". The scripts are: cordova.js, backgroundService-x.x.x.js and cordova_custom_plugins.js.
 - Upload the contents of the www folder from the project to your webhosting.
 - Start developing!
 
 <h3>Web examples</h3>
-- jpHolo Smartphone: http://www.teusink.org/blog/jpholo/index_smartphone.html
-- jpHolo Tablet: http://www.teusink.org/blog/jpholo/index_tablet.html
+- Web: http://www.teusink.org/blog/jpholo/main.html
 
 <h2>Change-log</h2>
 
 <h3>Pending work</h3>
 - Documentation.
+
+<h3>2.1.0: 2014-09-20</h3>
+- Upgrade to jQuery Mobile 1.4.4
+- Upgrade to Cordova PhoneGap 3.5.1
+- Panel menu is now only openend when swiped from bezel
+- Press effects in header are now gone when there is a touch move
+- Fully implemented an example how to process an Uri intent
+- Added a page called LandingPage to support the Uri process (some form of deep linking)
+- Improved app icon and sources to create own icon
+- Merged smartphone and tablet html files with the use of jQuery Mobile's gridview into main.html
+- Added a immersive page example including rotation event with a photo
+- Seperated the Javascript files more to make editing easier
+- Removed HomeButton plugin (it is not advised according Google Design Guidelines)
+- Removed i18next for not being used (it's a nice framework for multi-language though!)
+- Improved swipe and moved out of page specific code
 
 <h3>2.0.2: 2014-06-11</h3>
 - Improvements to the theme.
