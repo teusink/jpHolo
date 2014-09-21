@@ -74,6 +74,7 @@ Working examples can be found on Google Play Store.
 - Removed HomeButton plugin (it is not advised according Google Design Guidelines)
 - Removed i18next for not being used (it's a nice framework for multi-language though!)
 - Improved swipe and moved out of page specific code
+- Updated fonts
 
 <h3>2.0.2: 2014-06-11</h3>
 - Improvements to the theme.
