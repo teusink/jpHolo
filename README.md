@@ -60,6 +60,9 @@ Working examples can be found on Google Play Store.
 <h3>Pending work</h3>
 - Documentation.
 
+<h3>2.1.2: 2014-10-01</h3>
+- Update to Cordova PhoneGap 3.6.3
+
 <h3>2.1.1: 2014-09-21</h3>
 - Border CSS fix with immersive page
 

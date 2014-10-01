@@ -457,7 +457,7 @@ module.exports.metadata =
     "org.apache.cordova.inappbrowser": "0.5.3-dev",
     "org.apache.cordova.console": "0.2.12-dev",
     "org.apache.cordova.statusbar": "0.1.9-dev",
-    "org.apache.cordova.file": "1.3.0"
+    "org.apache.cordova.file": "1.3.1"
 }
 // BOTTOM OF METADATA
 });

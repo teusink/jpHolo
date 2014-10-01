@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<widget id="org.teusink.jpholo" version="2.1.0" xmlns="http://www.w3.org/ns/widgets">
+<widget id="org.teusink.jpholo" version="2.1.2" xmlns="http://www.w3.org/ns/widgets">
     <name>jpHolo</name>
 	
     <description>
@@ -23,7 +23,7 @@
 	<!-- Log level: ERROR, WARN, INFO, DEBUG, VERBOSE  (default=ERROR) -->
 	<!-- General preferences -->
 	<preference name="loglevel" value="ERROR" />
-	<preference name="phonegap-version" value="3.5.1" />
+	<preference name="phonegap-version" value="3.6.3" />
 	<preference name="orientation" value="both" />
 	<preference name="fullscreen" value="false" />
 	<!-- Android preferences -->
