@@ -7,8 +7,8 @@
         Example app with jQuery Mobile, PhoneGap and a native Android interface in holo-style.
     </description>
 	
-    <author email="info@teusink.org" href="http://www.teusink.org">
-        Teusink.org
+    <author email="hello@teusink.eu" href="http://www.teusink.eu">
+        Joram Teusink
     </author>
 	
 	<!-- Access elements control the Android whitelist. Domains are assumed blocked unless set otherwise -->
