@@ -129,6 +129,7 @@ function isDeviceReady(value, action) {
 		var connection = checkConnection();
 		switch (action) {
 		case "InitApp":
+			startPreLoadImages();
 			toast("Holo Light with Dark action bar example\nDevice is ready according to PhoneGap.\nConnection type: " + connection, "short");
 			break;
 		case "InitUri":
@@ -437,4 +438,30 @@ function checkOpenPanels() {
 		return false;
 	}
 	return true;
+}
+
+// image preloader
+jQuery.preloadImages = function () {
+	var i;
+	for (i = 0; i < arguments.length; i = i + 1) {
+		jQuery("<img>").attr("src", arguments[i]);
+	}
+};
+
+// actually preload images
+function startPreLoadImages() {
+	$.preloadImages(
+		"./images/jqm-icons/expander_close_holo_light.9.png",
+		"./images/jqm-icons/expander_open_holo_light.9.png",
+		"./images/icons/ic_action_home.png",
+		"./images/icons/ic_action_info.png",
+		"./images/icons/ic_action_list_header.png",
+		"./images/icons/ic_action_overflow_header.png",
+		"./images/icons/ic_action_share_header.png",
+		"./images/icons/ic_launcher_full_arrow.png",
+		"./images/icons/ic_launcher_full_menu.png",
+		"./images/icons/ic_launcher_full_menu_opened.png",
+		"./images/icons/ic_launcher_full_noarrow.png",
+		"./images/icons/ic_launcher_small_arrow.png"
+	);
 }

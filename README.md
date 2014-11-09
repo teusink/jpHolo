@@ -41,10 +41,10 @@ Working examples can be found on Google Play Store.
 - DroidPapers: https://play.google.com/store/apps/details?id=org.teusink.droidpapers
 
 <h3>Screenshots</h3>
-![alt tag](https://github.com/teusinkorg/jpHolo/blob/master/res_sources/screenshots/phone1.png)
-![alt tag](https://github.com/teusinkorg/jpHolo/blob/master/res_sources/screenshots/phone2.png)
-![alt tag](https://github.com/teusinkorg/jpHolo/blob/master/res_sources/screenshots/tablet1.png)
-![alt tag](https://github.com/teusinkorg/jpHolo/blob/master/res_sources/screenshots/tablet2.png)
+![alt tag](https://github.com/teusink/jpHolo/blob/master/res_sources/screenshots/phone1.png)
+![alt tag](https://github.com/teusink/jpHolo/blob/master/res_sources/screenshots/phone2.png)
+![alt tag](https://github.com/teusink/jpHolo/blob/master/res_sources/screenshots/tablet1.png)
+![alt tag](https://github.com/teusink/jpHolo/blob/master/res_sources/screenshots/tablet2.png)
 
 <h2>Web instructions</h2>
 - Set in main.html the value "window.phonegapExcluded" to true.
@@ -53,12 +53,17 @@ Working examples can be found on Google Play Store.
 - Start developing!
 
 <h3>Web examples</h3>
-- Web: http://jpholo.teusink.org/example/main.html
+- Web: http://jpholo.teusink.eu/example/main.html
 
 <h2>Change-log</h2>
 
 <h3>Pending work</h3>
 - Documentation.
+
+<h3>2.1.3: 2014-11-09</h3>
+- Update to jQuery Mobile 1.4.5
+- Added back the image preloader
+- Fixed broken links
 
 <h3>2.1.2: 2014-10-01</h3>
 - Update to Cordova PhoneGap 3.6.3
@@ -213,15 +218,15 @@ Working examples can be found on Google Play Store.
 - Added tablet view support.
 - Improved Holo colors.
 
-<h3>0.3.0: 2013-05-23 (on Teusink.org Blog)</h3>
+<h3>0.3.0: 2013-05-23 (on Blog)</h3>
 - Changed app to remove the blink issue (meta viewport). App now functions without blinking.
 
-<h3>0.2.0: 2013-05-22 (on Teusink.org Blog)</h3>
+<h3>0.2.0: 2013-05-22 (on Blog)</h3>
 - PhoneGap 2.7.0
 - Improved JavaScript code with JSLint
 - Changed panel behaviour to the official Google style presented at Google I/O 2013.
 
-<h3>0.1.0: 2013-04-29 (on Teusink.org Blog)</h3>
+<h3>0.1.0: 2013-04-29 (on Blog)</h3>
 - Initial release
 
 <h2>License</h2>

@@ -227,7 +227,7 @@ function initPageVarsOnShow(id) {
 	if (id !== "LandingsPage") {
 		resetPanelState();
 		window.localStorage.setItem("shareTagSubject", 'jpHolo');
-		window.localStorage.setItem("shareTagText", '#jpHolo, an application template based on PhoneGap, by Joram #Teusink https://github.com/teusinkorg/jpHolo');
+		window.localStorage.setItem("shareTagText", '#jpHolo, an application template based on PhoneGap, by Joram #Teusink https://github.com/teusink/jpHolo');
 		panelMenu(id);
 		panelMenuRight(id);
 		panelHandling();
