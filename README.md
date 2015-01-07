@@ -36,9 +36,8 @@ An application template based on jQuery Mobile and Cordova PhoneGap, featuring a
 <h3>PhoneGap examples</h3>
 
 See my blog about this: http://teusink.blogspot.nl/2013/04/android-example-app-with-phonegap-and.html
-Working examples can be found on Google Play Store.
-- jpHolo: https://play.google.com/store/apps/details?id=org.teusink.jpholo
-- DroidPapers: https://play.google.com/store/apps/details?id=org.teusink.droidpapers
+Working examples can be found here.
+- jpHolo APK file: https://github.com/teusink/jpHolo/raw/master/res_sources/jpHolo.apk
 
 <h3>Screenshots</h3>
 ![alt tag](https://github.com/teusink/jpHolo/blob/master/res_sources/screenshots/phone1.png)
@@ -53,7 +52,7 @@ Working examples can be found on Google Play Store.
 - Start developing!
 
 <h3>Web examples</h3>
-- Web: http://jpholo.teusink.eu/example/main.html
+- jpHolo on the Web: http://jpholo.teusink.eu/example/main.html
 
 <h2>Change-log</h2>
 
