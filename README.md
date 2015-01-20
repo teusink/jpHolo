@@ -56,8 +56,8 @@ Working examples can be found here.
 
 <h2>Change-log</h2>
 
-<h3>Pending work</h3>
-- Documentation.
+<h3>Commits after 2014-11-09</h3>
+- Various small fixes.
 
 <h3>2.1.3: 2014-11-09</h3>
 - Update to jQuery Mobile 1.4.5
