@@ -1,0 +1,9 @@
+@charset 'UTF-8';
+body {
+	font-size: 115% !important;
+}
+li.headerSpace {
+	height: 1.50em;
+	padding: 0;
+	margin: 0;
+}

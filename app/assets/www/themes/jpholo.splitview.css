@@ -1,0 +1,17 @@
+@charset 'UTF-8';
+/* jQuery Mobile Split View */
+.content-secondary {
+	float: left;
+	width: 38%;
+}
+.content-secondary .ui-listview {
+	margin: 0;
+}
+.content-primary {
+	float: right;
+	margin-top: 0;
+	right: 0;
+	margin-right: 0;
+	padding-right: 0;
+	width: 60%;
+}

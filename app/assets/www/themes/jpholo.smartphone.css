@@ -1,0 +1,16 @@
+@charset 'UTF-8';
+@media all and (orientation: landscape) {
+	body {
+		font-size: 100% !important; /* Default 85%, change this to 100% when using a virtual keyboard in your app. When the keyboard opens the app thinks it is in landscape mode, even when its in portrait mode. */
+	}	
+}
+@media all and (orientation: portrait) {
+	body {
+		font-size: 100% !important;
+	}
+}
+li.headerSpace {
+	height: 1.40em;
+	padding: 0;
+	margin: 0;
+}

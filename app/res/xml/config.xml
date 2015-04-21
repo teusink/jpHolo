@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<widget id="org.teusink.jpholo" version="2.1.3" xmlns="http://www.w3.org/ns/widgets">
+    <name>jpHolo</name>
+	
+    <description>
+        Example app with jQuery Mobile, PhoneGap and a native Android interface in holo-style.
+    </description>
+	
+    <author email="hello@teusink.eu" href="http://www.teusink.eu">
+        Joram Teusink
+    </author>
+	
+	<!-- Access elements control the Android whitelist. Domains are assumed blocked unless set otherwise -->
+	<!-- <access origin="https://example.com" /> allow any secure requests to example.com -->
+	<!-- <access origin="https://example.com" subdomains="true" /> such as above, but including subdomains, such as www -->
+	<!-- <access origin=".*" /> Allow all domains, suggested development use only -->
+	<access origin="" />
+
+	<!-- <content src="http://mysite.com/myapp.html" /> for external pages -->
+	<content src="main.html" />
+	
+	<!-- Log level: ERROR, WARN, INFO, DEBUG, VERBOSE  (default=ERROR) -->
+	<!-- General preferences -->
+	<preference name="loglevel" value="ERROR" />
+	<preference name="phonegap-version" value="3.6.3" />
+	<preference name="orientation" value="both" />
+	<preference name="fullscreen" value="false" />
+	<!-- Android preferences -->
+	<preference name="android-minSdkVersion" value="10" />
+	<!-- <preference name="android-maxSdkVersion" value="17" /> unset!! -->
+	<preference name="android-targetSdkVersion" value="19" />
+	<preference name="android-installLocation" value="internalOnly" />
+	<preference name="android-windowSoftInputMode" value="stateUnspecified" />
+	<preference name="splash-screen-duration" value="0" />
+	<!-- Other preferences -->
+	<preference name="InAppBrowserStorageEnabled" value="true" />
+	<preference name="loadUrlTimeoutValue" value="60000" />
+	<preference name="backgroundColor" value="0x000" />
+	<preference name="errorUrl" value="main.html" />
+	
+	<!-- PhoneGap features -->
+	<feature name="App"><param name="android-package" value="org.apache.cordova.App" /></feature>
+	<!-- PhoneGap optional plugins -->
+    <feature name="Battery"><param name="android-package" value="org.apache.cordova.batterystatus.BatteryListener" /></feature>
+	<feature name="Camera"><param name="android-package" value="org.apache.cordova.camera.CameraLauncher" /></feature>
+    <feature name="Contacts"><param name="android-package" value="org.apache.cordova.contacts.ContactManager" /></feature>
+    <feature name="Device"><param name="android-package" value="org.apache.cordova.device.Device" /></feature>
+    <feature name="Accelerometer"><param name="android-package" value="org.apache.cordova.devicemotion.AccelListener" /></feature>
+    <feature name="Compass"><param name="android-package" value="org.apache.cordova.deviceorientation.CompassListener" /></feature>
+    <feature name="Notification"><param name="android-package" value="org.apache.cordova.dialogs.Notification" /></feature>
+    <feature name="File"><param name="android-package" value="org.apache.cordova.file.FileUtils" /></feature>
+    <feature name="FileTransfer"><param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" /></feature>
+    <feature name="Geolocation"><param name="android-package" value="org.apache.cordova.geolocation.GeoBroker" /></feature>
+    <feature name="Globalization"><param name="android-package" value="org.apache.cordova.globalization.Globalization" /></feature>
+    <feature name="InAppBrowser"><param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" /></feature>
+    <feature name="Media"><param name="android-package" value="org.apache.cordova.media.AudioHandler" /></feature>
+    <feature name="Capture"><param name="android-package" value="org.apache.cordova.mediacapture.Capture" /></feature>
+    <feature name="NetworkStatus"><param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" /></feature>
+    <feature name="SplashScreen"><param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" /></feature>
+    <feature name="Vibration"><param name="android-package" value="org.apache.cordova.vibration.Vibration" /></feature>
+	
+	<!-- additional external library plugins -->
+	<feature name="BackgroundServicePlugin"><param name="android-package" value="com.red_folder.phonegap.plugin.backgroundservice.BackgroundServicePlugin" /></feature>
+	
+	<!-- additional plugins -->
+	<feature name="AndroidPreferences"><param name="android-package" value="org.teusink.plugins.AndroidPreferences" /></feature>
+	<feature name="Appstore"><param name="android-package" value="org.teusink.plugins.Appstore" /></feature>
+	<feature name="PackageVersion"><param name="android-package" value="org.teusink.plugins.PackageVersion" /></feature>
+	<feature name="PreferredScreenSize"><param name="android-package" value="org.teusink.plugins.PreferredScreenSize" /></feature>
+	<feature name="Share"><param name="android-package" value="org.teusink.plugins.Share" /></feature>
+	<feature name="Toasts"><param name="android-package" value="org.teusink.plugins.Toasts" /></feature>	
+	
+</widget>
