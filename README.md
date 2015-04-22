@@ -37,7 +37,7 @@ An application template based on jQuery Mobile and Cordova PhoneGap, featuring a
 
 See my blog about this: http://teusink.blogspot.nl/2013/04/android-example-app-with-phonegap-and.html
 Working examples can be found here.
-- jpHolo APK file: https://github.com/teusink/jpHolo/raw/master/res_sources/jpHolo.apk
+- jpHolo APK file: https://github.com/teusink/jpHolo/raw/master/app/res_sources/jpHolo.apk
 
 <h3>Screenshots</h3>
 ![alt tag](https://github.com/teusink/jpHolo/blob/master/app/res_sources/screenshots/phone1.png)
