@@ -52,7 +52,7 @@ Working examples can be found here.
 - Start developing!
 
 <h3>Web examples</h3>
-- jpHolo on the Web: http://jpholo.teusink.eu/example/main.html
+- jpHolo on the Web: https://rawgit.com/teusink/jpHolo/master/web-app/main.html
 
 <h2>Change-log</h2>
 
