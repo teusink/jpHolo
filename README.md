@@ -47,31 +47,38 @@ Working examples can be found here.
 ![Screenshot 4](https://github.com/teusink/jpHolo/blob/master/app/res_sources/screenshots/tablet2.png)
 
 <h2>Web instructions</h2>
+
 - Set in main.html the value "window.phonegapExcluded" to true.
 - Exclude the scripts that are mentioned below "<!-- Cordova PhoneGap -->". The scripts are: cordova.js, backgroundService-x.x.x.js and cordova_custom_plugins.js.
 - Upload the contents of the www folder from the project to your webhosting.
 - Start developing!
 
 <h3>Web examples</h3>
+
 - jpHolo on the Web: https://rawgit.com/teusink/jpHolo/master/web-app/main.html
 
 <h2>Change-log</h2>
 
 <h3>Commits after 2014-11-09</h3>
+
 - Various small fixes.
 
 <h3>2.1.3: 2014-11-09</h3>
+
 - Update to jQuery Mobile 1.4.5
 - Added back the image preloader
 - Fixed broken links
 
 <h3>2.1.2: 2014-10-01</h3>
+
 - Update to Cordova PhoneGap 3.6.3
 
 <h3>2.1.1: 2014-09-21</h3>
+
 - Border CSS fix with immersive page
 
 <h3>2.1.0: 2014-09-20</h3>
+
 - Upgrade to jQuery Mobile 1.4.4
 - Upgrade to Cordova PhoneGap 3.5.1
 - Panel menu is now only openend when swiped from bezel
@@ -88,9 +95,11 @@ Working examples can be found here.
 - Updated fonts
 
 <h3>2.0.2: 2014-06-11</h3>
+
 - Improvements to the theme.
 
 <h3>2.0.1: 2014-06-11</h3>
+
 - Upgrade to Cordova PhoneGap 3.5.0.
 - Upgrade to jQuery 2.1.1.
 - Upgrade to i18next 1.7.3.
@@ -99,6 +108,7 @@ Working examples can be found here.
 - Code improvements to plugins.
 
 <h3>2.0.0: 2014-03-02</h3>
+
 - Upgrade to Cordova PhoneGap 3.3.0.
 - Upgrade to jQuery Mobile 1.4.2.
 - Upgrade to jQuery 2.1.0.
@@ -119,6 +129,7 @@ Working examples can be found here.
 - Replaced sliders with the new flipswitches.
 
 <h3>1.4.5: 2013-11-24</h3>
+
 - Upgrade to jQuery Mobile 1.4.0.
 - Upgrade to PhoneGap 3.3.0.
 - Chrome Remote Debugging.
@@ -126,19 +137,24 @@ Working examples can be found here.
 - Remove of energize.js due to incompatibilities with ChromeView in Android KitKat 4.4.
 
 <h3>1.4.4: 2013-11-24</h3>
+
 - Some small changes and improvements.
 
 <h3>1.4.3: 2013-11-17</h3>
+
 - Changed the core scripts and html files a bit to make easy transfer to a webhosting possible. See the instructions above.
 
 <h3>1.4.2: 2013-10-26</h3>
+
 - Upgraded to the new PhoneGap 3.1.0 framework.
 - Added system specifications on second page (Holo Dark).
 
 <h3>1.4.1: 2013-10-24</h3>
+
 - Added event (swipe to right) to open left panel menu.
 
 <h3>1.4.0: 2013-10-04</h3>
+
 - Bit better screen estate usage for smaller tablets.
 - Added Holo Light theme header and icons (theme complete now).
 - Improved theme. Also included a picture of all jQuery Mobile theme swatches.
@@ -151,10 +167,12 @@ Working examples can be found here.
 - Reinstated the back-button handling to before. HomeButton plugin is still included, but not used.
 
 <h3>1.3.1: 2013-09-05</h3>
+
 - Changed PhoneGap plugins a bit with logging (nothing special).
 - Back-button does not exit app any more, but push it to background (saves reloading). When Android does not have enough memory it will eventually push the app out of memory.
 
 <h3>1.3.0: 2013-09-02</h3>
+
 - When left panel opens the header icon changes to the opened style. Like Google meant it.
 - Included 2 new image files because of the change above.
 - When a panel opens, non-contextual action bar buttons hide (and show when panel closes). Like Google meant it :).
@@ -162,18 +180,22 @@ Working examples can be found here.
 - Added a note to application.smartphone.css when using virtual keyboard in your app.
 
 <h3>1.2.5: 2013-08-14</h3>
+
 - Improved click energizer (energize-min.js).
 - Completed all references on homepage.
 - Remove jQuery Mobile pop-up.
 - Removed not needed files.
 
 <h3>1.2.4: 2013-08-11</h3>
+
 - Improved logging commands (console.info, console.warn, console.error, instead of console.log only).
 
 <h3>1.2.3: 2013-08-09</h3>
+
 - Footer action buttons height fix.
 
 <h3>1.2.2: 2013-08-06</h3>
+
 - Removed reference to non-existing script.
 - Made example (menu items, toasts etc.) bit more better to understand.
 - Added Appstore plugin to invoke an intent to open Play Store.
@@ -182,17 +204,21 @@ Working examples can be found here.
 - Upgraded package to Android 4.3 (API 18).
 
 <h3>1.2.1: 2013-07-26</h3>
+
 - Add the new (and all) Roboto TrueType fonts.
 - Improved icon images with new Roboto font.
 - Improved CSS a bit due to new fonts.
 
 <h3>1.2.0: 2013-07-21</h3>
+
 - Upgrade to jQuery Mobile 1.3.2.
 
 <h3>1.1.2: 2013-07-20</h3>
+
 - Paved the way for PhoneGap 3.0.0. Project is still using PhoneGap 2.9.0.
 
 <h3>1.1.1: 2013-07-12</h3>
+
 - improved Gimp image resource files (easier to adjust app title)
 - improved interface (icon title button)
 - added non-minified custom jQuery Mobile Theme
@@ -201,6 +227,7 @@ Working examples can be found here.
 - fixed tablet layout not showing
 
 <h3>1.1.0: 2013-07-10</h3>
+
 - renamed style.css to application.css
 - renamed style_tablet to application.splitview.css
 - added application.tablet.css
@@ -214,19 +241,23 @@ Working examples can be found here.
 - renamed entire app and code from JQM-Example to jpHolo (adjusted images also)
 
 <h3>1.0.0: 2013-06-29</h3>
+
 - Added to GitHub public repo now
 - Added tablet view support.
 - Improved Holo colors.
 
 <h3>0.3.0: 2013-05-23 (on Blog)</h3>
+
 - Changed app to remove the blink issue (meta viewport). App now functions without blinking.
 
 <h3>0.2.0: 2013-05-22 (on Blog)</h3>
+
 - PhoneGap 2.7.0
 - Improved JavaScript code with JSLint
 - Changed panel behaviour to the official Google style presented at Google I/O 2013.
 
 <h3>0.1.0: 2013-04-29 (on Blog)</h3>
+
 - Initial release
 
 <h2>License</h2>
