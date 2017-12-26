@@ -40,7 +40,6 @@ Working examples can be found here.
 - jpHolo APK file: https://github.com/teusink/jpHolo/raw/master/app/res_sources/jpHolo.apk
 
 <h3>Screenshots</h3>
-[[https://github.com/teusink/jpHolo/blob/master/app/res_sources/screenshots/phone1.png|alt=Screenshot]]
 
 ![Screenshot 1](https://github.com/teusink/jpHolo/blob/master/app/res_sources/screenshots/phone1.png)
 ![Screenshot 2](https://github.com/teusink/jpHolo/blob/master/app/res_sources/screenshots/phone2.png)
