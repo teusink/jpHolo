@@ -40,10 +40,10 @@ Working examples can be found here.
 - jpHolo APK file: https://github.com/teusink/jpHolo/raw/master/app/res_sources/jpHolo.apk
 
 <h3>Screenshots</h3>
-![alt tag](https://github.com/teusink/jpHolo/blob/master/app/res_sources/screenshots/phone1.png)
-![alt tag](https://github.com/teusink/jpHolo/blob/master/app/res_sources/screenshots/phone2.png)
-![alt tag](https://github.com/teusink/jpHolo/blob/master/app/res_sources/screenshots/tablet1.png)
-![alt tag](https://github.com/teusink/jpHolo/blob/master/app/res_sources/screenshots/tablet2.png)
+![Screenshot 1](https://github.com/teusink/jpHolo/raw/master/app/res_sources/screenshots/phone1.png)
+![Screenshot 2](https://github.com/teusink/jpHolo/blob/master/app/res_sources/screenshots/phone2.png)
+![Screenshot 3](https://github.com/teusink/jpHolo/blob/master/app/res_sources/screenshots/tablet1.png)
+![Screenshot 4](https://github.com/teusink/jpHolo/blob/master/app/res_sources/screenshots/tablet2.png)
 
 <h2>Web instructions</h2>
 - Set in main.html the value "window.phonegapExcluded" to true.
