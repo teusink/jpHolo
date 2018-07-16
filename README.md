@@ -28,15 +28,12 @@ An application template based on jQuery Mobile and Cordova PhoneGap, featuring a
 - All HTML, CSS, and JavaScript sources.
 
 <h2>PhoneGap instructions</h2>
-- Setup a development environment. Follow this blog of mine to do that for Windows: http://www.teusink.eu/2013/07/guide-phonegap-3-android-windows.html
+- Setup a development environment.
 - Download this project.
 - Import this project in Eclipse.
 - Start developing!
 
 <h3>PhoneGap examples</h3>
-
-See my blog about this: http://www.teusink.eu/2013/04/android-example-app-with-phonegap-and.html
-Working examples can be found here.
 - jpHolo APK file: https://github.com/teusink/jpHolo/raw/master/app/res_sources/jpHolo.apk
 
 <h3>Screenshots</h3>
