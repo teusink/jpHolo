@@ -50,10 +50,6 @@ An application template based on jQuery Mobile and Cordova PhoneGap, featuring a
 - Upload the contents of the www folder from the project to your webhosting.
 - Start developing!
 
-<h3>Web examples</h3>
-
-- jpHolo on the Web: https://rawgit.com/teusink/jpHolo/master/web-app/main.html
-
 <h2>Change-log</h2>
 
 <h3>Commits after 2014-11-09</h3>
