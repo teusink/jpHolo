@@ -54,7 +54,6 @@ $(window).bind('orientationchange',
 			if (currentId === 'immersivePage') {
 				var pic_real_width,
 					pic_real_height,
-					page,
 					imageRatio,
 					screenRatio;
 				$("<img />")

@@ -115,22 +115,6 @@ function toggleImmersive() {
 		} else {
 			$('#photoInfoDiv').hide();
 		}
-	} else if ($.mobile.pageContainer.pagecontainer("getActivePage")[0].id === 'immersivePage') {
-		if ($("#footerImmersive").is(':hidden')) {
-			$('#footerImmersive').show();
-		} else {
-			$('#footerImmersive').hide();
-		}
-		if ($("#headerImmersive").is(':hidden')) {
-			$('#headerImmersive').show();
-		} else {
-			$('#headerImmersive').hide();
-		}
-		if ($("#photoInfoDiv").is(':hidden')) {
-			$('#photoInfoDiv').show();
-		} else {
-			$('#photoInfoDiv').hide();
-		}
 	}
 }
 
@@ -268,8 +252,7 @@ $(document).off('swiperight').on('swiperight', function (event) {
 			d = document,
 			e = d.documentElement,
 			g = d.getElementsByTagName('body')[0],
-			x = w.innerWidth || e.clientWidth || g.clientWidth,
-			y = w.innerHeight || e.clientHeight || g.clientHeight;
+			x = w.innerWidth || e.clientWidth || g.clientWidth;
 		// check if there are no open panels, otherwise ignore swipe
 		if (checkOpenPanels() === false && event.swipestart.coords[0] < x / 5) {
 			togglePanel('#panelMenu' + window.localStorage.getItem("divIdGlobal"));
