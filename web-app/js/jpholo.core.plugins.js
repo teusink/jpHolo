@@ -153,8 +153,8 @@ function share(subject, text) {
 			}
 		);
 	} else {
-		subject = subject.replace('', '%20');
-		text = text.replace('', '%20');
+		subject = subject.replace(/ /g, '%20');
+		text = text.replace(/ /g, '%20');
 		window.location.href = "mailto:someone@example.com?subject=" + subject + "&body=" + text;
 	}
 }
